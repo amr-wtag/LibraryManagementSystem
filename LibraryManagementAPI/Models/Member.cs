@@ -1,4 +1,4 @@
-﻿namespace Backend.Models;
+﻿namespace LibraryManagementAPI.Models;
 
 public class Member
 {
