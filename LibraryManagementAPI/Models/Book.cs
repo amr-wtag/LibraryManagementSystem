@@ -8,5 +8,5 @@ public class Book
     public string Category { get; set; }
     public string CopiesAvailable { get; set; }
 
-    // public ICollection<Transaction> Transactions { get; set; }
+    public ICollection<Transaction> Transactions { get; set; }
 }

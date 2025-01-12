@@ -13,7 +13,7 @@ public class LibraryDbContext : DbContext
     public DbSet<Member> Members { get; set; }
     public DbSet<Transaction> Transactions { get; set; }
 
-    /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Transaction>()
             .HasOne(t => t.Book)
@@ -24,5 +24,5 @@ public class LibraryDbContext : DbContext
             .HasOne(t => t.Member)
             .WithMany(b => b.Transactions)
             .HasForeignKey(t => t.MemberId);
-    }*/
+    }
 }

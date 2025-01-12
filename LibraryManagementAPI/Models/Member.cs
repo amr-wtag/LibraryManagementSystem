@@ -7,5 +7,5 @@ public class Member
     public String Email { get; set; }
     public String MembershipId { get; set; }
     
-    // public ICollection<Transaction> Transactions { get; set; }
+    public ICollection<Transaction> Transactions { get; set; }
 }
