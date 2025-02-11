@@ -8,9 +8,9 @@ public class Transaction
     public DateTime IssuedDate { get; set; }
     public DateTime DueDate { get; set; }
     public DateTime? ReturnDate { get; set; }
-    public string Status { get; set; }
+    public string? Status { get; set; }
     
-    public Book Book { get; set; }
-    public Member Member { get; set; }
+    public Book? Book { get; set; }
+    public Member? Member { get; set; }
     
 }
