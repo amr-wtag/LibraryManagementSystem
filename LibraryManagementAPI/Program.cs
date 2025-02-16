@@ -1,9 +1,16 @@
 using LibraryManagementAPI.Data;
+using LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Repositories;
+using LibraryManagementAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<BookService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>

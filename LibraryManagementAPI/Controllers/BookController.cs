@@ -1,32 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using LibraryManagementAPI.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementAPI.Controllers;
 
-using Data;
+using Services;
 
 [Route("api/[controller]")]
 [ApiController]
 public class BookController : ControllerBase
 {
-    private readonly LibraryDbContext _context;
+    private readonly BookService _bookService;
 
-    public BookController(LibraryDbContext context)
+    public BookController(BookService bookService)
     {
-        _context = context;
+        _bookService = bookService;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
     {
-        try
+        var books = await _bookService.GetAllBooksAsync();
+        return Ok(books);
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<Book>> GetBook(Guid id)
+    {
+        var book = await _bookService.GetBookByIdAsync(id);
+        if (book == null)
         {
-            return await _context.Books.ToListAsync();
+            return NotFound(new { message = "Book not found" });
         }
-        catch (Exception ex)
+
+        return Ok(book);
+    }
+
+    [HttpGet("by-author/{author}")]
+    public async Task<ActionResult<List<Book>>> GetBookByAuthor(string author)
+    {
+        if (string.IsNullOrWhiteSpace(author))
         {
-            return StatusCode(500, $"An error occurred while retrieving books: {ex.Message}");
+            return BadRequest("Author parameter cannot be empty.");
         }
+        
+        var books = await _bookService.GetBooksByAuthorAsync(author);
+        
+        if (books.Count == 0)
+        {
+            return NotFound("No books found for the given author.");
+        }
+
+        return Ok(books);
     }
 }
