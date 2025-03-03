@@ -1,9 +1,8 @@
 using LibraryManagementAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace LibraryManagementAPI.Data;
-
-public class LibraryDbContext : DbContext
+public class LibraryDbContext : IdentityDbContext<User>
 {
     public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options)
     {
@@ -15,6 +14,8 @@ public class LibraryDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Transaction>()
             .HasOne(t => t.Book)
             .WithMany(b => b.Transactions)

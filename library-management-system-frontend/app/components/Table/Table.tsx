@@ -75,23 +75,24 @@ const Table = ({data, headers, textCase = 'capitalize'}: TableProps) => {
                 ))}
                 </tbody>
             </table>
-
-            {data.length > 10 && <div className="mt-2">
-                <button
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                    className="px-2 py-1 border"
-                >
-                    Previous
-                </button>
-                <button
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                    className="ml-2 px-2 py-1 border"
-                >
-                    Next
-                </button>
-            </div>}
+            <div className='flex justify-end'>
+                {data.length > 10 && <div className="mt-2">
+                    <button
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                        className="px-2 py-1 border"
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                        className="ml-2 px-2 py-1 border"
+                    >
+                        Next
+                    </button>
+                </div>}
+            </div>
         </div>
     );
 };
