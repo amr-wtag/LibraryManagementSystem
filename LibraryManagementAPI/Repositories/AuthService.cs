@@ -14,9 +14,9 @@ public class AuthService : IAuthService
     private readonly SignInManager<User> _signInManager;
     private readonly IConfiguration _configuration;
 
-    public AuthService(UserManager<User> usrManager, SignInManager<User> signInManager, IConfiguration configuration)
+    public AuthService(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
     {
-        _userManager = usrManager;
+        _userManager = userManager;
         _signInManager = signInManager;
         _configuration = configuration;
     }
@@ -55,7 +55,7 @@ public class AuthService : IAuthService
         var key = Encoding.UTF8.GetBytes(secretKey);
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
             new Claim(ClaimTypes.Name, user.UserName ?? string.Empty)
         };

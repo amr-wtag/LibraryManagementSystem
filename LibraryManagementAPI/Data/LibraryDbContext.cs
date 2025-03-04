@@ -2,14 +2,15 @@ using LibraryManagementAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-public class LibraryDbContext : IdentityDbContext<User>
+namespace LibraryManagementAPI.Data;
+
+public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
 {
     public LibraryDbContext(DbContextOptions<LibraryDbContext> options) : base(options)
     {
     }
 
     public DbSet<Book> Books { get; set; }
-    public DbSet<Member> Members { get; set; }
     public DbSet<Transaction> Transactions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,8 +23,8 @@ public class LibraryDbContext : IdentityDbContext<User>
             .HasForeignKey(t => t.BookId);
 
         modelBuilder.Entity<Transaction>()
-            .HasOne(t => t.Member)
+            .HasOne(t => t.User)
             .WithMany(b => b.Transactions)
-            .HasForeignKey(t => t.MemberId);
+            .HasForeignKey(t => t.UserId);
     }
 }

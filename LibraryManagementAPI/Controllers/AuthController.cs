@@ -18,11 +18,12 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] Register model)
     {
-        var user = new User { UserName = model.UserName, Email = model.Email, fullName = model.FullName };
+        var user = new User { UserName = model.UserName, Email = model.Email, FullName = model.FullName };
         var result = await _authService.RegisterAsync(user, model.Password);
-
         if (result.Contains("User registered successfully"))
+        {
             return Ok(result);
+        }
 
         return BadRequest(result);
     }
