@@ -2,7 +2,7 @@ namespace LibraryManagementAPI.interfaces;
 
 using Models;
 
-public class IAuthRepository
+public interface IAuthService
 {
     Task<string> RegisterAsync(User user, string password);
     Task<string?> LoginAsync(string username, string password);

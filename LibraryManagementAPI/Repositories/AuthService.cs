@@ -8,20 +8,20 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 
-public class AuthRepository : IAuthRepository
+public class AuthService : IAuthService
 {
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly IConfiguration _configuration;
 
-    public AuthRepository(UserManager<User> usrManager, SignInManager<User> signInManager, IConfiguration configuration)
+    public AuthService(UserManager<User> usrManager, SignInManager<User> signInManager, IConfiguration configuration)
     {
         _userManager = usrManager;
         _signInManager = signInManager;
         _configuration = configuration;
     }
 
-    public async Task<string>? RegisterAsync(User user, string password)
+    public async Task<string> RegisterAsync(User user, string password)
     {
         var result = await _userManager.CreateAsync(user, password);
 
@@ -49,12 +49,15 @@ public class AuthRepository : IAuthRepository
 
     public string GenerateJwtToken(User user)
     {
-        var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]);
+        var secretKey = _configuration["JwtSettings:Secret"]
+                        ?? throw new InvalidOperationException("JWT Secret Key is missing in configuration.");
+
+        var key = Encoding.UTF8.GetBytes(secretKey);
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(ClaimTypes.Name, user.UserName)
+            new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+            new Claim(ClaimTypes.Name, user.UserName ?? string.Empty)
         };
 
         var token = new JwtSecurityToken(
