@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] Login model)
     {
-        var token = await _authService.LoginAsync(model.UserName, model.Password);
+        var token = await _authService.LoginAsync(model.UserName, model.Email, model.Password);
 
         if (token == null)
         {

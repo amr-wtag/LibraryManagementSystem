@@ -33,9 +33,9 @@ public class AuthService : IAuthService
         return "User registered successfully.";
     }
 
-    public async Task<string?> LoginAsync(string username, string password)
+    public async Task<string?> LoginAsync(string username, string email, string password)
     {
-        var user = await _userManager.FindByNameAsync(username);
+        var user = await _userManager.FindByNameAsync(username) ?? await _userManager.FindByEmailAsync(email);
         if (user == null)
         {
             return null;
