@@ -10,6 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LibraryManagementAPI.Migrations
 {
+    using Data;
+
     [DbContext(typeof(LibraryDbContext))]
     [Migration("20250304042321_updated_database_for_authentication_and_authorization")]
     partial class updated_database_for_authentication_and_authorization

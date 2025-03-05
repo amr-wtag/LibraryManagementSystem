@@ -9,6 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LibraryManagementAPI.Migrations
 {
+    using Data;
+
     [DbContext(typeof(LibraryDbContext))]
     partial class LibraryDbContextModelSnapshot : ModelSnapshot
     {

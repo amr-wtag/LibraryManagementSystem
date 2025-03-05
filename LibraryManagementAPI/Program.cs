@@ -1,4 +1,5 @@
 using System.Text;
+using LibraryManagementAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using LibraryManagementAPI.interfaces;
 using LibraryManagementAPI.Models;
@@ -30,7 +31,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<LibraryDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<LibraryDbContext>()
     .AddDefaultTokenProviders();
 
@@ -75,8 +76,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

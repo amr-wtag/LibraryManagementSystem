@@ -10,6 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LibraryManagementAPI.Migrations
 {
+    using Data;
+
     [DbContext(typeof(LibraryDbContext))]
     [Migration("20250210114342_Convert_CopiesAvailable_ToInt")]
     partial class Convert_CopiesAvailable_ToInt
