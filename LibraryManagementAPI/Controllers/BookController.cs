@@ -26,13 +26,19 @@ public class BookController : ControllerBase
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<Book>> GetBook(Guid id)
     {
-        var book = await _bookService.GetBookByIdAsync(id);
-        if (book == null)
+        try
         {
-            return NotFound(new { message = "Book not found" });
+            var book = await _bookService.GetBookByIdAsync(id);
+            return Ok(book);
+
+        }
+        catch (KeyNotFoundException exception)
+        {
+            return NotFound(new { message = exception.Message });
+
         }
 
-        return Ok(book);
+
     }
 
     [HttpGet("by-author/{author}")]

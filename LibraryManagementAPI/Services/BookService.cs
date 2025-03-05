@@ -17,9 +17,10 @@ public class BookService
         return await _bookRepository.GetAllBooksAsync();
     }
 
-    public async Task<Book?> GetBookByIdAsync(Guid id)
+    public async Task<Book> GetBookByIdAsync(Guid id)
     {
-        return await _bookRepository.GetBookByIdAsync(id);
+        return await _bookRepository.GetBookByIdAsync(id)
+                   ?? throw new KeyNotFoundException("Book not found");
     }
 
     public async Task<List<Book>> GetBooksByAuthorAsync(string? author)
