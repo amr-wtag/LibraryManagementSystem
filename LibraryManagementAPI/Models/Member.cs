@@ -1,11 +1,8 @@
-﻿namespace LibraryManagementAPI.Models;
+using Microsoft.AspNetCore.Identity;
 
-public class Member
+namespace LibraryManagementAPI.Models;
+
+public class Member: IdentityUser
 {
-    public Guid Id { get; set; }
-    public String? Name { get; set; }
-    public String? Email { get; set; }
-    public String? MembershipId { get; set; }
-    
-    public ICollection<Transaction>? Transactions { get; set; }
+    public string? MembershipId { get; set; }
 }

@@ -10,7 +10,7 @@ public class LibraryDbContext : DbContext
     }
 
     public DbSet<Book> Books { get; set; }
-    public DbSet<Member> Members { get; set; }
+    public DbSet<MemberDetails> Members { get; set; }
     public DbSet<Transaction> Transactions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
