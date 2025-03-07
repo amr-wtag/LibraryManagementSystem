@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
             {
                 source: '/',
                 destination: '/books',
-                permanent: false, 
+                permanent: false,
             },
         ];
     },
