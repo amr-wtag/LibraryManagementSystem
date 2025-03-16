@@ -29,6 +29,7 @@ module.exports = {
     },
     rules: {
         'react/jsx-no-target-blank': 'off',
+        "eol-last": ["error", "always"],
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
         'no-unused-vars': ['error', { varsIgnorePattern: 'React' }],
         'no-console': 'error',

@@ -18,9 +18,7 @@ const BookPage = async () => {
     "category",
     "copiesAvailable",
   ]
-
-  console.log({response:books[0].copiesAvailable})
-
+  
   return (
     <div>
       <h1>Books</h1>
