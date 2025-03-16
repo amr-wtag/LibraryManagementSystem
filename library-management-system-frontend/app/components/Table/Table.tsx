@@ -3,32 +3,38 @@
 import { useMemo, useState } from 'react';
 import {
   ColumnDef,
-  useReactTable,
-  getCoreRowModel,
-  getSortedRowModel,
-  getPaginationRowModel,
   flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
 } from '@tanstack/react-table';
 
 interface TableProps {
-  data: any[][]; // Now expects an array of arrays
-  headers: string[]; // Headers are required to determine column count
+  data: object[];
+  headers?: string[]; // Now optional
   textCase?: string;
 }
 
 const Table = ({ data, headers, textCase = 'capitalize' }: TableProps) => {
-  const columns = useMemo<ColumnDef<any>[]>(
+  // Dynamically get headers from data if not provided
+  const tableHeaders = headers && headers.length > 0 ? headers : Object.keys(data[0] || {});
+
+  const columns = useMemo<ColumnDef<object>[]>(
     () =>
-      headers.map((header, index) => ({
-        id: `col-${index}`, // Unique ID based on index
-        accessorFn: (row) => row[index] ?? 'N/A', // Match value by index, not key
+      tableHeaders.map((header, index) => ({
+        id: header.toLowerCase(),
+        accessorFn: (row) => {
+          // Get the value by index number instead of key
+          const rowValues = Object.values(row); // Convert object to array
+          return rowValues[index] !== undefined ? rowValues[index] : 'N/A';
+        },
         header: () => <span className={textCase}>{header}</span>,
         cell: (info) => String(info.getValue() ?? 'N/A'),
       })),
-    [headers, textCase],
+    [tableHeaders, textCase],
   );
 
-  console.log('Columns:', columns.map((col) => col.id));
 
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -75,7 +81,7 @@ const Table = ({ data, headers, textCase = 'capitalize' }: TableProps) => {
         </tbody>
       </table>
       <div className="flex justify-end">
-        {data.length > pageSize && (
+        {data.length > 10 && (
           <div className="mt-2">
             <button
               onClick={() => table.previousPage()}
@@ -97,5 +103,6 @@ const Table = ({ data, headers, textCase = 'capitalize' }: TableProps) => {
     </div>
   );
 };
+
 
 export default Table;
