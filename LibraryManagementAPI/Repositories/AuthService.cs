@@ -1,5 +1,4 @@
 namespace LibraryManagementAPI.Repositories;
-
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -23,6 +22,17 @@ public class AuthService : IAuthService
 
     public async Task<string> RegisterAsync(User user, string password)
     {
+        if (string.IsNullOrWhiteSpace(user.Email))
+        {
+            return "Email is required.";
+        }
+
+        var existingUser = await _userManager.FindByEmailAsync(user.Email);
+        if (existingUser != null)
+        {
+            return "Email is already registered.";
+        }
+
         var result = await _userManager.CreateAsync(user, password);
 
         if (!result.Succeeded)
