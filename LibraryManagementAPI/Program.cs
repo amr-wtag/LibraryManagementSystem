@@ -1,4 +1,5 @@
 using System.Text;
+using DotNetEnv;
 using LibraryManagementAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using LibraryManagementAPI.interfaces;
@@ -10,7 +11,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using AuthService = LibraryManagementAPI.Repositories.AuthService;
 
+Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
+
+var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+
+if (string.IsNullOrEmpty(jwtSecret))
+{
+    throw new InvalidOperationException("JWT_SECRET is missing from environment variables.");
+}
+
+builder.Configuration["JwtSettings:Secret"] = jwtSecret;
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
