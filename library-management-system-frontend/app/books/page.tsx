@@ -1,4 +1,5 @@
 import Table from '@/app/components/Table/Table';
+import API_ENDPOINTS from '@/app/lib/api';
 
 interface Book {
   id: number;
@@ -9,16 +10,15 @@ interface Book {
 }
 
 const BookPage = async () => {
-  const response = await fetch('http://localhost:5049/api/book');
-
+  const response = await fetch(API_ENDPOINTS.books);
   const books: Book[] = await response.json();
   const headers = [
-    "title",
-    "author",
-    "category",
-    "copiesAvailable",
-  ]
-  
+    'test',
+    'author',
+    'category',
+    'copiesAvailable',
+  ];
+
   return (
     <div>
       <h1>Books</h1>
