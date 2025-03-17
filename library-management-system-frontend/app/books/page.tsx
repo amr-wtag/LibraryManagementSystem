@@ -1,4 +1,4 @@
-import Table from "@/app/components/Table/Table";
+import Table from '@/app/components/Table/Table';
 
 interface Book {
   id: number;
@@ -18,13 +18,11 @@ const BookPage = async () => {
     "category",
     "copiesAvailable",
   ]
-
-  console.log({response:books[0].copiesAvailable})
-
+  
   return (
     <div>
       <h1>Books</h1>
-      <Table data={books} headers={headers}/>
+      <Table data={books} headers={headers} />
     </div>
   );
 };

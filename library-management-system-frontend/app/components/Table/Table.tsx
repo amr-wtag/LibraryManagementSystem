@@ -1,35 +1,40 @@
 'use client';
 
-import {useMemo, useState} from 'react';
-import PropTypes from 'prop-types';
+import { useMemo, useState } from 'react';
 import {
   ColumnDef,
-  useReactTable,
-  getCoreRowModel,
-  getSortedRowModel,
-  getPaginationRowModel,
   flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
 } from '@tanstack/react-table';
 
 interface TableProps {
   data: object[];
-  headers: string[];
+  headers?: string[]; // Now optional
   textCase?: string;
 }
 
-const Table = ({data, headers, textCase = 'capitalize'}: TableProps) => {
+const Table = ({ data, headers, textCase = 'capitalize' }: TableProps) => {
+  // Dynamically get headers from data if not provided
+  const tableHeaders = headers && headers.length > 0 ? headers : Object.keys(data[0] || {});
+
   const columns = useMemo<ColumnDef<object>[]>(
     () =>
-      headers.map((header) => ({
+      tableHeaders.map((header, index) => ({
         id: header.toLowerCase(),
-        accessorKey: header,
+        accessorFn: (row) => {
+          // Get the value by index number instead of key
+          const rowValues = Object.values(row); // Convert object to array
+          return rowValues[index] !== undefined ? rowValues[index] : 'N/A';
+        },
         header: () => <span className={textCase}>{header}</span>,
         cell: (info) => String(info.getValue() ?? 'N/A'),
       })),
-    [headers, textCase]
+    [tableHeaders, textCase],
   );
 
-  console.log({data})
 
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -40,10 +45,10 @@ const Table = ({data, headers, textCase = 'capitalize'}: TableProps) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    state: {pagination: {pageIndex, pageSize}},
+    state: { pagination: { pageIndex, pageSize } },
     onPaginationChange: (updater) => {
       const newPagination =
-        typeof updater === 'function' ? updater({pageIndex, pageSize}) : updater;
+        typeof updater === 'function' ? updater({ pageIndex, pageSize }) : updater;
       setPageIndex(newPagination.pageIndex);
       setPageSize(newPagination.pageSize);
     },
@@ -75,31 +80,29 @@ const Table = ({data, headers, textCase = 'capitalize'}: TableProps) => {
         ))}
         </tbody>
       </table>
-      <div className='flex justify-end'>
-        {data.length > 10 && <div className="mt-2">
-          <button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            className="px-2 py-1 border"
-          >
-            Previous
-          </button>
-          <button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            className="ml-2 px-2 py-1 border"
-          >
-            Next
-          </button>
-        </div>}
+      <div className="flex justify-end">
+        {data.length > 10 && (
+          <div className="mt-2">
+            <button
+              onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              className="px-2 py-1 border"
+            >
+              Previous
+            </button>
+            <button
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              className="ml-2 px-2 py-1 border"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-Table.propTypes = {
-  data: PropTypes.array.isRequired,
-  headers: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
 
 export default Table;
