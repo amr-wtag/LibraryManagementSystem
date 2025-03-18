@@ -38,6 +38,9 @@ public class AuthController : ControllerBase
             return Unauthorized("invalid credentials");
         }
 
-        return Ok(token);
+        return Ok(new
+        {
+            token
+        });
     }
 }
