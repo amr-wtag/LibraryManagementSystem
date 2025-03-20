@@ -9,7 +9,7 @@ using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using AuthService = LibraryManagementAPI.Repositories.AuthService;
+using AuthRepository = LibraryManagementAPI.Repositories.AuthRepository;
 
 Env.Load();
 
@@ -25,7 +25,7 @@ if (string.IsNullOrEmpty(jwtSecret))
 builder.Configuration["JwtSettings:Secret"] = jwtSecret;
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<BookService>();
 
 builder.Services.AddEndpointsApiExplorer();

@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Models;
 
-public class AuthService : IAuthService
+public class AuthRepository : IAuthRepository
 {
     private readonly UserManager<User> _userManager;
     private readonly SignInManager<User> _signInManager;
     private readonly IConfiguration _configuration;
 
-    public AuthService(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+    public AuthRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
     {
         _userManager = userManager;
         _signInManager = signInManager;

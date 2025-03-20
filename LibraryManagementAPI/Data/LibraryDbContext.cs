@@ -38,19 +38,18 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
         var passwordHasher = new PasswordHasher<User>();
 
         // Generate Roles
-        var roles = new List<Role>
-        {
-            new Role { Id = Guid.NewGuid(), Name = "Admin", NormalizedName = "ADMIN" },
-            new Role { Id = Guid.NewGuid(), Name = "Librarian", NormalizedName = "LIBRARIAN" },
-            new Role { Id = Guid.NewGuid(), Name = "User", NormalizedName = "USER" }
-        };
+        var adminRole = new Role { Id = Guid.NewGuid(), Name = "Admin", NormalizedName = "ADMIN" };
+        var librarianRole = new Role { Id = Guid.NewGuid(), Name = "Librarian", NormalizedName = "LIBRARIAN" };
+        var userRole = new Role { Id = Guid.NewGuid(), Name = "User", NormalizedName = "USER" };
+
+        var roles = new List<Role> { adminRole, librarianRole, userRole };
         modelBuilder.Entity<Role>().HasData(roles);
 
         // Generate Users
         var userFaker = new Faker<User>()
             .RuleFor(u => u.Id, f => Guid.NewGuid())
             .RuleFor(u => u.UserName, f => f.Internet.UserName())
-            .RuleFor(u=>u.FullName, f => f.Internet.UserName())
+            .RuleFor(u => u.FullName, f => f.Name.FullName())
             .RuleFor(u => u.Email, f => f.Internet.Email())
             .RuleFor(u => u.NormalizedEmail, (f, u) => u.Email.ToUpper())
             .RuleFor(u => u.NormalizedUserName, (f, u) => u.UserName.ToUpper())
@@ -64,6 +63,20 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
 
         modelBuilder.Entity<User>().HasData(users);
 
+        // Assign Roles to Users (First User -> Admin, Second -> Librarian, Rest -> User)
+        var userRoles = new List<IdentityUserRole<Guid>>
+        {
+            new IdentityUserRole<Guid> { UserId = users[0].Id, RoleId = adminRole.Id },
+            new IdentityUserRole<Guid> { UserId = users[1].Id, RoleId = librarianRole.Id }
+        };
+
+        for (int i = 2; i < users.Count; i++)
+        {
+            userRoles.Add(new IdentityUserRole<Guid> { UserId = users[i].Id, RoleId = userRole.Id });
+        }
+
+        modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(userRoles);
+
         // Generate Books with Categories
         var bookCategories = new[] { "Fiction", "Science", "History", "Technology", "Mystery" };
 
@@ -76,23 +89,5 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
 
         var books = bookFaker.Generate(10);
         modelBuilder.Entity<Book>().HasData(books);
-
-
-        /*var transactionFaker = new Faker<Transaction>()
-            .RuleFor(t => t.Id, f => Guid.NewGuid())
-            .RuleFor(t => t.BookId, f => f.PickRandom(books).Id)
-            .RuleFor(t => t.UserId, f => f.PickRandom(users).Id)
-            .RuleFor(t => t.IssuedDate, f => f.Date.Past(1).ToUniversalTime()) // ✅ Convert to UTC
-            .RuleFor(t => t.DueDate,
-                (f, t) => t.IssuedDate.AddDays(f.Random.Int(7, 30)).ToUniversalTime()) // ✅ Convert to UTC
-            .RuleFor(t => t.ReturnDate, (f, t) =>
-                f.Random.Bool(0.7f)
-                    ? t.DueDate.AddDays(f.Random.Int(-5, 5)).ToUniversalTime()
-                    : null) // ✅ Convert to UTC
-            .RuleFor(t => t.Status,
-                (f, t) => t.ReturnDate == null ? "Issued" : f.PickRandom(new[] { "Issued", "Returned", "Overdue" }));
-
-        var transactions = transactionFaker.Generate(15);
-        modelBuilder.Entity<Transaction>().HasData(transactions);*/
     }
 }

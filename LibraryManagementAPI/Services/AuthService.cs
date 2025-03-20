@@ -3,23 +3,23 @@ namespace LibraryManagementAPI.Services;
 using interfaces;
 using Models;
 
-public class AuthService: IAuthService
+public class AuthService
 {
-    private readonly IAuthService _authService;
+    private readonly IAuthRepository _authRepository;
 
-    public AuthService(IAuthService authService)
+    public AuthService(IAuthRepository authRepository)
     {
-        _authService = authService;
+        _authRepository = authRepository;
     }
 
     public async Task<string> RegisterAsync(User user, string password)
     {
-        return await _authService.RegisterAsync(user, password);
+        return await _authRepository.RegisterAsync(user, password);
     }
 
     public async Task<string?> LoginAsync(string username,string email, string password)
     {
-        return await _authService.LoginAsync(username, email,password);
+        return await _authRepository.LoginAsync(username, email,password);
     }
 
 }
