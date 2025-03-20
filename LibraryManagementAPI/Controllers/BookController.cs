@@ -48,9 +48,9 @@ public class BookController : ControllerBase
         {
             return BadRequest("Author parameter cannot be empty.");
         }
-        
+
         var books = await _bookService.GetBooksByAuthorAsync(author);
-        
+
         if (books.Count == 0)
         {
             return NotFound("No books found for the given author.");

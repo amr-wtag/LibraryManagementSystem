@@ -1,12 +1,25 @@
 'use client';
 
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-final-form';
 import API_ENDPOINTS from '@/app/lib/api';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import LoginForm from '@/app/components/LoginForm/LoginForm';
 
 const LoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
+  const token = localStorage.getItem('token');
+  console.log({ token });
+  useEffect(() => {
+    if (token) {
+      router.replace('/books'); // Use replace() instead of push() to prevent back navigation
+    } else {
+      setIsAuthChecked(true); // Only render the form if authentication check is done
+    }
+  }, [router, token]);
 
   const handleLogin = async (values: { email: string; password: string }) => {
     setError('');
@@ -42,35 +55,22 @@ const LoginPage = () => {
 
       console.log('Login successful:', token);
       localStorage.setItem('token', data.token); // Store JWT Token
+      router.push('/books');
+
     } catch (error: any) {
-      console.log("hehehehe");
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
 
+  if (!isAuthChecked) return null;
+
   return (
     <Form
       onSubmit={handleLogin}
       render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Email:</label>
-            <Field name="email" component="input" type="email" placeholder="Email" />
-          </div>
-
-          <div>
-            <label>Password:</label>
-            <Field name="password" component="input" type="password" placeholder="Password" />
-          </div>
-
-          <button type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-        </form>
+        <LoginForm handleSubmit={handleSubmit} />
       )}
     />
   );

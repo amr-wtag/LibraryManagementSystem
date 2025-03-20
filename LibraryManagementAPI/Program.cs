@@ -30,13 +30,23 @@ builder.Services.AddScoped<BookService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// ✅ Use a specific origin and allow credentials
+var frontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL");
+
+if (string.IsNullOrEmpty(frontendUrl))
+{
+    throw new InvalidOperationException("FRONTEND_URL is missing from environment variables.");
+}
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
+        policy.WithOrigins(frontendUrl) // ✅ Set frontend URL
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials(); // ✅ Required for authentication
     });
 });
 
@@ -88,7 +98,21 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// ✅ Ensure CORS is applied BEFORE authentication & authorization
 app.UseCors("AllowFrontend");
+
+// ✅ Ensure OPTIONS requests are handled
+app.Use(async (context, next) =>
+{
+    if (context.Request.Method == "OPTIONS")
+    {
+        context.Response.StatusCode = 200;
+        return;
+    }
+    await next();
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
