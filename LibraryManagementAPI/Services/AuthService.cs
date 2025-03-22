@@ -12,14 +12,13 @@ public class AuthService
         _authRepository = authRepository;
     }
 
-    public async Task<string> RegisterAsync(User user, string password)
+    public async Task<string> RegisterAsync(User user, string password, string role)
     {
-        return await _authRepository.RegisterAsync(user, password);
+        return await _authRepository.RegisterAsync(user, password, role);
     }
 
-    public async Task<string?> LoginAsync(string username,string email, string password)
+    public async Task<string?> LoginAsync(string username, string email, string password)
     {
-        return await _authRepository.LoginAsync(username, email,password);
+        return await _authRepository.LoginAsync(username, email, password);
     }
-
 }

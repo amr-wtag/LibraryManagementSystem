@@ -1,9 +1,9 @@
-namespace LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Models;
 
-using Models;
+namespace LibraryManagementAPI.interfaces;
 
 public interface IAuthRepository
 {
-    Task<string> RegisterAsync(User user, string password);
+    Task<string> RegisterAsync(User user, string password, string role);
     Task<string?> LoginAsync(string username, string email, string password);
 }
