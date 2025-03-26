@@ -7,11 +7,11 @@ using Services;
 
 [Route("api/[controller]")]
 [ApiController]
-public class BookController : ControllerBase
+public class BooksController : ControllerBase
 {
     private readonly BookService _bookService;
 
-    public BookController(BookService bookService)
+    public BooksController(BookService bookService)
     {
         _bookService = bookService;
     }
@@ -38,7 +38,6 @@ public class BookController : ControllerBase
 
         }
 
-
     }
 
     [HttpGet("by-author/{author}")]
@@ -48,9 +47,9 @@ public class BookController : ControllerBase
         {
             return BadRequest("Author parameter cannot be empty.");
         }
-        
+
         var books = await _bookService.GetBooksByAuthorAsync(author);
-        
+
         if (books.Count == 0)
         {
             return NotFound("No books found for the given author.");
