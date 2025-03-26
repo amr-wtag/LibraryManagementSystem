@@ -1,6 +1,6 @@
 ﻿namespace LibraryManagementAPI.Models;
 
-public class Transaction
+public class BookReservation
 {
     public Guid Id { get; set; }
     public Guid BookId { get; set; }

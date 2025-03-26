@@ -13,21 +13,22 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
     }
 
     public DbSet<Book> Books { get; set; }
-    public DbSet<Transaction> Transactions { get; set; }
+    public DbSet<BookReservation> BookReservations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Transaction>()
-            .HasOne(t => t.Book)
-            .WithMany(b => b.Transactions)
-            .HasForeignKey(t => t.BookId);
+        // Update relationships to use BookReservation
+        modelBuilder.Entity<BookReservation>()
+            .HasOne(br => br.Book)
+            .WithMany(b => b.BookReservations)
+            .HasForeignKey(br => br.BookId);
 
-        modelBuilder.Entity<Transaction>()
-            .HasOne(t => t.User)
-            .WithMany(b => b.Transactions)
-            .HasForeignKey(t => t.UserId);
+        modelBuilder.Entity<BookReservation>()
+            .HasOne(br => br.User)
+            .WithMany(u => u.BookReservations)
+            .HasForeignKey(br => br.UserId);
 
         // Call Seed Data
         SeedData(modelBuilder);
@@ -56,24 +57,19 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
             .RuleFor(u => u.EmailConfirmed, f => true);
 
         var users = userFaker.Generate(5);
-        foreach (var user in users)
-        {
-            user.PasswordHash = passwordHasher.HashPassword(user, "Password123!");
-        }
+        foreach (var user in users) user.PasswordHash = passwordHasher.HashPassword(user, "Password123!");
 
         modelBuilder.Entity<User>().HasData(users);
 
         // Assign Roles to Users (First User -> Admin, Second -> Librarian, Rest -> User)
         var userRoles = new List<IdentityUserRole<Guid>>
         {
-            new IdentityUserRole<Guid> { UserId = users[0].Id, RoleId = adminRole.Id },
-            new IdentityUserRole<Guid> { UserId = users[1].Id, RoleId = librarianRole.Id }
+            new() { UserId = users[0].Id, RoleId = adminRole.Id },
+            new() { UserId = users[1].Id, RoleId = librarianRole.Id }
         };
 
-        for (int i = 2; i < users.Count; i++)
-        {
+        for (var i = 2; i < users.Count; i++)
             userRoles.Add(new IdentityUserRole<Guid> { UserId = users[i].Id, RoleId = userRole.Id });
-        }
 
         modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(userRoles);
 

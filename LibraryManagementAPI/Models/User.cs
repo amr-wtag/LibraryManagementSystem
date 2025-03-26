@@ -7,5 +7,5 @@ public class User : IdentityUser<Guid>
     public string? FullName { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public ICollection<Transaction>? Transactions { get; set; }
+    public ICollection<BookReservation>? BookReservations { get; set; }
 }
