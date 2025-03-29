@@ -1,9 +1,9 @@
-namespace LibraryManagementAPI.Repositories;
-
-using Data;
-using interfaces;
+using LibraryManagementAPI.Data;
+using LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using Models;
+
+namespace LibraryManagementAPI.Repositories;
 
 public class BookRepository : IBookRepository
 {
@@ -27,8 +27,8 @@ public class BookRepository : IBookRepository
     public async Task<List<Book>> GetBooksByAuthorAsync(string? author)
     {
         return await _context.Books
-            .Where(book => !string.IsNullOrEmpty(book.Author) &&
-                           (author == null || book.Author.ToLower().Contains(author.ToLower())))
+            .Where(book => book.BookAuthors!.Any(ba =>
+                ba.Author != null && (author == null || ba.Author.Name.ToLower().Contains(author.ToLower()))))
             .ToListAsync();
     }
 }

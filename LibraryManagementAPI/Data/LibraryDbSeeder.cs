@@ -46,17 +46,36 @@ public static class LibraryDbSeeder
 
         modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(userRoles);
 
-        // Generate Books with Categories
+        // Generate Authors
+        var authorFaker = new Faker<Author>()
+            .RuleFor(a => a.Id, f => Guid.NewGuid())
+            .RuleFor(a => a.Name, f => f.Name.FullName());
+
+        var authors = authorFaker.Generate(5);
+        modelBuilder.Entity<Author>().HasData(authors);
+
+        // Generate Books
         var bookCategories = new[] { "Fiction", "Science", "History", "Technology", "Mystery" };
 
         var bookFaker = new Faker<Book>()
             .RuleFor(b => b.Id, f => Guid.NewGuid())
             .RuleFor(b => b.Title, f => f.Lorem.Sentence(3))
-            .RuleFor(b => b.Author, f => f.Name.FullName())
             .RuleFor(b => b.Category, f => f.PickRandom(bookCategories))
             .RuleFor(b => b.CopiesAvailable, f => f.Random.Int(1, 20));
 
         var books = bookFaker.Generate(10);
         modelBuilder.Entity<Book>().HasData(books);
+
+        // Create BookAuthor relationships
+        var bookAuthors = new List<BookAuthor>();
+        foreach (var book in books)
+        foreach (var author in authors.OrderBy(a => Guid.NewGuid()).Take(2)) // Assign two random authors for each book
+            bookAuthors.Add(new BookAuthor
+            {
+                BookId = book.Id,
+                AuthorId = author.Id
+            });
+
+        modelBuilder.Entity<BookAuthor>().HasData(bookAuthors);
     }
 }

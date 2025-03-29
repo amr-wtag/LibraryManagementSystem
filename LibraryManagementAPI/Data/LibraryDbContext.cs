@@ -11,6 +11,8 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
     }
 
     public DbSet<Book> Books { get; set; }
+    public DbSet<Author> Authors { get; set; }
+    public DbSet<BookAuthor> BookAuthors { get; set; }
     public DbSet<BookReservation> BookReservations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,6 +29,20 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
             .HasOne(br => br.User)
             .WithMany(u => u.BookReservations)
             .HasForeignKey(br => br.UserId);
+
+        modelBuilder.Entity<BookAuthor>()
+            .HasKey(ba => new { ba.BookId, ba.AuthorId });
+
+        modelBuilder.Entity<BookAuthor>()
+            .HasOne(ba => ba.Book)
+            .WithMany(b => b.BookAuthors)
+            .HasForeignKey(ba => ba.BookId);
+
+        modelBuilder.Entity<BookAuthor>()
+            .HasOne(ba => ba.Author)
+            .WithMany(a => a.BookAuthors)
+            .HasForeignKey(ba => ba.AuthorId);
+
 
         // Call Seed Data
         LibraryDbSeeder.Seed(modelBuilder);
