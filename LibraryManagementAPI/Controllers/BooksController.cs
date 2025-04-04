@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using LibraryManagementAPI.Models;
+﻿using LibraryManagementAPI.Models;
+using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementAPI.Controllers;
-
-using Services;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -16,44 +15,11 @@ public class BooksController : ControllerBase
         _bookService = bookService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+    [HttpGet("filter")]
+    public async Task<ActionResult<List<Book>>> GetFilteredBooksAsync(
+        [FromQuery] string? title, [FromQuery] string? author, [FromQuery] string? genre)
     {
-        var books = await _bookService.GetAllBooksAsync();
-        return Ok(books);
-    }
-
-    [HttpGet("{id:guid}")]
-    public async Task<ActionResult<Book>> GetBook(Guid id)
-    {
-        try
-        {
-            var book = await _bookService.GetBookByIdAsync(id);
-            return Ok(book);
-
-        }
-        catch (KeyNotFoundException exception)
-        {
-            return NotFound(new { message = exception.Message });
-
-        }
-
-    }
-
-    [HttpGet("by-author/{author}")]
-    public async Task<ActionResult<List<Book>>> GetBookByAuthor(string author)
-    {
-        if (string.IsNullOrWhiteSpace(author))
-        {
-            return BadRequest("Author parameter cannot be empty.");
-        }
-
-        var books = await _bookService.GetBooksByAuthorAsync(author);
-
-        if (books.Count == 0)
-        {
-            return NotFound("No books found for the given author.");
-        }
+        var books = await _bookService.GetFilteredBookAsync(title, author, genre);
 
         return Ok(books);
     }

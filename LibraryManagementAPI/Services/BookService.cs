@@ -1,7 +1,7 @@
-namespace LibraryManagementAPI.Services;
+using LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Models;
 
-using interfaces;
-using Models;
+namespace LibraryManagementAPI.Services;
 
 public class BookService
 {
@@ -12,19 +12,8 @@ public class BookService
         _bookRepository = bookRepository;
     }
 
-    public async Task<IEnumerable<Book>> GetAllBooksAsync()
+    public async Task<List<Book>> GetFilteredBookAsync(string? title, string? author, string? genre)
     {
-        return await _bookRepository.GetAllBooksAsync();
-    }
-
-    public async Task<Book> GetBookByIdAsync(Guid id)
-    {
-        return await _bookRepository.GetBookByIdAsync(id)
-                   ?? throw new KeyNotFoundException("Book not found");
-    }
-
-    public async Task<List<Book>> GetBooksByAuthorAsync(string? author)
-    {
-        return await _bookRepository.GetBooksByAuthorAsync(author);
+        return await _bookRepository.GetFilteredBookAsync(title, author, genre);
     }
 }

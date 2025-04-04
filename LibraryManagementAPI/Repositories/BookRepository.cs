@@ -14,21 +14,30 @@ public class BookRepository : IBookRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Book>> GetAllBooksAsync()
+    public async Task<List<Book>> GetFilteredBookAsync(string? title, string? author, string? genre)
     {
-        return await _context.Books.ToListAsync();
-    }
+        var query = _context.Books
+            .Include(b => b.BookAuthors).ThenInclude(ba => ba.Author)
+            .Include(b => b.BookGenres).ThenInclude(bg => bg.Genre)
+            .AsQueryable();
 
-    public async Task<Book?> GetBookByIdAsync(Guid id)
-    {
-        return await _context.Books.FindAsync(id);
-    }
+        if (!string.IsNullOrWhiteSpace(title))
+        {
+            query = query.Where(b => b.Title!.Contains(title));
+        }
 
-    public async Task<List<Book>> GetBooksByAuthorAsync(string? author)
-    {
-        return await _context.Books
-            .Where(book => book.BookAuthors!.Any(ba =>
-                ba.Author != null && (author == null || ba.Author.Name.ToLower().Contains(author.ToLower()))))
-            .ToListAsync();
+        if (!string.IsNullOrWhiteSpace(author))
+        {
+            query = query.Where(b => b.BookAuthors!.Any(ba =>
+                ba.Author != null && ba.Author.Name!.Contains(author)));
+        }
+
+        if (!string.IsNullOrWhiteSpace(genre))
+        {
+            query = query.Where(b => b.BookGenres!.Any(
+                bg => bg.Genre != null && bg.Genre.Name!.Contains(genre)));
+        }
+
+        return await query.ToListAsync();
     }
 }
