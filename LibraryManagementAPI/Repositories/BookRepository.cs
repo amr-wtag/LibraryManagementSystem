@@ -23,19 +23,19 @@ public class BookRepository : IBookRepository
 
         if (!string.IsNullOrWhiteSpace(title))
         {
-            query = query.Where(b => b.Title!.Contains(title));
+            query = query.Where(b => b.Title!.ToLower().Contains(title.ToLower()));
         }
 
         if (!string.IsNullOrWhiteSpace(author))
         {
             query = query.Where(b => b.BookAuthors!.Any(ba =>
-                ba.Author != null && ba.Author.Name!.Contains(author)));
+                ba.Author != null && ba.Author.Name!.ToLower().Contains(author.ToLower())));
         }
 
         if (!string.IsNullOrWhiteSpace(genre))
         {
             query = query.Where(b => b.BookGenres!.Any(
-                bg => bg.Genre != null && bg.Genre.Name!.Contains(genre)));
+                bg => bg.Genre != null && bg.Genre.Name!.ToLower().Contains(genre.ToLower())));
         }
 
         return await query.ToListAsync();

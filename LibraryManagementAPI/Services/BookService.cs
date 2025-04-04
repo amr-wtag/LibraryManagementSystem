@@ -1,5 +1,6 @@
+using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.interfaces;
-using LibraryManagementAPI.Models;
+using LibraryManagementAPI.Mappers;
 
 namespace LibraryManagementAPI.Services;
 
@@ -12,8 +13,9 @@ public class BookService
         _bookRepository = bookRepository;
     }
 
-    public async Task<List<Book>> GetFilteredBookAsync(string? title, string? author, string? genre)
+    public async Task<List<BookDto>> GetFilteredBookAsync(string? title, string? author, string? genre)
     {
-        return await _bookRepository.GetFilteredBookAsync(title, author, genre);
+        var books = await _bookRepository.GetFilteredBookAsync(title, author, genre);
+        return books.Select(book => book.MapToDto()).ToList();
     }
 }

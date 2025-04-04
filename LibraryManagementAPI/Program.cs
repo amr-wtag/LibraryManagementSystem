@@ -1,11 +1,12 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using DotNetEnv;
 using LibraryManagementAPI.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using LibraryManagementAPI.interfaces;
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Repositories;
 using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -77,7 +78,12 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+        options.JsonSerializerOptions.MaxDepth = 64; // Increase if needed
+    });
 
 var app = builder.Build();
 
