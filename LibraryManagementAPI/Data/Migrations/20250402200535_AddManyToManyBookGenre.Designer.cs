@@ -3,6 +3,7 @@ using System;
 using LibraryManagementAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LibraryManagementAPI.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250402200535_AddManyToManyBookGenre")]
+    partial class AddManyToManyBookGenre
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,28 +41,28 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7f985fa4-61a9-45a9-96a8-b6d89ec2ae20"),
-                            Name = "Wendy Berge"
+                            Id = new Guid("b9e7063d-e341-438f-8492-35021baa3399"),
+                            Name = "Emelia Feeney"
                         },
                         new
                         {
-                            Id = new Guid("f4a9d220-4b1c-4be6-a2e5-86b7763252e8"),
-                            Name = "Donato Fadel"
+                            Id = new Guid("303c84b0-2366-4a24-9d8f-dd6a83d1f3a5"),
+                            Name = "Janiya Tillman"
                         },
                         new
                         {
-                            Id = new Guid("7f7c755e-84a5-4620-94c0-49466210befc"),
-                            Name = "Ruby Hoeger"
+                            Id = new Guid("a478ca95-4352-4324-8291-31cfed4df751"),
+                            Name = "Blaise Skiles"
                         },
                         new
                         {
-                            Id = new Guid("4783eadd-022b-4a26-afe3-9aa737aa7bef"),
-                            Name = "Amari Grant"
+                            Id = new Guid("1553e0e4-2273-430f-bda5-fb6b1dbe4c2f"),
+                            Name = "Frieda Crist"
                         },
                         new
                         {
-                            Id = new Guid("931c8342-2cd5-4adf-ad3f-989da3c3f3a3"),
-                            Name = "Hilda Lockman"
+                            Id = new Guid("35c36800-e157-4664-aa9c-8b8cb97256ca"),
+                            Name = "Noble Bernier"
                         });
                 });
 
@@ -82,63 +85,63 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a6a22d27-4022-47b9-b438-36737bb114e3"),
-                            CopiesAvailable = 8,
-                            Title = "Voluptatem dolores magnam."
+                            Id = new Guid("50d00abb-2a4e-43ae-a8cb-96cbbfbe1c22"),
+                            CopiesAvailable = 10,
+                            Title = "Voluptatibus nostrum iusto."
                         },
                         new
                         {
-                            Id = new Guid("31e79e9a-7671-451e-bb87-a0906f8fff39"),
+                            Id = new Guid("52e7473c-ec5e-4770-b6ae-34a40e262286"),
+                            CopiesAvailable = 9,
+                            Title = "Velit est rem."
+                        },
+                        new
+                        {
+                            Id = new Guid("edf394b5-0819-4a59-a1f9-1f013e92e0ae"),
                             CopiesAvailable = 15,
-                            Title = "Eveniet reiciendis facilis."
+                            Title = "Voluptates aut et."
                         },
                         new
                         {
-                            Id = new Guid("b0b2905a-aaaa-4b57-8e0a-b0012eeecd1e"),
-                            CopiesAvailable = 13,
-                            Title = "Voluptas dolorem neque."
-                        },
-                        new
-                        {
-                            Id = new Guid("19873608-6ab9-4529-97f0-ef894832f439"),
-                            CopiesAvailable = 14,
-                            Title = "Illum accusantium nemo."
-                        },
-                        new
-                        {
-                            Id = new Guid("8a69a014-9472-453c-884e-9ceb7e32c7f8"),
-                            CopiesAvailable = 2,
-                            Title = "In inventore qui."
-                        },
-                        new
-                        {
-                            Id = new Guid("88373764-c77f-4fe0-b592-6256cd2ea49d"),
-                            CopiesAvailable = 16,
-                            Title = "Praesentium accusamus maxime."
-                        },
-                        new
-                        {
-                            Id = new Guid("ade330e6-2b44-47d1-a36c-37ba42a22cbb"),
-                            CopiesAvailable = 6,
-                            Title = "Fuga qui corporis."
-                        },
-                        new
-                        {
-                            Id = new Guid("33a8bf64-f3f8-43fb-a0bc-9ca2a0194eb5"),
-                            CopiesAvailable = 8,
-                            Title = "Eveniet possimus animi."
-                        },
-                        new
-                        {
-                            Id = new Guid("bcbfc274-3970-4bc2-ae82-04b98dfd8ec6"),
-                            CopiesAvailable = 3,
-                            Title = "Neque autem voluptates."
-                        },
-                        new
-                        {
-                            Id = new Guid("aeb5df0c-d306-43a3-b3fa-ae3ea539e51f"),
+                            Id = new Guid("09f80ef2-277f-496b-a9d0-824339dc70c3"),
                             CopiesAvailable = 19,
-                            Title = "Nam quo enim."
+                            Title = "Tenetur magni sit."
+                        },
+                        new
+                        {
+                            Id = new Guid("2cf911e6-e97d-48cc-8ca5-5f32359e38e9"),
+                            CopiesAvailable = 16,
+                            Title = "Numquam sit laudantium."
+                        },
+                        new
+                        {
+                            Id = new Guid("0af53432-000d-49f7-9c46-75df165f5d34"),
+                            CopiesAvailable = 17,
+                            Title = "Est totam blanditiis."
+                        },
+                        new
+                        {
+                            Id = new Guid("dcac770a-ccb8-4ec7-90d6-a7116271fd30"),
+                            CopiesAvailable = 12,
+                            Title = "Et iste dolores."
+                        },
+                        new
+                        {
+                            Id = new Guid("17e8b7ae-e319-46e8-901f-d77441223493"),
+                            CopiesAvailable = 15,
+                            Title = "Et laborum dolores."
+                        },
+                        new
+                        {
+                            Id = new Guid("0f06e0c2-d611-4bd3-a87c-7a4d68d829f9"),
+                            CopiesAvailable = 19,
+                            Title = "Consequatur expedita tenetur."
+                        },
+                        new
+                        {
+                            Id = new Guid("a2659473-3c1f-4ae6-ae2c-8aff12d44070"),
+                            CopiesAvailable = 1,
+                            Title = "In totam qui."
                         });
                 });
 
@@ -159,103 +162,103 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            BookId = new Guid("a6a22d27-4022-47b9-b438-36737bb114e3"),
-                            AuthorId = new Guid("7f7c755e-84a5-4620-94c0-49466210befc")
+                            BookId = new Guid("50d00abb-2a4e-43ae-a8cb-96cbbfbe1c22"),
+                            AuthorId = new Guid("b9e7063d-e341-438f-8492-35021baa3399")
                         },
                         new
                         {
-                            BookId = new Guid("a6a22d27-4022-47b9-b438-36737bb114e3"),
-                            AuthorId = new Guid("f4a9d220-4b1c-4be6-a2e5-86b7763252e8")
+                            BookId = new Guid("50d00abb-2a4e-43ae-a8cb-96cbbfbe1c22"),
+                            AuthorId = new Guid("1553e0e4-2273-430f-bda5-fb6b1dbe4c2f")
                         },
                         new
                         {
-                            BookId = new Guid("31e79e9a-7671-451e-bb87-a0906f8fff39"),
-                            AuthorId = new Guid("f4a9d220-4b1c-4be6-a2e5-86b7763252e8")
+                            BookId = new Guid("52e7473c-ec5e-4770-b6ae-34a40e262286"),
+                            AuthorId = new Guid("b9e7063d-e341-438f-8492-35021baa3399")
                         },
                         new
                         {
-                            BookId = new Guid("31e79e9a-7671-451e-bb87-a0906f8fff39"),
-                            AuthorId = new Guid("7f7c755e-84a5-4620-94c0-49466210befc")
+                            BookId = new Guid("52e7473c-ec5e-4770-b6ae-34a40e262286"),
+                            AuthorId = new Guid("303c84b0-2366-4a24-9d8f-dd6a83d1f3a5")
                         },
                         new
                         {
-                            BookId = new Guid("b0b2905a-aaaa-4b57-8e0a-b0012eeecd1e"),
-                            AuthorId = new Guid("931c8342-2cd5-4adf-ad3f-989da3c3f3a3")
+                            BookId = new Guid("edf394b5-0819-4a59-a1f9-1f013e92e0ae"),
+                            AuthorId = new Guid("a478ca95-4352-4324-8291-31cfed4df751")
                         },
                         new
                         {
-                            BookId = new Guid("b0b2905a-aaaa-4b57-8e0a-b0012eeecd1e"),
-                            AuthorId = new Guid("f4a9d220-4b1c-4be6-a2e5-86b7763252e8")
+                            BookId = new Guid("edf394b5-0819-4a59-a1f9-1f013e92e0ae"),
+                            AuthorId = new Guid("1553e0e4-2273-430f-bda5-fb6b1dbe4c2f")
                         },
                         new
                         {
-                            BookId = new Guid("19873608-6ab9-4529-97f0-ef894832f439"),
-                            AuthorId = new Guid("f4a9d220-4b1c-4be6-a2e5-86b7763252e8")
+                            BookId = new Guid("09f80ef2-277f-496b-a9d0-824339dc70c3"),
+                            AuthorId = new Guid("35c36800-e157-4664-aa9c-8b8cb97256ca")
                         },
                         new
                         {
-                            BookId = new Guid("19873608-6ab9-4529-97f0-ef894832f439"),
-                            AuthorId = new Guid("931c8342-2cd5-4adf-ad3f-989da3c3f3a3")
+                            BookId = new Guid("09f80ef2-277f-496b-a9d0-824339dc70c3"),
+                            AuthorId = new Guid("303c84b0-2366-4a24-9d8f-dd6a83d1f3a5")
                         },
                         new
                         {
-                            BookId = new Guid("8a69a014-9472-453c-884e-9ceb7e32c7f8"),
-                            AuthorId = new Guid("7f985fa4-61a9-45a9-96a8-b6d89ec2ae20")
+                            BookId = new Guid("2cf911e6-e97d-48cc-8ca5-5f32359e38e9"),
+                            AuthorId = new Guid("35c36800-e157-4664-aa9c-8b8cb97256ca")
                         },
                         new
                         {
-                            BookId = new Guid("8a69a014-9472-453c-884e-9ceb7e32c7f8"),
-                            AuthorId = new Guid("f4a9d220-4b1c-4be6-a2e5-86b7763252e8")
+                            BookId = new Guid("2cf911e6-e97d-48cc-8ca5-5f32359e38e9"),
+                            AuthorId = new Guid("303c84b0-2366-4a24-9d8f-dd6a83d1f3a5")
                         },
                         new
                         {
-                            BookId = new Guid("88373764-c77f-4fe0-b592-6256cd2ea49d"),
-                            AuthorId = new Guid("4783eadd-022b-4a26-afe3-9aa737aa7bef")
+                            BookId = new Guid("0af53432-000d-49f7-9c46-75df165f5d34"),
+                            AuthorId = new Guid("35c36800-e157-4664-aa9c-8b8cb97256ca")
                         },
                         new
                         {
-                            BookId = new Guid("88373764-c77f-4fe0-b592-6256cd2ea49d"),
-                            AuthorId = new Guid("7f7c755e-84a5-4620-94c0-49466210befc")
+                            BookId = new Guid("0af53432-000d-49f7-9c46-75df165f5d34"),
+                            AuthorId = new Guid("b9e7063d-e341-438f-8492-35021baa3399")
                         },
                         new
                         {
-                            BookId = new Guid("ade330e6-2b44-47d1-a36c-37ba42a22cbb"),
-                            AuthorId = new Guid("4783eadd-022b-4a26-afe3-9aa737aa7bef")
+                            BookId = new Guid("dcac770a-ccb8-4ec7-90d6-a7116271fd30"),
+                            AuthorId = new Guid("a478ca95-4352-4324-8291-31cfed4df751")
                         },
                         new
                         {
-                            BookId = new Guid("ade330e6-2b44-47d1-a36c-37ba42a22cbb"),
-                            AuthorId = new Guid("7f7c755e-84a5-4620-94c0-49466210befc")
+                            BookId = new Guid("dcac770a-ccb8-4ec7-90d6-a7116271fd30"),
+                            AuthorId = new Guid("b9e7063d-e341-438f-8492-35021baa3399")
                         },
                         new
                         {
-                            BookId = new Guid("33a8bf64-f3f8-43fb-a0bc-9ca2a0194eb5"),
-                            AuthorId = new Guid("931c8342-2cd5-4adf-ad3f-989da3c3f3a3")
+                            BookId = new Guid("17e8b7ae-e319-46e8-901f-d77441223493"),
+                            AuthorId = new Guid("35c36800-e157-4664-aa9c-8b8cb97256ca")
                         },
                         new
                         {
-                            BookId = new Guid("33a8bf64-f3f8-43fb-a0bc-9ca2a0194eb5"),
-                            AuthorId = new Guid("7f985fa4-61a9-45a9-96a8-b6d89ec2ae20")
+                            BookId = new Guid("17e8b7ae-e319-46e8-901f-d77441223493"),
+                            AuthorId = new Guid("b9e7063d-e341-438f-8492-35021baa3399")
                         },
                         new
                         {
-                            BookId = new Guid("bcbfc274-3970-4bc2-ae82-04b98dfd8ec6"),
-                            AuthorId = new Guid("7f7c755e-84a5-4620-94c0-49466210befc")
+                            BookId = new Guid("0f06e0c2-d611-4bd3-a87c-7a4d68d829f9"),
+                            AuthorId = new Guid("a478ca95-4352-4324-8291-31cfed4df751")
                         },
                         new
                         {
-                            BookId = new Guid("bcbfc274-3970-4bc2-ae82-04b98dfd8ec6"),
-                            AuthorId = new Guid("f4a9d220-4b1c-4be6-a2e5-86b7763252e8")
+                            BookId = new Guid("0f06e0c2-d611-4bd3-a87c-7a4d68d829f9"),
+                            AuthorId = new Guid("1553e0e4-2273-430f-bda5-fb6b1dbe4c2f")
                         },
                         new
                         {
-                            BookId = new Guid("aeb5df0c-d306-43a3-b3fa-ae3ea539e51f"),
-                            AuthorId = new Guid("7f985fa4-61a9-45a9-96a8-b6d89ec2ae20")
+                            BookId = new Guid("a2659473-3c1f-4ae6-ae2c-8aff12d44070"),
+                            AuthorId = new Guid("a478ca95-4352-4324-8291-31cfed4df751")
                         },
                         new
                         {
-                            BookId = new Guid("aeb5df0c-d306-43a3-b3fa-ae3ea539e51f"),
-                            AuthorId = new Guid("7f7c755e-84a5-4620-94c0-49466210befc")
+                            BookId = new Guid("a2659473-3c1f-4ae6-ae2c-8aff12d44070"),
+                            AuthorId = new Guid("303c84b0-2366-4a24-9d8f-dd6a83d1f3a5")
                         });
                 });
 
@@ -276,103 +279,103 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            BookId = new Guid("a6a22d27-4022-47b9-b438-36737bb114e3"),
-                            GenreId = new Guid("365ec0b3-88e4-47e8-a491-e81d5ffb1839")
+                            BookId = new Guid("50d00abb-2a4e-43ae-a8cb-96cbbfbe1c22"),
+                            GenreId = new Guid("90e38c2b-5ed5-4888-86b2-505a3f6a0844")
                         },
                         new
                         {
-                            BookId = new Guid("a6a22d27-4022-47b9-b438-36737bb114e3"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("50d00abb-2a4e-43ae-a8cb-96cbbfbe1c22"),
+                            GenreId = new Guid("caa04c57-255d-4f1d-9153-8c5932bb39e8")
                         },
                         new
                         {
-                            BookId = new Guid("31e79e9a-7671-451e-bb87-a0906f8fff39"),
-                            GenreId = new Guid("365ec0b3-88e4-47e8-a491-e81d5ffb1839")
+                            BookId = new Guid("52e7473c-ec5e-4770-b6ae-34a40e262286"),
+                            GenreId = new Guid("caa04c57-255d-4f1d-9153-8c5932bb39e8")
                         },
                         new
                         {
-                            BookId = new Guid("31e79e9a-7671-451e-bb87-a0906f8fff39"),
-                            GenreId = new Guid("ff2f218b-87dc-42cc-b0be-fd2fba5af557")
+                            BookId = new Guid("52e7473c-ec5e-4770-b6ae-34a40e262286"),
+                            GenreId = new Guid("5b3863cc-9ca8-4d89-818a-000f8b643862")
                         },
                         new
                         {
-                            BookId = new Guid("b0b2905a-aaaa-4b57-8e0a-b0012eeecd1e"),
-                            GenreId = new Guid("19bd8929-c838-4693-b1f6-60dacce4d482")
+                            BookId = new Guid("edf394b5-0819-4a59-a1f9-1f013e92e0ae"),
+                            GenreId = new Guid("90e38c2b-5ed5-4888-86b2-505a3f6a0844")
                         },
                         new
                         {
-                            BookId = new Guid("b0b2905a-aaaa-4b57-8e0a-b0012eeecd1e"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("edf394b5-0819-4a59-a1f9-1f013e92e0ae"),
+                            GenreId = new Guid("2b80fff8-74e0-4fcc-b903-527a0a6056ae")
                         },
                         new
                         {
-                            BookId = new Guid("19873608-6ab9-4529-97f0-ef894832f439"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("09f80ef2-277f-496b-a9d0-824339dc70c3"),
+                            GenreId = new Guid("90e38c2b-5ed5-4888-86b2-505a3f6a0844")
                         },
                         new
                         {
-                            BookId = new Guid("19873608-6ab9-4529-97f0-ef894832f439"),
-                            GenreId = new Guid("365ec0b3-88e4-47e8-a491-e81d5ffb1839")
+                            BookId = new Guid("09f80ef2-277f-496b-a9d0-824339dc70c3"),
+                            GenreId = new Guid("2b80fff8-74e0-4fcc-b903-527a0a6056ae")
                         },
                         new
                         {
-                            BookId = new Guid("8a69a014-9472-453c-884e-9ceb7e32c7f8"),
-                            GenreId = new Guid("19bd8929-c838-4693-b1f6-60dacce4d482")
+                            BookId = new Guid("2cf911e6-e97d-48cc-8ca5-5f32359e38e9"),
+                            GenreId = new Guid("2b80fff8-74e0-4fcc-b903-527a0a6056ae")
                         },
                         new
                         {
-                            BookId = new Guid("8a69a014-9472-453c-884e-9ceb7e32c7f8"),
-                            GenreId = new Guid("365ec0b3-88e4-47e8-a491-e81d5ffb1839")
+                            BookId = new Guid("2cf911e6-e97d-48cc-8ca5-5f32359e38e9"),
+                            GenreId = new Guid("5b3863cc-9ca8-4d89-818a-000f8b643862")
                         },
                         new
                         {
-                            BookId = new Guid("88373764-c77f-4fe0-b592-6256cd2ea49d"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("0af53432-000d-49f7-9c46-75df165f5d34"),
+                            GenreId = new Guid("2b80fff8-74e0-4fcc-b903-527a0a6056ae")
                         },
                         new
                         {
-                            BookId = new Guid("88373764-c77f-4fe0-b592-6256cd2ea49d"),
-                            GenreId = new Guid("ff2f218b-87dc-42cc-b0be-fd2fba5af557")
+                            BookId = new Guid("0af53432-000d-49f7-9c46-75df165f5d34"),
+                            GenreId = new Guid("90e38c2b-5ed5-4888-86b2-505a3f6a0844")
                         },
                         new
                         {
-                            BookId = new Guid("ade330e6-2b44-47d1-a36c-37ba42a22cbb"),
-                            GenreId = new Guid("19bd8929-c838-4693-b1f6-60dacce4d482")
+                            BookId = new Guid("dcac770a-ccb8-4ec7-90d6-a7116271fd30"),
+                            GenreId = new Guid("90e38c2b-5ed5-4888-86b2-505a3f6a0844")
                         },
                         new
                         {
-                            BookId = new Guid("ade330e6-2b44-47d1-a36c-37ba42a22cbb"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("dcac770a-ccb8-4ec7-90d6-a7116271fd30"),
+                            GenreId = new Guid("2b80fff8-74e0-4fcc-b903-527a0a6056ae")
                         },
                         new
                         {
-                            BookId = new Guid("33a8bf64-f3f8-43fb-a0bc-9ca2a0194eb5"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("17e8b7ae-e319-46e8-901f-d77441223493"),
+                            GenreId = new Guid("90e38c2b-5ed5-4888-86b2-505a3f6a0844")
                         },
                         new
                         {
-                            BookId = new Guid("33a8bf64-f3f8-43fb-a0bc-9ca2a0194eb5"),
-                            GenreId = new Guid("ff2f218b-87dc-42cc-b0be-fd2fba5af557")
+                            BookId = new Guid("17e8b7ae-e319-46e8-901f-d77441223493"),
+                            GenreId = new Guid("caa04c57-255d-4f1d-9153-8c5932bb39e8")
                         },
                         new
                         {
-                            BookId = new Guid("bcbfc274-3970-4bc2-ae82-04b98dfd8ec6"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("0f06e0c2-d611-4bd3-a87c-7a4d68d829f9"),
+                            GenreId = new Guid("5b3863cc-9ca8-4d89-818a-000f8b643862")
                         },
                         new
                         {
-                            BookId = new Guid("bcbfc274-3970-4bc2-ae82-04b98dfd8ec6"),
-                            GenreId = new Guid("365ec0b3-88e4-47e8-a491-e81d5ffb1839")
+                            BookId = new Guid("0f06e0c2-d611-4bd3-a87c-7a4d68d829f9"),
+                            GenreId = new Guid("90e38c2b-5ed5-4888-86b2-505a3f6a0844")
                         },
                         new
                         {
-                            BookId = new Guid("aeb5df0c-d306-43a3-b3fa-ae3ea539e51f"),
-                            GenreId = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8")
+                            BookId = new Guid("a2659473-3c1f-4ae6-ae2c-8aff12d44070"),
+                            GenreId = new Guid("caa04c57-255d-4f1d-9153-8c5932bb39e8")
                         },
                         new
                         {
-                            BookId = new Guid("aeb5df0c-d306-43a3-b3fa-ae3ea539e51f"),
-                            GenreId = new Guid("365ec0b3-88e4-47e8-a491-e81d5ffb1839")
+                            BookId = new Guid("a2659473-3c1f-4ae6-ae2c-8aff12d44070"),
+                            GenreId = new Guid("2b80fff8-74e0-4fcc-b903-527a0a6056ae")
                         });
                 });
 
@@ -421,28 +424,6 @@ namespace LibraryManagementAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ff2f218b-87dc-42cc-b0be-fd2fba5af557"),
-                            Name = "Grocery & Music"
-                        },
-                        new
-                        {
-                            Id = new Guid("365ec0b3-88e4-47e8-a491-e81d5ffb1839"),
-                            Name = "Grocery"
-                        },
-                        new
-                        {
-                            Id = new Guid("19bd8929-c838-4693-b1f6-60dacce4d482"),
-                            Name = "Clothing, Music & Kids"
-                        },
-                        new
-                        {
-                            Id = new Guid("2286ae46-5d38-48d7-b1d1-ed163ab6e4c8"),
-                            Name = "Sports"
-                        });
                 });
 
             modelBuilder.Entity("LibraryManagementAPI.Models.Role", b =>
@@ -474,19 +455,19 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bcebfbf2-a287-47a0-b4f9-d41e9965e94c"),
+                            Id = new Guid("e8d2c9d0-a638-45c6-83c3-145375906820"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("8c81133a-2411-434e-8e8a-1e8a5540f192"),
+                            Id = new Guid("3f619e20-e613-4c71-8b7f-6552f67cc09c"),
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
-                            Id = new Guid("adda8091-635a-47c3-8802-853db6d08561"),
+                            Id = new Guid("0e0eacae-95b0-4330-92c3-623e8f94b324"),
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -565,88 +546,88 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8e569084-9ea1-4f8a-b000-dc589c9218e9"),
+                            Id = new Guid("e8d3b1c2-66a2-4602-a2b6-a57497d74de9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8279579a-9058-4012-9018-fbbd5bb067e3",
-                            CreatedAt = new DateTime(2025, 4, 2, 20, 24, 47, 188, DateTimeKind.Utc).AddTicks(4850),
-                            Email = "Ricardo.Moore@gmail.com",
+                            ConcurrencyStamp = "8b9527bf-5c65-4dc7-ad89-910d2d44dfae",
+                            CreatedAt = new DateTime(2025, 4, 2, 20, 5, 35, 95, DateTimeKind.Utc).AddTicks(5140),
+                            Email = "Waylon.Rempel@gmail.com",
                             EmailConfirmed = true,
-                            FullName = "David Shanahan",
+                            FullName = "Felix Schoen",
                             LockoutEnabled = false,
-                            NormalizedEmail = "RICARDO.MOORE@GMAIL.COM",
-                            NormalizedUserName = "ALBERTA_RODRIGUEZ40",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMSHvpbB0J0n+A092TgXXZdj2rZbMZ0/ZsspunVj8oYRL3UkcDd7glPJPqSwlpWvpw==",
+                            NormalizedEmail = "WAYLON.REMPEL@GMAIL.COM",
+                            NormalizedUserName = "VERONICA73",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJX5gjrBQIzBgPxLUDcyO6jWCym7vfU8fLC3XJ+nzzBLhUiF74KRyRA5vncS39BXlA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UserName = "Alberta_Rodriguez40"
+                            UserName = "Veronica73"
                         },
                         new
                         {
-                            Id = new Guid("2b1c0700-6c1f-42ee-82fd-de44cff89743"),
+                            Id = new Guid("04b46029-ea11-409c-a289-777e04f0fb6f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b317c586-af7a-4f1c-9fb0-0dcf4166ee58",
-                            CreatedAt = new DateTime(2025, 4, 2, 20, 24, 47, 188, DateTimeKind.Utc).AddTicks(6410),
-                            Email = "Rico.Bogan2@hotmail.com",
+                            ConcurrencyStamp = "5d4c5344-8dc1-4a09-bc84-2b4b778c26b4",
+                            CreatedAt = new DateTime(2025, 4, 2, 20, 5, 35, 95, DateTimeKind.Utc).AddTicks(6650),
+                            Email = "Terrance_Cole2@gmail.com",
                             EmailConfirmed = true,
-                            FullName = "Javon Stark",
+                            FullName = "Terry Kessler",
                             LockoutEnabled = false,
-                            NormalizedEmail = "RICO.BOGAN2@HOTMAIL.COM",
-                            NormalizedUserName = "ELWIN_HERMANN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELCbN7sTMVMUN8qQ88X3mM3lqN4Y+8u0tC/1YDwwCuAR/bY4+TfPCJ0MvEkILsht3Q==",
+                            NormalizedEmail = "TERRANCE_COLE2@GMAIL.COM",
+                            NormalizedUserName = "JEFFRY.KING70",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAtGIBGDDZgCqqdzFKmMzLXX9sbS1FNCzTA8k/EMW7goK1fpfeYeXpTvqkDc2Y2RYg==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UserName = "Elwin_Hermann"
+                            UserName = "Jeffry.King70"
                         },
                         new
                         {
-                            Id = new Guid("4482db24-b489-42f7-b913-f716a767d00b"),
+                            Id = new Guid("da60d36e-3c79-4765-a59e-ac94612cec7f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "12782788-5c31-4d83-88cd-fadeda66aa45",
-                            CreatedAt = new DateTime(2025, 4, 2, 20, 24, 47, 188, DateTimeKind.Utc).AddTicks(6520),
-                            Email = "Eunice.Kunze46@gmail.com",
+                            ConcurrencyStamp = "1268f410-4e63-40b8-acd8-37ce9938fb6c",
+                            CreatedAt = new DateTime(2025, 4, 2, 20, 5, 35, 95, DateTimeKind.Utc).AddTicks(6740),
+                            Email = "Chelsea5@yahoo.com",
                             EmailConfirmed = true,
-                            FullName = "Ward Smitham",
+                            FullName = "Germaine Langworth",
                             LockoutEnabled = false,
-                            NormalizedEmail = "EUNICE.KUNZE46@GMAIL.COM",
-                            NormalizedUserName = "ANDRE22",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIAO1Y22Khn7RGVlPg7iPihfNhUiyiUyrY2Qe8jbHjvNuq1zFE2eM8sWEVLQY9ek2Q==",
+                            NormalizedEmail = "CHELSEA5@YAHOO.COM",
+                            NormalizedUserName = "ESTEVAN37",
+                            PasswordHash = "AQAAAAIAAYagAAAAENarH7wA9JcT4tC0AzuIAiGjro6ynjna5QShnUdhl4c1X9dMk37NPuQs9wvxOdQcyA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UserName = "Andre22"
+                            UserName = "Estevan37"
                         },
                         new
                         {
-                            Id = new Guid("415516b5-9c42-494d-bcc1-d902826ea304"),
+                            Id = new Guid("706dd894-1a76-4624-9a16-b16f5c28a932"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "982393c8-714d-4d69-a167-6dfae04a0104",
-                            CreatedAt = new DateTime(2025, 4, 2, 20, 24, 47, 188, DateTimeKind.Utc).AddTicks(6640),
-                            Email = "Hank52@gmail.com",
+                            ConcurrencyStamp = "d85476b3-dab1-4ef7-8570-e6db48ba564f",
+                            CreatedAt = new DateTime(2025, 4, 2, 20, 5, 35, 95, DateTimeKind.Utc).AddTicks(6840),
+                            Email = "Carey37@yahoo.com",
                             EmailConfirmed = true,
-                            FullName = "Johathan Roob",
+                            FullName = "Theresia Durgan",
                             LockoutEnabled = false,
-                            NormalizedEmail = "HANK52@GMAIL.COM",
-                            NormalizedUserName = "JOANIE17",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOU87YUqTv7DDdRa+FKNFDnDw31b4jAgjcZAFwUAghj/ynKGEoN+w8nc/ZSVLTu+BA==",
+                            NormalizedEmail = "CAREY37@YAHOO.COM",
+                            NormalizedUserName = "IRMA_DARE56",
+                            PasswordHash = "AQAAAAIAAYagAAAAEP+/ZUZVihnXphz19lacgEufbrcEs8lc6Vlp9yVyyxix4t6IoNmG47uPX8qoyZwu/Q==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UserName = "Joanie17"
+                            UserName = "Irma_Dare56"
                         },
                         new
                         {
-                            Id = new Guid("8fe12c25-8606-41b6-a225-f802d8db9504"),
+                            Id = new Guid("e931c25f-a9bb-4c9b-bc29-7f52e0cd3806"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c8508ad-1387-46c2-ae86-39aafff3537c",
-                            CreatedAt = new DateTime(2025, 4, 2, 20, 24, 47, 188, DateTimeKind.Utc).AddTicks(6740),
-                            Email = "Alanis.Mitchell59@yahoo.com",
+                            ConcurrencyStamp = "ef2e7974-2199-46f0-b1bb-b95a2bab46c3",
+                            CreatedAt = new DateTime(2025, 4, 2, 20, 5, 35, 95, DateTimeKind.Utc).AddTicks(6900),
+                            Email = "Elisha.Runolfsson@gmail.com",
                             EmailConfirmed = true,
-                            FullName = "Janie Hilll",
+                            FullName = "Cary Thiel",
                             LockoutEnabled = false,
-                            NormalizedEmail = "ALANIS.MITCHELL59@YAHOO.COM",
-                            NormalizedUserName = "KATHLEEN.KLOCKO39",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKbh7dAcK7GF2SBoGsdqN/mJgqNu0iH0PIcawWh303ZrXse2cX2BkQCsIjZXD5jCEQ==",
+                            NormalizedEmail = "ELISHA.RUNOLFSSON@GMAIL.COM",
+                            NormalizedUserName = "ANNA92",
+                            PasswordHash = "AQAAAAIAAYagAAAAENgvBqCn1OBLmDFS0Z0hph9Vg6JmGSFo0/oRfBr4oKvoKXqcznF6kjc2A2Ii8t1wlQ==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UserName = "Kathleen.Klocko39"
+                            UserName = "Anna92"
                         });
                 });
 
@@ -736,28 +717,28 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("8e569084-9ea1-4f8a-b000-dc589c9218e9"),
-                            RoleId = new Guid("bcebfbf2-a287-47a0-b4f9-d41e9965e94c")
+                            UserId = new Guid("e8d3b1c2-66a2-4602-a2b6-a57497d74de9"),
+                            RoleId = new Guid("e8d2c9d0-a638-45c6-83c3-145375906820")
                         },
                         new
                         {
-                            UserId = new Guid("2b1c0700-6c1f-42ee-82fd-de44cff89743"),
-                            RoleId = new Guid("8c81133a-2411-434e-8e8a-1e8a5540f192")
+                            UserId = new Guid("04b46029-ea11-409c-a289-777e04f0fb6f"),
+                            RoleId = new Guid("3f619e20-e613-4c71-8b7f-6552f67cc09c")
                         },
                         new
                         {
-                            UserId = new Guid("4482db24-b489-42f7-b913-f716a767d00b"),
-                            RoleId = new Guid("adda8091-635a-47c3-8802-853db6d08561")
+                            UserId = new Guid("da60d36e-3c79-4765-a59e-ac94612cec7f"),
+                            RoleId = new Guid("0e0eacae-95b0-4330-92c3-623e8f94b324")
                         },
                         new
                         {
-                            UserId = new Guid("415516b5-9c42-494d-bcc1-d902826ea304"),
-                            RoleId = new Guid("adda8091-635a-47c3-8802-853db6d08561")
+                            UserId = new Guid("706dd894-1a76-4624-9a16-b16f5c28a932"),
+                            RoleId = new Guid("0e0eacae-95b0-4330-92c3-623e8f94b324")
                         },
                         new
                         {
-                            UserId = new Guid("8fe12c25-8606-41b6-a225-f802d8db9504"),
-                            RoleId = new Guid("adda8091-635a-47c3-8802-853db6d08561")
+                            UserId = new Guid("e931c25f-a9bb-4c9b-bc29-7f52e0cd3806"),
+                            RoleId = new Guid("0e0eacae-95b0-4330-92c3-623e8f94b324")
                         });
                 });
 

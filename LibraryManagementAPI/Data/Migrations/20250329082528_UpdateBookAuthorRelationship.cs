@@ -400,7 +400,7 @@ namespace LibraryManagementAPI.Migrations
                     { new Guid("e7348b37-7dbe-42f2-8f82-4dd9fee7dcb1"), "Antone Ernser", "History", 20, "Ducimus et necessitatibus." }
                 });
 
-            
+
             migrationBuilder.CreateIndex(
                 name: "IX_BookReservations_BookId",
                 table: "BookReservations",
