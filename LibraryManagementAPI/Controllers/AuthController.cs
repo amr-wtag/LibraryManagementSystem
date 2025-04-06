@@ -1,5 +1,5 @@
-using LibraryManagementAPI.interfaces;
 using LibraryManagementAPI.Models;
+using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementAPI.Controllers;
@@ -8,20 +8,23 @@ namespace LibraryManagementAPI.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly IAuthRepository _authRepository;
+    private readonly AuthService _authService;
 
-    public AuthController(IAuthRepository authRepository)
+    public AuthController(AuthService authService)
     {
-        _authRepository = authRepository;
+        _authService = authService;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] Register model)
     {
         var user = new User { UserName = model.UserName, Email = model.Email, FullName = model.FullName };
-        var result = await _authRepository.RegisterAsync(user, model.Password, model.Role);
+        var result = await _authService.RegisterAsync(user, model.Password, model.Role);
 
-        if (result.Contains("User registered successfully")) return Ok(result);
+        if (result.Contains("User registered successfully"))
+        {
+            return Ok(result);
+        }
 
         return BadRequest(result);
     }
@@ -29,9 +32,12 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] Login model)
     {
-        var token = await _authRepository.LoginAsync(model.UserName, model.Email, model.Password);
+        var token = await _authService.LoginAsync(model.UserName, model.Email, model.Password);
 
-        if (token == null) return Unauthorized("invalid credentials");
+        if (token == null)
+        {
+            return Unauthorized("invalid credentials");
+        }
 
         return Ok(token);
     }
