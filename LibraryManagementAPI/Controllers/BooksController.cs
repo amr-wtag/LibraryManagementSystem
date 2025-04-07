@@ -1,6 +1,7 @@
 ﻿using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementAPI.Controllers;
@@ -25,7 +26,8 @@ public class BooksController : ControllerBase
         return Ok(books);
     }
 
-    [HttpPost]
+    [HttpPost("create")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddBookAsync([FromBody] AddBookRequestDto dto)
     {
         var result = await _bookService.AddBookAsync(dto);

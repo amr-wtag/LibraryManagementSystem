@@ -27,18 +27,30 @@ public class AuthRepository : IAuthRepository
 
     public async Task<string> RegisterAsync(User user, string password, string role)
     {
-        if (string.IsNullOrWhiteSpace(user.Email)) return "Email is required.";
+        if (string.IsNullOrWhiteSpace(user.Email))
+        {
+            return "Email is required.";
+        }
 
         var existingUser = await _userManager.FindByEmailAsync(user.Email);
-        if (existingUser != null) return "Email is already registered.";
+        if (existingUser != null)
+        {
+            return "Email is already registered.";
+        }
 
-        if (!AllowedRoles.Contains(role)) return "Invalid role specified.";
+        if (!AllowedRoles.Contains(role))
+        {
+            return "Invalid role specified.";
+        }
 
         user.CreatedAt = DateTime.UtcNow;
 
         var result = await _userManager.CreateAsync(user, password);
 
-        if (!result.Succeeded) return string.Join(", ", result.Errors.Select(e => e.Description));
+        if (!result.Succeeded)
+        {
+            return string.Join(", ", result.Errors.Select(e => e.Description));
+        }
 
         // Assign role (assuming roles already exist)
         await _userManager.AddToRoleAsync(user, role);
@@ -49,40 +61,52 @@ public class AuthRepository : IAuthRepository
     public async Task<string?> LoginAsync(string username, string email, string password)
     {
         var user = await _userManager.FindByNameAsync(username) ?? await _userManager.FindByEmailAsync(email);
-        if (user == null) return null;
+        if (user == null)
+        {
+            return null;
+        }
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
 
-        if (!result.Succeeded) return null;
+        if (!result.Succeeded)
+        {
+            return null;
+        }
+
         return await GenerateJwtToken(user);
     }
 
-    private async Task<string> GenerateJwtToken(User user)
+    public async Task<string> GenerateJwtToken(User user)
     {
-        var secretKey = _configuration["JwtSettings:Secret"]
-                        ?? throw new InvalidOperationException("JWT Secret Key is missing in configuration.");
-
-        var key = Encoding.UTF8.GetBytes(secretKey);
-
-        // Get user roles
-        var userRoles = await _userManager.GetRolesAsync(user);
-
+        // Create a list of claims based on user properties
         var claims = new List<Claim>
         {
-            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-            new(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
-            new(ClaimTypes.Name, user.UserName ?? string.Empty)
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new(ClaimTypes.Name, user.UserName)
         };
 
-        // Add role claims
-        claims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
+        // Get the user's roles asynchronously and add them as claims
+        var roles = await _userManager.GetRolesAsync(user);
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role)); // Adding role as claim
+        }
 
+        // Generate the security key and signing credentials
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        // Create the JWT token
         var token = new JwtSecurityToken(
-            claims: claims,
-            expires: DateTime.UtcNow.AddHours(1),
-            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
+            _configuration["JwtSettings:Issuer"],
+            _configuration["JwtSettings:Audience"],
+            claims,
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: creds
         );
 
+        // Return the generated token as a string
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
 }
