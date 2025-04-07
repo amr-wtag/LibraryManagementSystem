@@ -1,4 +1,5 @@
-﻿using LibraryManagementAPI.Models;
+﻿using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,5 +23,12 @@ public class BooksController : ControllerBase
         var books = await _bookService.GetFilteredBookAsync(title, author, genre);
 
         return Ok(books);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddBookAsync([FromBody] AddBookRequestDto dto)
+    {
+        var result = await _bookService.AddBookAsync(dto);
+        return Ok(result);
     }
 }

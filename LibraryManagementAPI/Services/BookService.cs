@@ -18,4 +18,12 @@ public class BookService
         var books = await _bookRepository.GetFilteredBookAsync(title, author, genre);
         return books.Select(book => book.MapToDto()).ToList();
     }
+
+    public async Task<BookDto> AddBookAsync(AddBookRequestDto dto)
+    {
+        var bookEntity = dto.MapToEntity();
+        var addBook = await _bookRepository.AddBookAsync(bookEntity);
+
+        return addBook.MapToDto();
+    }
 }

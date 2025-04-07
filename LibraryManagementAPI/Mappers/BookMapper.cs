@@ -22,4 +22,15 @@ public static class BookMapper
                 .ToList() ?? new List<Genre>()
         };
     }
+
+    public static Book MapToEntity(this AddBookRequestDto dto)
+    {
+        return new Book
+        {
+            Title = dto.Title,
+            CopiesAvailable = dto.CopiesAvailable,
+            BookAuthors = dto.AuthorIds.Select(id => new BookAuthor { AuthorId = id }).ToList(),
+            BookGenres = dto.GenreIds.Select(id => new BookGenre { GenreId = id }).ToList()
+        };
+    }
 }

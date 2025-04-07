@@ -40,4 +40,11 @@ public class BookRepository : IBookRepository
 
         return await query.ToListAsync();
     }
+
+    public async Task<Book> AddBookAsync(Book book)
+    {
+        _context.Books.Add(book);
+        await _context.SaveChangesAsync();
+        return book;
+    }
 }
