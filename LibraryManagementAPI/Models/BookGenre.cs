@@ -1,6 +1,6 @@
 namespace LibraryManagementAPI.Models;
 
-public class BookGenre
+public class BookGenre : BaseEntity
 {
     public Guid BookId { get; set; }
     public Book? Book { get; set; }

@@ -1,6 +1,6 @@
 namespace LibraryManagementAPI.Models;
 
-public class Author
+public class Author : BaseEntity
 {
     public Guid Id { get; set; }
     public string? Name { get; set; }

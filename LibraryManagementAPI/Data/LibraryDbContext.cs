@@ -1,3 +1,4 @@
+using LibraryManagementAPI.Helpers;
 using LibraryManagementAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -61,5 +62,13 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
 
         // Call Seed Data
         LibraryDbSeeder.Seed(modelBuilder);
+    }
+
+    // use TimestampHelper to update timestamp
+    public override int SaveChanges()
+    {
+        TimestampHelper.UpdateTimeStamp(ChangeTracker);
+
+        return base.SaveChanges();
     }
 }
