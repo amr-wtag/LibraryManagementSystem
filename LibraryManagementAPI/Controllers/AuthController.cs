@@ -1,3 +1,4 @@
+using System.Text.Json;
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] Login model)
     {
+        Console.WriteLine($"values: {JsonSerializer.Serialize(model)}");
         var token = await _authService.LoginAsync(model.UserName, model.Email, model.Password);
 
         if (token == null)
