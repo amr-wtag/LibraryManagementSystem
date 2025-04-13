@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LibraryManagementSystem.Winforms.Forms.Books;
 using LibraryManagementSystem.Winforms.Models;
 
 namespace LibraryManagementSystem.Winforms.Views.Authentication;
@@ -13,6 +14,21 @@ namespace LibraryManagementSystem.Winforms.Views.Authentication;
         public LoginForms()
         {
             InitializeComponent();
+            this.Load += LoginForms_Load;
+        }
+        
+        private void LoginForms_Load(object? sender, EventArgs e)
+        {
+            var token = Properties.Settings.Default.JwtToken;
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                /*var mainForm = new Form1();
+                mainForm.Show();*/
+                var bookListForm = new BookListForm(token);
+                bookListForm.Show();
+                this.Hide();
+            }
         }
 
         private async void loginButton_click(object sender, EventArgs e)
@@ -22,6 +38,7 @@ namespace LibraryManagementSystem.Winforms.Views.Authentication;
 
             using var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:5049"); // Replace with your actual API
+            
 
             var loginData = new LoginDto
             {
@@ -39,17 +56,23 @@ namespace LibraryManagementSystem.Winforms.Views.Authentication;
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
-                    var loginResponse = JsonSerializer.Deserialize<LoginResponse>(responseString);
+                    var loginResponse = JsonSerializer.Deserialize<LoginResponse>(
+                        responseString,
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                    );
 
                     MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Save token for future requests (if needed)
-                    Properties.Settings.Default.JwtToken = loginResponse.Token;
+                    Properties.Settings.Default.JwtToken = loginResponse?.Token;
                     Properties.Settings.Default.Save();
 
-                    var mainForm = new Form1();
-                    mainForm.Show();
-                    this.Hide();
+                    // var mainForm = new Form1();
+                    // mainForm.Show();
+                    // this.Hide();
+                    var bookListForm = new BookListForm(loginResponse?.Token);
+                                    bookListForm.Show();
+                                    this.Hide();
                 }
                 else
                 {

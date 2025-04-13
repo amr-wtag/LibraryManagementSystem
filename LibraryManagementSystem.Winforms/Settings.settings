@@ -1,3 +1,0 @@
-// Save the JWT token after successful login
-        Properties.Settings.Default.JwtToken = loginResponse.Token;
-        Properties.Settings.Default.Save();
