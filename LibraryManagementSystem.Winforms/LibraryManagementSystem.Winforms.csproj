@@ -24,6 +24,9 @@
       <Compile Update="test\test.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Forms\Dashboard\DashboardForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>

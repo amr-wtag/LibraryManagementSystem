@@ -29,10 +29,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         private void InitializeComponent()
         {
             lblHeader = new System.Windows.Forms.Label();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
-            dataGridView2 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            dataGridViewBooks = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).BeginInit();
             SuspendLayout();
             // 
             // lblHeader
@@ -46,43 +44,31 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             lblHeader.TabIndex = 0;
             lblHeader.Text = "Book List (Loading...)";
             // 
-            // dataGridView1
+            // dataGridViewBooks
             // 
-            dataGridView1.ColumnHeadersHeight = 46;
-            dataGridView1.Location = new System.Drawing.Point(26, 43);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 82;
-            dataGridView1.Size = new System.Drawing.Size(1060, 691);
-            dataGridView1.TabIndex = 1;
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.ColumnHeadersHeight = 46;
-            dataGridView2.Location = new System.Drawing.Point(27, 81);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 82;
-            dataGridView2.Size = new System.Drawing.Size(1060, 691);
-            dataGridView2.TabIndex = 2;
+            dataGridViewBooks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+            dataGridViewBooks.ColumnHeadersHeight = 46;
+            dataGridViewBooks.Location = new System.Drawing.Point(30, 119);
+            dataGridViewBooks.Name = "dataGridViewBooks";
+            dataGridViewBooks.RowHeadersWidth = 82;
+            dataGridViewBooks.Size = new System.Drawing.Size(1148, 859);
+            dataGridViewBooks.TabIndex = 1;
             // 
             // BookListForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1114, 853);
-            Controls.Add(dataGridView2);
-            Controls.Add(dataGridView1);
+            ClientSize = new System.Drawing.Size(1210, 1013);
+            Controls.Add(dataGridViewBooks);
             Controls.Add(lblHeader);
             Margin = new System.Windows.Forms.Padding(6);
             Text = "Book List";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
-        private System.Windows.Forms.DataGridView dataGridView2;
-
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewBooks;
 
         #endregion
 

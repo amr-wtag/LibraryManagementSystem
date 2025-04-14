@@ -10,3 +10,4 @@ public class Book : BaseEntity
     public ICollection<BookGenre> BookGenres { get; set; } = new List<BookGenre>();
     public ICollection<BookReservation>? BookReservations { get; set; }
 }
+ 

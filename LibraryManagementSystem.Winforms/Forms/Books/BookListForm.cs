@@ -1,8 +1,10 @@
 using System;
+using System.Data;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LibraryManagementSystem.Winforms.Models.Books;
 
 namespace LibraryManagementSystem.Winforms.Forms.Books
 {
@@ -20,7 +22,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             if (!string.IsNullOrEmpty(token))
             {
-                await ShowBooksAsync(token);    
+                await ShowBooksAsync(token);
             }
             else
             {
@@ -35,10 +37,33 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             client.BaseAddress = new Uri("http://localhost:5049"); // replace with your actual backend
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
+
             try
             {
                 var response = await client.GetAsync("/api/books/filter");
                 var result = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var booksWrapper = JsonSerializer.Deserialize<BookListResponse>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    var books = booksWrapper?.Value;
+                    
+                    // MessageBox.Show($"Books count: {result}");
+                    if (books != null)
+                    {
+                        var displayBooks = books.Select(book=>new BookDisplayModel
+                        {
+                            Title = book.Title ?? "",
+                            CopiesAvailable = book.CopiesAvailable,
+                        }).ToList();
+
+                        dataGridViewBooks.DataSource = displayBooks;
+                    }
+                }
 
                 /*if (response.IsSuccessStatusCode)
                 {
