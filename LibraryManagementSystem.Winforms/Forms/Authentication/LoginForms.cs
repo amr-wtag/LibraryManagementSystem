@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LibraryManagementSystem.Winforms.Forms.Books;
+using LibraryManagementSystem.Winforms.Forms.Dashboard;
 using LibraryManagementSystem.Winforms.Models;
 
 namespace LibraryManagementSystem.Winforms.Views.Authentication;
@@ -25,8 +25,8 @@ namespace LibraryManagementSystem.Winforms.Views.Authentication;
             {
                 /*var mainForm = new Form1();
                 mainForm.Show();*/
-                var bookListForm = new BookListForm(token);
-                bookListForm.Show();
+                var dashboardListForm = new DashboardForm();
+            dashboardListForm.Show();
                 this.Hide();
             }
         }
@@ -67,12 +67,12 @@ namespace LibraryManagementSystem.Winforms.Views.Authentication;
                     Properties.Settings.Default.JwtToken = loginResponse?.Token;
                     Properties.Settings.Default.Save();
 
-                    // var mainForm = new Form1();
-                    // mainForm.Show();
-                    // this.Hide();
-                    var bookListForm = new BookListForm(loginResponse?.Token);
-                                    bookListForm.Show();
-                                    this.Hide();
+                // var mainForm = new Form1();
+                // mainForm.Show();
+                // this.Hide();
+                var dashboardListForm = new DashboardForm();
+                dashboardListForm.Show();
+                this.Hide();
                 }
                 else
                 {

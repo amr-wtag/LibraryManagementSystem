@@ -10,7 +10,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 {
     public partial class BookListForm : Form
     {
-        public BookListForm(string token)
+        public BookListForm()
         {
             InitializeComponent();
             this.Load += BookListForm_Load;
@@ -22,7 +22,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             if (!string.IsNullOrEmpty(token))
             {
-                await ShowBooksAsync(token);
+                await ShowBooksAsync();
             }
             else
             {
@@ -31,8 +31,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             }
         }
 
-        private async Task ShowBooksAsync(string token)
+        private async Task ShowBooksAsync()
         {
+            var token = Properties.Settings.Default.JwtToken;
             using var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:5049"); // replace with your actual backend
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
