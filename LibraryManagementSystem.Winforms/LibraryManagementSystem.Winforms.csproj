@@ -18,6 +18,12 @@
       <Compile Update="Forms\Books\BookListForm.cs">
         <SubType>Form</SubType>
       </Compile>
+      <Compile Update="Forms\Books\BookListForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+      <Compile Update="test\test.cs">
+        <SubType>Form</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
