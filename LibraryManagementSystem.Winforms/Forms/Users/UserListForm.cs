@@ -40,15 +40,23 @@ namespace LibraryManagementSystem.Winforms.Forms.Users
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var users = JsonSerializer.Deserialize<UserDisplayModal>(result, new JsonSerializerOptions
+                    var users = JsonSerializer.Deserialize<List<UserDisplayModal>>(result, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true,
                     });
-
-                    if(users != null)
+                    if (users != null && users.Any())
                     {
-                        DataGridViewUsers.DataSource = users;
+                        //DataGridViewUsers.DataSource = users;
+                        MessageBox.Show("Users found.");
                     }
+                    else
+                    {
+                        MessageBox.Show("No users found.");
+                    }
+                    //if(users != null)
+                    //{
+                    //    DataGridViewUsers.DataSource = users;
+                    //}
                 }
                 else
                 {

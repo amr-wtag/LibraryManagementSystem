@@ -49,6 +49,7 @@
             Controls.Add(DataGridViewUsers);
             Name = "UserListForm";
             Text = "Form1";
+            this.Load += new System.EventHandler(this.UserListForm_Load);
             ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).EndInit();
             ResumeLayout(false);
         }

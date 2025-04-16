@@ -78,12 +78,20 @@ public class AuthRepository : IAuthRepository
 
     public async Task<string> GenerateJwtToken(User user)
     {
+        // Get the secret key from the environment variable
+        var secretKey = Environment.GetEnvironmentVariable("JWT_SECRET");
+
+        if (string.IsNullOrEmpty(secretKey))
+        {
+            throw new InvalidOperationException("JWT_SECRET environment variable is not set.");
+        }
+
         // Create a list of claims based on user properties
         var claims = new List<Claim>
-        {
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.UserName)
-        };
+    {
+        new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new(ClaimTypes.Name, user.UserName)
+    };
 
         // Get the user's roles asynchronously and add them as claims
         var roles = await _userManager.GetRolesAsync(user);
@@ -93,7 +101,7 @@ public class AuthRepository : IAuthRepository
         }
 
         // Generate the security key and signing credentials
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         // Create the JWT token
@@ -101,7 +109,7 @@ public class AuthRepository : IAuthRepository
             _configuration["JwtSettings:Issuer"],
             _configuration["JwtSettings:Audience"],
             claims,
-            expires: DateTime.Now.AddDays(1),
+            expires: DateTime.Now.AddMinutes(int.Parse(_configuration["JwtSettings:ExpiryMinutes"])),
             signingCredentials: creds
         );
 
