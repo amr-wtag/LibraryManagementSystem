@@ -52,11 +52,11 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                     });
 
                     var books = booksWrapper?.Value;
-                    
+
                     // MessageBox.Show($"Books count: {result}");
                     if (books != null)
                     {
-                        var displayBooks = books.Select(book=>new BookDisplayModel
+                        var displayBooks = books.Select(book => new BookDisplayModel
                         {
                             Title = book.Title ?? "",
                             CopiesAvailable = book.CopiesAvailable,
@@ -66,14 +66,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                     }
                 }
 
-                /*if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Books Response:\n" + result, "Books", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Failed to fetch books:\n" + result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }*/
+
             }
             catch (Exception ex)
             {

@@ -26,8 +26,8 @@ namespace LibraryManagementSystem.Winforms.Views.Authentication;
                 /*var mainForm = new Form1();
                 mainForm.Show();*/
                 var dashboardListForm = new DashboardForm();
-            dashboardListForm.Show();
                 this.Hide();
+                dashboardListForm.Show();
             }
         }
 

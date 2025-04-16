@@ -20,7 +20,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<User>>>? GetAllUsers()
     {
-        var users =await _userManager.Users.OrderBy(u => u.CreatedAt).ToList();
+        var users = await _userService.GetAllUsersAsync();
         return Ok(users);
     }
 }
