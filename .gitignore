@@ -4,7 +4,7 @@
 /.next
 /obj
 /bin
-
+/.vs
 LibraryManagementSystem.Winforms/bin/Debug/net8.0-windows/LibraryManagementSystem.Winforms.dll
 /LibraryManagementSystem.Winforms/obj
 LibraryManagementSystem.Winforms/obj/Debug/net8.0-windows/apphost.exe
