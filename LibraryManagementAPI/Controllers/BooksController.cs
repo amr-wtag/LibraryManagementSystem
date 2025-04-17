@@ -17,16 +17,16 @@ public class BooksController : ControllerBase
         _bookService = bookService;
     }
 
-    [HttpGet("filter")]
+    [HttpGet]
     public async Task<ActionResult<List<Book>>> GetFilteredBooksAsync(
-        [FromQuery] string? title, [FromQuery] string? author, [FromQuery] string? genre)
+        [FromQuery] string? title, [FromQuery] List<Guid>? authorIds, [FromQuery] List<Guid>? genreIds)
     {
-        var books = await _bookService.GetFilteredBookAsync(title, author, genre);
+        var books = await _bookService.GetFilteredBookAsync(title, authorIds, genreIds);
 
         return Ok(books);
     }
 
-    [HttpPost("create")]
+    [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddBookAsync([FromBody] AddBookRequestDto dto)
     {
