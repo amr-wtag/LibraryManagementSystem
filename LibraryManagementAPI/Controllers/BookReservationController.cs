@@ -1,0 +1,47 @@
+using LibraryManagementAPI.DTOs;
+using LibraryManagementAPI.Models;
+using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Mvc;
+
+namespace LibraryManagementAPI.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class BookReservationController : ControllerBase
+{
+    private readonly BookReservationService _bookReservationService;
+
+    public BookReservationController(BookReservationService bookReservationService)
+    {
+        _bookReservationService = bookReservationService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllBookReservationsAsync(Guid? id = null)
+    {
+        var reservations = await _bookReservationService.GetBookReservationsAsync(id);
+        return Ok(reservations);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddBookReservationAsync([FromBody] CreateBookReservationDto dto)
+    {
+        try
+        {
+            var reservations = new List<BookReservation>();
+
+            foreach (var bookId in dto.BookIds)
+            {
+                var reservation =
+                    await _bookReservationService.AddBookReservationAsync(bookId, dto.UserId, dto.DueDate);
+                reservations.Add(reservation);
+            }
+
+            return Created("", reservations);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
+}
