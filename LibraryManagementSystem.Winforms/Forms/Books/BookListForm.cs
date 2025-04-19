@@ -1,9 +1,5 @@
-using System;
 using System.Data;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using LibraryManagementSystem.Winforms.Models.Books;
 
 namespace LibraryManagementSystem.Winforms.Forms.Books
@@ -41,7 +37,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             try
             {
-                var response = await client.GetAsync("/api/books/filter");
+                var response = await client.GetAsync("/api/books");
                 var result = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
