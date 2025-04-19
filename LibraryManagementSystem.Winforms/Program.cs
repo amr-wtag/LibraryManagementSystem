@@ -1,28 +1,31 @@
-using System;
-using System.Windows.Forms;
+using LibraryManagementSystem.Winforms.Forms.Dashboard;
 using LibraryManagementSystem.Winforms.Properties;
+using LibraryManagementSystem.Winforms.Views.Authentication;
 
 namespace LibraryManagementSystem.Winforms;
 
-    internal static class Program
+internal static class Program
+{
+    [STAThread]
+    static void Main()
     {
-        [STAThread]
-        static void Main()
+        // ✅ Read JWT from environment variable
+        string jwtFromEnv = Environment.GetEnvironmentVariable("JWT_TOKEN");
+
+        if (!string.IsNullOrWhiteSpace(jwtFromEnv))
         {
-            // ✅ Read JWT from environment variable
-            string jwtFromEnv = Environment.GetEnvironmentVariable("JWT_TOKEN");
+            Settings.Default.JwtToken = jwtFromEnv;
 
-            if (!string.IsNullOrWhiteSpace(jwtFromEnv))
-            {
-               Settings.Default.JwtToken = jwtFromEnv;
+            Settings.Default.Save();
+        }
 
-                // Optional: Persist the token for future sessions
-                // Remove this line if you want to keep it in-memory only
-                Settings.Default.Save();
-            }
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Views.Authentication.LoginForms());
+        if (!string.IsNullOrWhiteSpace(Settings.Default.JwtToken))
+        {
+            Application.Run(new DashboardForm()); // Go straight to dashboard
+        }
+        else
+        {
+            Application.Run(new LoginForms()); // Show login screen
         }
     }
+}

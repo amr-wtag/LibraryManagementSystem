@@ -1,5 +1,6 @@
 using System.Data;
 using System.Text.Json;
+using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.Books;
 
 namespace LibraryManagementSystem.Winforms.Forms.Books
@@ -30,8 +31,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         private async Task ShowBooksAsync()
         {
             var token = Properties.Settings.Default.JwtToken;
-            using var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5049"); // replace with your actual backend
+            using var client = ApiClientHelper.CreateClient();
+
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
 
