@@ -1,6 +1,4 @@
-using System;
 using LibraryManagementAPI.Models;
-using Xunit;
 
 namespace LibraryManagementAPI.Tests.Models;
 
