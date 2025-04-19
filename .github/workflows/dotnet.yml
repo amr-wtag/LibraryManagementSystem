@@ -19,27 +19,20 @@ jobs:
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0'  # Specify your .NET version here
+        dotnet-version: '8.0'  # Update to .NET 8.0
 
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Build project
       run: dotnet build --configuration Release
-      
 
     - name: Run tests
-      run: dotnet test --configuration Release --no-build --verbosity normal
+      run: dotnet test LibraryManagementAPI.Tests/LibraryManagementAPI.Tests.csproj --configuration Release --no-build --verbosity normal
 
+    # Publish the test results as an artifact
     - name: Upload test results
       uses: actions/upload-artifact@v3
       with:
         name: test-results
-        path: TestResults
-
-    - name: Publish test results
-      if: always()
-      run: |
-        mkdir -p $(Build.ArtifactStagingDirectory)/test-results
-        mv TestResults/* $(Build.ArtifactStagingDirectory)/test-results || true
-        echo "Test results are available in the $(Build.ArtifactStagingDirectory)/test-results directory"
+        path: LibraryManagementAPI.Tests/TestResults/  # Path to where test results are saved
