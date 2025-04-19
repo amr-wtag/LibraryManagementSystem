@@ -1,6 +1,7 @@
 using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementAPI.Controllers;
@@ -17,13 +18,16 @@ public class BookReservationController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllBookReservationsAsync(Guid? id = null)
+    [Authorize(Roles = "Admin, Librarian")]
+    public async Task<IActionResult> GetAllBookReservationsAsync(Guid? id = null, Guid? userId = null,
+        Guid? bookId = null)
     {
-        var reservations = await _bookReservationService.GetBookReservationsAsync(id);
+        var reservations = await _bookReservationService.GetBookReservationsAsync(id, userId, bookId);
         return Ok(reservations);
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin, Librarian")]
     public async Task<IActionResult> AddBookReservationAsync([FromBody] CreateBookReservationDto dto)
     {
         try
@@ -46,6 +50,7 @@ public class BookReservationController : ControllerBase
     }
 
     [HttpPost("return")]
+    [Authorize(Roles = "Admin, Librarian")]
     public async Task<IActionResult> ReturnBooksAsync([FromBody] List<Guid> reservationIds)
     {
         try

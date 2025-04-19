@@ -5,20 +5,20 @@ namespace LibraryManagementAPI.Tests.Models;
 public class AuthorTests
 {
     [Fact]
-    public void Author_Can_Be_Created()
+    public void Author_ShouldHaveProperties()
     {
         var id = new Guid();
         var name = "John";
 
-        var authoe = new Author()
+        var author = new Author()
         {
             Id = id,
             Name = name
         };
         
-        Assert.Equal(id, authoe.Id);    
-        Assert.Equal(name, authoe.Name);
-        Assert.Null(authoe.BookAuthors);
+        Assert.Equal(id, author.Id);    
+        Assert.Equal(name, author.Name);
+        Assert.Null(author.BookAuthors);
     }
 
     [Fact]

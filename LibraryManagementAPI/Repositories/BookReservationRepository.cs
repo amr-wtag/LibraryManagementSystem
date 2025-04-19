@@ -14,16 +14,29 @@ public class BookReservationRepository : IBookReservationRepository
         _context = context;
     }
 
-    public async Task<List<BookReservation>> GetBookReservationsAsync(Guid? id = null)
+    public async Task<List<BookReservation>> GetBookReservationsAsync(Guid? id = null, Guid? userId = null,
+        Guid? bookId = null)
     {
         var query = _context.BookReservations
             .Include(r => r.Book)
-            .Include(r => r.User);
+            .Include(r => r.User)
+            .AsQueryable();
 
         if (id.HasValue)
         {
-            return await query.Where(r => r.Id == id.Value).ToListAsync();
+            query = query.Where(r => r.Id == id.Value);
         }
+
+        if (userId.HasValue)
+        {
+            query = query.Where(r => r.UserId == userId.Value);
+        }
+
+        if (bookId.HasValue)
+        {
+            query = query.Where(r => r.BookId == bookId.Value);
+        }
+
 
         return await query.ToListAsync();
     }
@@ -71,13 +84,6 @@ public class BookReservationRepository : IBookReservationRepository
         return reservation;
     }
 
-
-    public async Task UpdateBookReservationAsync(BookReservation bookReservation)
-    {
-        _context.BookReservations.Update(bookReservation);
-        await _context.SaveChangesAsync();
-    }
-
     public async Task<List<BookReservation>> ReturnBooksAsync(List<Guid> reservationIds)
     {
         var reservations = await _context.BookReservations
@@ -107,5 +113,12 @@ public class BookReservationRepository : IBookReservationRepository
 
         await _context.SaveChangesAsync();
         return reservations;
+    }
+
+
+    public async Task UpdateBookReservationAsync(BookReservation bookReservation)
+    {
+        _context.BookReservations.Update(bookReservation);
+        await _context.SaveChangesAsync();
     }
 }
