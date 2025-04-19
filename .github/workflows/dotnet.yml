@@ -1,0 +1,38 @@
+name: .NET Core CI
+
+on:
+  push:
+    branches:
+      - main  # Or your default branch name, like `master`
+  pull_request:
+    branches:
+      - main  # Or your default branch name, like `master`
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # The environment to run the job on
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # Checkout your repository
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'  # Specify your .NET version here
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build project
+      run: dotnet build --configuration Release
+
+    - name: Run tests
+      run: dotnet test --configuration Release --no-build --verbosity normal
+
+    - name: Publish test results
+      if: always()
+      run: |
+        mkdir -p $(Build.ArtifactStagingDirectory)/test-results
+        mv TestResults/* $(Build.ArtifactStagingDirectory)/test-results || true
+        echo "Test results are available in the $(Build.ArtifactStagingDirectory)/test-results directory"
