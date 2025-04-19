@@ -1,0 +1,37 @@
+name: .NET Core CI
+
+on:
+  push:
+    branches:
+      - main  # Trigger when code is pushed to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger when a PR is created or updated targeting the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # The environment to run the job on
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3  # Checkout the repository code
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'  # Use .NET version 8.0 or whichever version you're using
+
+    - name: Restore dependencies
+      run: dotnet restore  # Restore NuGet dependencies
+
+    - name: Build project
+      run: dotnet build --configuration Release  # Build the project in Release mode
+
+    - name: Run tests
+      run: dotnet test LibraryManagementAPI.Tests/LibraryManagementAPI.Tests.csproj --configuration Release --no-build --verbosity normal  # Run the tests
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results  # Artifact name
+        path: LibraryManagementAPI.Tests/TestResults/  # Path to where test results are saved (ensure this directory exists in your project)
