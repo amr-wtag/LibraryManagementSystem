@@ -1,5 +1,6 @@
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementAPI.Controllers;
@@ -40,5 +41,12 @@ public class AuthController : ControllerBase
         }
 
         return Ok(token);
+    }
+
+    [Authorize]
+    [HttpPost("logout")]
+    public IActionResult Logout()
+    {
+        return Ok(new { message = "Logged out successfully" });
     }
 }

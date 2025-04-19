@@ -76,6 +76,11 @@ public class AuthRepository : IAuthRepository
         return await GenerateJwtToken(user);
     }
 
+    public async Task Logout()
+    {
+        await _signInManager.SignOutAsync();
+    }
+
     public async Task<string> GenerateJwtToken(User user)
     {
         // Create a list of claims based on user properties
@@ -108,5 +113,4 @@ public class AuthRepository : IAuthRepository
         // Return the generated token as a string
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
-
 }
