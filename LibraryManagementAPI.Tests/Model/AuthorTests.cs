@@ -15,8 +15,8 @@ public class AuthorTests
             Id = id,
             Name = name
         };
-        
-        Assert.Equal(id, author.Id);    
+
+        Assert.Equal(id, author.Id);
         Assert.Equal(name, author.Name);
         Assert.Null(author.BookAuthors);
     }
@@ -34,11 +34,9 @@ public class AuthorTests
             Id = Guid.NewGuid(),
             Name = "John",
             BookAuthors = bookAuthors
-
         };
-        
+
         Assert.NotNull(author.BookAuthors);
         Assert.Single(author.BookAuthors);
     }
 }
-
