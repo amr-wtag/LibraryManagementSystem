@@ -14,13 +14,6 @@ public class BookReservationRepository : IBookReservationRepository
         _context = context;
     }
 
-
-    public async Task UpdateBookReservationAsync(BookReservation bookReservation)
-    {
-        _context.BookReservations.Update(bookReservation);
-        await _context.SaveChangesAsync();
-    }
-
     public async Task<List<BookReservation>> GetBookReservationsAsync(Guid? id = null)
     {
         var query = _context.BookReservations
@@ -76,5 +69,43 @@ public class BookReservationRepository : IBookReservationRepository
         await _context.SaveChangesAsync();
 
         return reservation;
+    }
+
+
+    public async Task UpdateBookReservationAsync(BookReservation bookReservation)
+    {
+        _context.BookReservations.Update(bookReservation);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<BookReservation>> ReturnBooksAsync(List<Guid> reservationIds)
+    {
+        var reservations = await _context.BookReservations
+            .Include(r => r.Book)
+            .Where(r => reservationIds.Contains(r.Id) && r.Status == "Issued")
+            .ToListAsync();
+
+        if (reservations.Count != reservationIds.Count)
+        {
+            var foundIds = reservations.Select(r => r.Id);
+            var notFound = reservationIds.Except(foundIds);
+            throw new Exception(
+                $"One or more reservations are not in 'Issued' status or not found: {string.Join(", ", notFound)}");
+        }
+
+        foreach (var reservation in reservations)
+        {
+            reservation.Status = "Returned";
+            reservation.ReturnDate = DateTime.UtcNow;
+            reservation.UpdatedAt = DateTime.UtcNow;
+
+            if (reservation.Book != null)
+            {
+                reservation.Book.CopiesAvailable++;
+            }
+        }
+
+        await _context.SaveChangesAsync();
+        return reservations;
     }
 }

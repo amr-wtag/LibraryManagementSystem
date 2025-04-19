@@ -44,4 +44,18 @@ public class BookReservationController : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+
+    [HttpPost("return")]
+    public async Task<IActionResult> ReturnBooksAsync([FromBody] List<Guid> reservationIds)
+    {
+        try
+        {
+            var returnedBooks = await _bookReservationService.ReturnBooksAsync(reservationIds);
+            return Ok(returnedBooks);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new { message = e.Message });
+        }
+    }
 }

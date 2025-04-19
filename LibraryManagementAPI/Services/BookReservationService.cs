@@ -22,8 +22,8 @@ public class BookReservationService
         return await _bookReservationRepository.AddBookReservationAsync(bookId, userId, dueDate);
     }
 
-    public async Task UpdateBookReservationAsync(BookReservation bookReservation)
+    public async Task<List<BookReservation>> ReturnBooksAsync(List<Guid> reservationIds)
     {
-        await _bookReservationRepository.UpdateBookReservationAsync(bookReservation);
+        return await _bookReservationRepository.ReturnBooksAsync(reservationIds);
     }
 }
