@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Text.Json;
+using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.Users;
 
 namespace LibraryManagementSystem.Winforms.Forms.Users
@@ -9,31 +10,39 @@ namespace LibraryManagementSystem.Winforms.Forms.Users
         public UserListForm()
         {
             InitializeComponent();
+            this.Load += UserListForm_Load;
         }
 
-        private async void UserListForm_Load(object sender, EventArgs e)
+        private async void UserListForm_Load(object? sender, EventArgs e)
+
         {
-            await ShowUsersAsync();
+            var token = Properties.Settings.Default.JwtToken;
+
+            if (!string.IsNullOrEmpty(token))
+            {
+                await ShowUsersAsync();
+            }
+            else
+            {
+                MessageBox.Show("No token found. Please log in first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.Close();
+            }
         }
 
         public async Task ShowUsersAsync()
         {
             var token = Properties.Settings.Default.JwtToken;
 
-            Console.WriteLine(new { token });
+            using var client = ApiClientHelper.CreateClient();
 
-            using var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5049");
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             try
             {
-                var response = await client.GetAsync("/api/user");
+                var response = await client.GetAsync("user");
 
                 var result = await response.Content.ReadAsStringAsync();
 
-                Console.WriteLine($"Status Code: {response.StatusCode}");
-                Console.WriteLine($"Reason Phrase: {response.ReasonPhrase}");
 
                 if (response.IsSuccessStatusCode)
                 {

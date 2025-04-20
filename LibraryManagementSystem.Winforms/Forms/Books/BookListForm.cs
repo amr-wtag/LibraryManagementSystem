@@ -38,7 +38,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             try
             {
-                var response = await client.GetAsync("/api/books");
+                var response = await client.GetAsync("books");
                 var result = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
@@ -50,7 +50,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
                     var books = booksWrapper?.Value;
 
-                    // MessageBox.Show($"Books count: {result}");
                     if (books != null)
                     {
                         var displayBooks = books.Select(book => new BookDisplayModel

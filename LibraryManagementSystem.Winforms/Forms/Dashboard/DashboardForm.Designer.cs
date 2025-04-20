@@ -51,7 +51,7 @@ partial class DashboardForm
         usersButton.FlatStyle = FlatStyle.Flat;
         usersButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         usersButton.ForeColor = Color.White;
-        usersButton.Location = new Point(32, 122);
+        usersButton.Location = new Point(32, 128);
         usersButton.Margin = new Padding(5);
         usersButton.Name = "usersButton";
         usersButton.Size = new Size(244, 64);
@@ -72,10 +72,10 @@ partial class DashboardForm
         // buttonPanel
         // 
         buttonPanel.BackColor = Color.FromArgb(44, 62, 80);
+        buttonPanel.Controls.Add(usersButton);
         buttonPanel.Controls.Add(bookReservation);
         buttonPanel.Controls.Add(logOutButton);
         buttonPanel.Controls.Add(booksButton);
-        buttonPanel.Controls.Add(usersButton);
         buttonPanel.Dock = DockStyle.Left;
         buttonPanel.Location = new Point(0, 0);
         buttonPanel.Margin = new Padding(5);
@@ -115,6 +115,7 @@ partial class DashboardForm
         // 
         // DashboardForm
         // 
+        AllowDrop = true;
         AutoScaleDimensions = new SizeF(13F, 32F);
         AutoScaleMode = AutoScaleMode.Font;
         AutoScroll = true;

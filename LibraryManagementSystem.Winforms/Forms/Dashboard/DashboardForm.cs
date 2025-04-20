@@ -12,6 +12,7 @@ public partial class DashboardForm : Form
     public DashboardForm()
     {
         InitializeComponent();
+        logOutButton.Click += logOutButton_Click;
     }
 
     private void BooksButton_Click(object sender, EventArgs e)
@@ -60,7 +61,6 @@ public partial class DashboardForm : Form
 
                 MessageBox.Show(message ?? "Logged out successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Optional: clear the token and close form
                 Properties.Settings.Default.JwtToken = string.Empty;
                 Properties.Settings.Default.Save();
 
