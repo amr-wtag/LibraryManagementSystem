@@ -13,7 +13,7 @@ public class BookService
         _bookRepository = bookRepository;
     }
 
-    public async Task<List<BookDto>> GetFilteredBookAsync(string? title, List<Guid> bookIds, List<Guid>? authorIds, List<Guid>? genreIds)
+    public async Task<List<BookDto>> GetFilteredBookAsync(string? title, List<Guid>? bookIds, List<Guid>? authorIds, List<Guid>? genreIds)
     {
         var books = await _bookRepository.GetFilteredBookAsync(title, bookIds, authorIds, genreIds);
         return books.Select(book => book.MapToDto()).ToList();
