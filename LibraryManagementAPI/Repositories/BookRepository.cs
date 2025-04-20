@@ -14,7 +14,7 @@ public class BookRepository : IBookRepository
         _context = context;
     }
 
-    public async Task<List<Book>> GetFilteredBookAsync(string? title, List<Guid>? authorIds, List<Guid>? genreIds)
+    public async Task<List<Book>> GetFilteredBookAsync(string? title, List<Guid>? bookIds, List<Guid>? authorIds, List<Guid>? genreIds)
     {
         var query = _context.Books
             .Include(b => b.BookAuthors).ThenInclude(ba => ba.Author)
@@ -24,6 +24,11 @@ public class BookRepository : IBookRepository
         if (!string.IsNullOrWhiteSpace(title))
         {
             query = query.Where(b => b.Title!.ToLower().Contains(title.ToLower()));
+        }
+
+        if (bookIds != null && bookIds.Any())
+        {
+            query = query.Where(b => bookIds.Contains(b.Id));
         }
 
         if (authorIds != null && authorIds.Any())

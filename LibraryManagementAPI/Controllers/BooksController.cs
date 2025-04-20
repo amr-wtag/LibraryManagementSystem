@@ -19,9 +19,9 @@ public class BooksController : ControllerBase
 
     [HttpGet]
     public async Task<ActionResult<List<Book>>> GetFilteredBooksAsync(
-        [FromQuery] string? title, [FromQuery] List<Guid>? authorIds, [FromQuery] List<Guid>? genreIds)
+        [FromQuery] string? title, [FromQuery] List<Guid>? bookIds, [FromQuery] List<Guid>? authorIds, [FromQuery] List<Guid>? genreIds)
     {
-        var books = await _bookService.GetFilteredBookAsync(title, authorIds, genreIds);
+        var books = await _bookService.GetFilteredBookAsync(title, bookIds, authorIds, genreIds);
 
         return Ok(books);
     }
