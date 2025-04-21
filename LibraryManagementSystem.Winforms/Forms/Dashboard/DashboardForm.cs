@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Text.Json;
+using LibraryManagementSystem.Winforms.Component;
 using LibraryManagementSystem.Winforms.Forms.Books;
 using LibraryManagementSystem.Winforms.Forms.Users;
 using LibraryManagementSystem.Winforms.helpers;
@@ -77,5 +78,18 @@ public partial class DashboardForm : Form
         {
             MessageBox.Show("An error occurred:\n" + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
+
+    private void dropdownControl1_Load(object sender, EventArgs e)
+    {
+        var options = new List<DropDownOption>
+    {
+        new DropDownOption { Label = "Option 1", Value = 1 },
+        new DropDownOption { Label = "Option 2", Value = 2 },
+        new DropDownOption { Label = "Option 3", Value = 3 }
+    };
+
+        dropdownControl1.IsMultiSelect = true;
+        dropdownControl1.SetOptions(options);
     }
 }
