@@ -42,7 +42,7 @@
             singleSelectComboBox.FormattingEnabled = true;
             singleSelectComboBox.Location = new Point(0, 0);
             singleSelectComboBox.Name = "singleSelectComboBox";
-            singleSelectComboBox.Size = new Size(200, 23);
+            singleSelectComboBox.Size = new Size(215, 23);
             singleSelectComboBox.TabIndex = 0;
             // 
             // multiSelectListBox
@@ -52,7 +52,7 @@
             multiSelectListBox.FormattingEnabled = true;
             multiSelectListBox.Location = new Point(0, 0);
             multiSelectListBox.Name = "multiSelectListBox";
-            multiSelectListBox.Size = new Size(200, 100);
+            multiSelectListBox.Size = new Size(215, 168);
             multiSelectListBox.TabIndex = 1;
             multiSelectListBox.Visible = false;
             // 
@@ -62,7 +62,7 @@
             Controls.Add(singleSelectComboBox);
             Controls.Add(multiSelectListBox);
             Name = "DropdownControl";
-            Size = new Size(200, 100);
+            Size = new Size(215, 168);
             ResumeLayout(false);
         }
 

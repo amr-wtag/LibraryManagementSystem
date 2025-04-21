@@ -26,7 +26,7 @@ partial class DashboardForm
         booksButton = new Button();
         usersButton = new Button();
         contentPanel = new Panel();
-        dropdownControl1 = new LibraryManagementSystem.Winforms.Component.DropdownControl();
+        dropdownControl1 = new DropdownControl();
         buttonPanel = new Panel();
         bookReservation = new Button();
         logOutButton = new Button();
@@ -79,7 +79,7 @@ partial class DashboardForm
         dropdownControl1.IsMultiSelect = false;
         dropdownControl1.Location = new Point(12, 164);
         dropdownControl1.Name = "dropdownControl1";
-        dropdownControl1.Size = new Size(156, 35);
+        dropdownControl1.Size = new Size(156, 114);
         dropdownControl1.TabIndex = 4;
         dropdownControl1.Load += dropdownControl1_Load;
         // 

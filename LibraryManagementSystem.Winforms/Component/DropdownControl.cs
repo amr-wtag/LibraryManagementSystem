@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,31 +8,32 @@ namespace LibraryManagementSystem.Winforms.Component
 {
     public partial class DropdownControl : UserControl
     {
+
         public bool IsMultiSelect { get; set; }
 
-        public DropdownControl(bool isMultiSelect = false)
+        // Required for designer
+        public DropdownControl() : this(false) { }
+
+        // Main constructor
+        public DropdownControl(bool isMultiSelect)
         {
             IsMultiSelect = isMultiSelect;
+
+            InitializeComponent(); // REQUIRED for design view
             InitializeControls();
         }
 
         private void InitializeControls()
         {
-            singleSelectComboBox = new ComboBox
-            {
-                Dock = DockStyle.Fill,
-                DropDownStyle = ComboBoxStyle.DropDownList
-            };
+            singleSelectComboBox.Visible = !IsMultiSelect;
+            multiSelectListBox.Visible = IsMultiSelect;
 
-            multiSelectListBox = new CheckedListBox
+            if (DesignMode)
             {
-                Dock = DockStyle.Fill,
-                CheckOnClick = true,
-                Visible = false
-            };
-
-            Controls.Add(singleSelectComboBox);
-            Controls.Add(multiSelectListBox);
+                singleSelectComboBox.Items.Add("Option A");
+                singleSelectComboBox.Items.Add("Option B");
+                singleSelectComboBox.SelectedIndex = 0;
+            }
         }
 
         public void SetOptions(List<DropDownOption> options)
@@ -46,6 +46,18 @@ namespace LibraryManagementSystem.Winforms.Component
                 multiSelectListBox.Items.Clear();
                 foreach (var item in options)
                     multiSelectListBox.Items.Add(item);
+
+                // Dynamic height based on item count
+                int itemHeight = multiSelectListBox.ItemHeight;
+                int itemCount = options.Count;
+                int maxVisibleItems = 8; // Limit how tall the list can grow
+                int visibleItemCount = Math.Min(itemCount, maxVisibleItems);
+
+                int desiredHeight = (itemHeight * visibleItemCount) + 4; // 4px for padding/margin
+                multiSelectListBox.Height = desiredHeight;
+
+                // 👇 Set the overall control height to match the list height
+                this.Size = new Size(this.Width, desiredHeight);
             }
             else
             {
@@ -54,8 +66,12 @@ namespace LibraryManagementSystem.Winforms.Component
 
                 singleSelectComboBox.DataSource = null;
                 singleSelectComboBox.DataSource = options;
+
+                // Optional: Fix height for single-select mode
+                this.Size = new Size(this.Width, singleSelectComboBox.Height);
             }
         }
+
 
         public DropDownOption GetSelectedItem()
         {
