@@ -30,6 +30,7 @@ partial class DashboardForm
         buttonPanel = new Panel();
         bookReservation = new Button();
         logOutButton = new Button();
+        multiSelectComboBox1 = new MultiSelectComboBox();
         buttonPanel.SuspendLayout();
         SuspendLayout();
         // 
@@ -86,6 +87,7 @@ partial class DashboardForm
         // buttonPanel
         // 
         buttonPanel.BackColor = Color.FromArgb(44, 62, 80);
+        buttonPanel.Controls.Add(multiSelectComboBox1);
         buttonPanel.Controls.Add(dropdownControl1);
         buttonPanel.Controls.Add(usersButton);
         buttonPanel.Controls.Add(bookReservation);
@@ -128,6 +130,14 @@ partial class DashboardForm
         logOutButton.Text = "LogOut";
         logOutButton.UseVisualStyleBackColor = true;
         // 
+        // multiSelectComboBox1
+        // 
+        multiSelectComboBox1.Location = new Point(22, 305);
+        multiSelectComboBox1.Name = "multiSelectComboBox1";
+        multiSelectComboBox1.Size = new Size(138, 26);
+        multiSelectComboBox1.TabIndex = 5;
+        multiSelectComboBox1.Load += multiSelectComboBox1_Load;
+        // 
         // DashboardForm
         // 
         AllowDrop = true;
@@ -150,4 +160,5 @@ partial class DashboardForm
     private Button logOutButton;
     private Button bookReservation;
     private Component.DropdownControl dropdownControl1;
+    private MultiSelectComboBox multiSelectComboBox1;
 }

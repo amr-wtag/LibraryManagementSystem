@@ -89,7 +89,19 @@ public partial class DashboardForm : Form
         new DropDownOption { Label = "Option 3", Value = 3 }
     };
 
-        dropdownControl1.IsMultiSelect = true;
+        dropdownControl1.IsMultiSelect = false;
         dropdownControl1.SetOptions(options);
+    }
+
+    private void multiSelectComboBox1_Load(object sender, EventArgs e)
+    {
+        var options = new List<DropDownOption>
+    {
+         new DropDownOption { Label = "Option 1", Value = 1 },
+        new DropDownOption { Label = "Option 2", Value = 2 },
+        new DropDownOption { Label = "Option 3", Value = 3 }
+    };
+
+        multiSelectComboBox1.SetItems(options);
     }
 }
