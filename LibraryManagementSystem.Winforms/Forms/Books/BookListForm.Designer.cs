@@ -47,14 +47,15 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // 
             // multiSelectComboBox1
             // 
-            multiSelectComboBox1.Location = new Point(53, 46);
+            multiSelectComboBox1.LabelText = "Select Books:";
+            multiSelectComboBox1.Location = new Point(81, 34);
             multiSelectComboBox1.Name = "multiSelectComboBox1";
             multiSelectComboBox1.Size = new Size(254, 50);
             multiSelectComboBox1.TabIndex = 2;
-            multiSelectComboBox1.Load += multiSelectComboBox1_Load;
             // 
             // multiSelectComboBox2
             // 
+            multiSelectComboBox2.LabelText = "Select...";
             multiSelectComboBox2.Location = new Point(368, 46);
             multiSelectComboBox2.Name = "multiSelectComboBox2";
             multiSelectComboBox2.Size = new Size(254, 50);
@@ -62,6 +63,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // 
             // multiSelectComboBox3
             // 
+            multiSelectComboBox3.LabelText = "Select...";
             multiSelectComboBox3.Location = new Point(686, 46);
             multiSelectComboBox3.Name = "multiSelectComboBox3";
             multiSelectComboBox3.Size = new Size(254, 50);
