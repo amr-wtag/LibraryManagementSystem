@@ -4,6 +4,9 @@
     <Compile Update="Component\DropdownControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="component\MultiSelectComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -33,4 +33,12 @@ public class BooksController : ControllerBase
         var result = await _bookService.AddBookAsync(dto);
         return Ok(result);
     }
+
+    [HttpGet("id-titles")]
+    public async Task<ActionResult<List<BookSummaryDto>>> GetBookIdTitlesAsync()
+    {
+        var result = await _bookService.GetBookIdTitleAsync();
+        return Ok(result);
+    }
+
 }

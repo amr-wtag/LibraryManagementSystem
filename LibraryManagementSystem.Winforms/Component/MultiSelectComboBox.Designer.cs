@@ -21,16 +21,16 @@
             displayBox.Location = new Point(0, 0);
             displayBox.Name = "displayBox";
             displayBox.ReadOnly = true;
-            displayBox.Size = new Size(130, 23);
+            displayBox.Size = new Size(198, 39);
             displayBox.TabIndex = 1;
             // 
             // dropButton
             // 
             dropButton.Dock = DockStyle.Right;
             dropButton.ForeColor = Color.CornflowerBlue;
-            dropButton.Location = new Point(130, 0);
+            dropButton.Location = new Point(198, 0);
             dropButton.Name = "dropButton";
-            dropButton.Size = new Size(20, 23);
+            dropButton.Size = new Size(20, 37);
             dropButton.TabIndex = 2;
             dropButton.Text = "▼";
             dropButton.Click += DropButton_Click;
@@ -45,16 +45,17 @@
             // 
             // dropDown
             // 
+            dropDown.ImageScalingSize = new Size(32, 32);
             dropDown.LayoutStyle = ToolStripLayoutStyle.Flow;
             dropDown.Name = "dropDown";
-            dropDown.Size = new Size(2, 4);
+            dropDown.Size = new Size(4, 8);
             // 
             // MultiSelectComboBox
             // 
             Controls.Add(displayBox);
             Controls.Add(dropButton);
             Name = "MultiSelectComboBox";
-            Size = new Size(150, 23);
+            Size = new Size(218, 37);
             ResumeLayout(false);
             PerformLayout();
         }

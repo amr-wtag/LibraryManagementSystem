@@ -28,50 +28,67 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         /// </summary>
         private void InitializeComponent()
         {
-            lblHeader = new System.Windows.Forms.Label();
-            dataGridViewBooks = new System.Windows.Forms.DataGridView();
+            dataGridViewBooks = new DataGridView();
+            multiSelectComboBox1 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            multiSelectComboBox2 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            multiSelectComboBox3 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).BeginInit();
             SuspendLayout();
             // 
-            // lblHeader
-            // 
-            lblHeader.AutoSize = true;
-            lblHeader.Font = new System.Drawing.Font("Segoe UI", 14F);
-            lblHeader.Location = new System.Drawing.Point(56, 43);
-            lblHeader.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            lblHeader.Name = "lblHeader";
-            lblHeader.Size = new System.Drawing.Size(363, 51);
-            lblHeader.TabIndex = 0;
-            lblHeader.Text = "Book List (Loading...)";
-            // 
             // dataGridViewBooks
             // 
-            dataGridViewBooks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right));
+            dataGridViewBooks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewBooks.ColumnHeadersHeight = 46;
-            dataGridViewBooks.Location = new System.Drawing.Point(30, 119);
+            dataGridViewBooks.Location = new Point(30, 119);
             dataGridViewBooks.Name = "dataGridViewBooks";
             dataGridViewBooks.RowHeadersWidth = 82;
-            dataGridViewBooks.Size = new System.Drawing.Size(1148, 859);
+            dataGridViewBooks.Size = new Size(1148, 859);
             dataGridViewBooks.TabIndex = 1;
+            // 
+            // multiSelectComboBox1
+            // 
+            multiSelectComboBox1.Location = new Point(53, 46);
+            multiSelectComboBox1.Name = "multiSelectComboBox1";
+            multiSelectComboBox1.Size = new Size(254, 50);
+            multiSelectComboBox1.TabIndex = 2;
+            multiSelectComboBox1.Load += multiSelectComboBox1_Load;
+            // 
+            // multiSelectComboBox2
+            // 
+            multiSelectComboBox2.Location = new Point(368, 46);
+            multiSelectComboBox2.Name = "multiSelectComboBox2";
+            multiSelectComboBox2.Size = new Size(254, 50);
+            multiSelectComboBox2.TabIndex = 3;
+            // 
+            // multiSelectComboBox3
+            // 
+            multiSelectComboBox3.Location = new Point(686, 46);
+            multiSelectComboBox3.Name = "multiSelectComboBox3";
+            multiSelectComboBox3.Size = new Size(254, 50);
+            multiSelectComboBox3.TabIndex = 4;
             // 
             // BookListForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1210, 1013);
+            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1210, 1013);
+            Controls.Add(multiSelectComboBox3);
+            Controls.Add(multiSelectComboBox2);
+            Controls.Add(multiSelectComboBox1);
             Controls.Add(dataGridViewBooks);
-            Controls.Add(lblHeader);
-            Margin = new System.Windows.Forms.Padding(6);
+            Margin = new Padding(6);
+            Name = "BookListForm";
             Text = "Book List";
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         private System.Windows.Forms.DataGridView dataGridViewBooks;
 
         #endregion
 
-        private System.Windows.Forms.Label lblHeader;
+        private Component.MultiSelectComboBox multiSelectComboBox1;
+        private Component.MultiSelectComboBox multiSelectComboBox2;
+        private Component.MultiSelectComboBox multiSelectComboBox3;
     }
 }

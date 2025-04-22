@@ -1,4 +1,5 @@
 using LibraryManagementAPI.Data;
+using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.interfaces;
 using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -52,4 +53,16 @@ public class BookRepository : IBookRepository
         await _context.SaveChangesAsync();
         return book;
     }
+
+    public async Task<List<BookSummaryDto>> GetBookIdTitleAsync()
+    {
+        return await _context.Books
+            .Select(b => new BookSummaryDto
+            {
+                Id = b.Id,
+                Title = b.Title
+            })
+            .ToListAsync();
+    }
+
 }

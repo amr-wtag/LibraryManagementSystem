@@ -28,17 +28,27 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             }
         }
 
-        private async Task ShowBooksAsync()
+        private async Task ShowBooksAsync(List<string>? filterIds = null)
         {
             var token = Properties.Settings.Default.JwtToken;
             using var client = ApiClientHelper.CreateClient();
 
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             try
             {
-                var response = await client.GetAsync("books");
+                // Build the query string with the bookIds if filterIds is not null or empty
+                string url = "books";
+
+                if (filterIds != null && filterIds.Any())
+                {
+                    // Join the book IDs into a comma-separated list for the 'bookIds' query parameter
+                    string bookIdsQuery = string.Join(",", filterIds);
+                    url += $"?bookIds={bookIdsQuery}";
+                }
+
+                var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
@@ -61,13 +71,64 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                         dataGridViewBooks.DataSource = displayBooks;
                     }
                 }
-
-
+                else
+                {
+                    MessageBox.Show("Failed to fetch books from the API.");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred:\n" + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+        private async void multiSelectComboBox1_Load(object sender, EventArgs e)
+        {
+            var token = Properties.Settings.Default.JwtToken;
+            using var client = ApiClientHelper.CreateClient();
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            try
+            {
+                var response = await client.GetAsync("books/id-titles");
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseObject = JsonSerializer.Deserialize<BookSummaryResponse>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    var books = responseObject?.Values;
+
+                    if (books != null && books.Any())
+                    {
+                        var options = books.Select(book => new DropDownOption
+                        {
+                            Label = book.Title ?? "(Untitled)",
+                            Value = book.Id
+                        }).ToList();
+
+                        multiSelectComboBox1.SetItems(options); // assuming your control has this method
+                    }
+                    else
+                    {
+                        MessageBox.Show("No books available.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to fetch book list.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
     }
 }

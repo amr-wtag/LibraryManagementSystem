@@ -26,4 +26,11 @@ public class BookService
 
         return addBook.MapToDto();
     }
+
+    public async Task<List<BookSummaryDto>> GetBookIdTitleAsync()
+    {
+        return await _bookRepository.GetBookIdTitleAsync();
+    }
+
+
 }
