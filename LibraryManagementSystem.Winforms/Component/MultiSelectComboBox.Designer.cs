@@ -18,7 +18,7 @@
             // 
             // displayBox
             // 
-            displayBox.Dock = DockStyle.Fill;
+            displayBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             displayBox.Location = new Point(0, 0);
             displayBox.Name = "displayBox";
             displayBox.ReadOnly = true;
@@ -56,7 +56,7 @@
             titleLabel.AutoSize = true;
             titleLabel.Location = new Point(0, 0);
             titleLabel.Name = "titleLabel";
-            titleLabel.Size = new Size(100, 23);
+            titleLabel.Size = new Size(0, 32);
             titleLabel.TabIndex = 3;
             // 
             // MultiSelectComboBox

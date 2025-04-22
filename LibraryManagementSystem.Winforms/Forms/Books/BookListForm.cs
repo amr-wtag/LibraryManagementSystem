@@ -11,7 +11,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         {
             InitializeComponent();
             this.Load += BookListForm_Load;
-            multiSelectComboBox1.SelectedValuesChanged += MultiSelectComboBox1_SelectedValuesChanged;
+            //multiSelectComboBox1.SelectedValuesChanged += MultiSelectComboBox1_SelectedValuesChanged;
+            //multiSelectComboBox2.SelectedValuesChanged += MultiSelectComboBox2_SelectedValuesChanged;
+            //multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBo3_SelectedValuesChanged;
         }
 
         private async void BookListForm_Load(object? sender, EventArgs e)
@@ -30,17 +32,28 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             }
         }
 
-        private async void MultiSelectComboBox1_SelectedValuesChanged(object? sender, EventArgs e)
+        private async void MultiSelectComboBoxes_SelectedValuesChanged(object? sender, EventArgs e)
         {
             var selectedBookIds = multiSelectComboBox1
                 .GetSelectedItems()
                 .Select(opt => opt.Value.ToString())
                 .ToList();
+            var selectedAuthorIds = multiSelectComboBox2
+                .GetSelectedItems()
+                .Select(opt => opt.Value.ToString())
+                .ToList();
+            var selectedGenreIds = multiSelectComboBox3
+                .GetSelectedItems()
+                .Select(opt => opt.Value.ToString())
+                .ToList();
 
-            await ShowBooksAsync(selectedBookIds);
+            await ShowBooksAsync(selectedBookIds, selectedAuthorIds, selectedGenreIds);
         }
 
-        /*private async Task ShowBooksAsync(List<string>? filterIds = null)
+
+
+
+        private async Task ShowBooksAsync(List<string>? bookIds = null, List<string>? authorIds = null, List<string>? genreIds = null)
         {
             var token = Properties.Settings.Default.JwtToken;
             using var client = ApiClientHelper.CreateClient();
@@ -50,63 +63,29 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             try
             {
+                //string url = "books";
+
+                //if (filterIds != null && filterIds.Any())
+                //{
+                //    string queryParams = string.Join("&", filterIds.Select(id => $"bookIds={id}"));
+                //    url += $"?{queryParams}";
+                //}
+
+                var queryParts = new List<string>();
+
+                if (bookIds != null && bookIds.Any())
+                    queryParts.AddRange(bookIds.Select(id => $"bookIds={id}"));
+
+                if (authorIds != null && authorIds.Any())
+                    queryParts.AddRange(authorIds.Select(id => $"authorIds={id}"));
+
+                if (genreIds != null && genreIds.Any())
+                    queryParts.AddRange(genreIds.Select(id => $"genreIds={id}"));
+
                 string url = "books";
-
-                if (filterIds != null && filterIds.Any())
+                if (queryParts.Any())
                 {
-                    string bookIdsQuery = string.Join(",", filterIds);
-                    url += $"?bookIds={bookIdsQuery}";
-                }
-
-                var response = await client.GetAsync(url);
-                var result = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var booksWrapper = JsonSerializer.Deserialize<BookListResponse>(result, new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-
-                    var books = booksWrapper?.Value;
-
-                    if (books != null)
-                    {
-                        var displayBooks = books.Select(book => new BookDisplayModel
-                        {
-                            Title = book.Title ?? "",
-                            CopiesAvailable = book.CopiesAvailable,
-                        }).ToList();
-
-                        dataGridViewBooks.DataSource = displayBooks;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Failed to fetch books from the API.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred:\n" + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }*/
-        private async Task ShowBooksAsync(List<string>? filterIds = null)
-        {
-            var token = Properties.Settings.Default.JwtToken;
-            using var client = ApiClientHelper.CreateClient();
-
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
-            try
-            {
-                string url = "books";
-
-                if (filterIds != null && filterIds.Any())
-                {
-                    string queryParams = string.Join("&", filterIds.Select(id => $"bookIds={id}"));
-                    url += $"?{queryParams}";
+                    url += "?" + string.Join("&", queryParts);
                 }
 
                 Console.WriteLine($"Requesting URL: {url}"); // Optional: for debugging
@@ -191,6 +170,16 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        private void multiSelectComboBox2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void multiSelectComboBox3_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
