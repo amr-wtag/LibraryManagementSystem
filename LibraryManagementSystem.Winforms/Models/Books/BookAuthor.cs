@@ -1,3 +1,5 @@
+using LibraryManagementSystem.Winforms.Models.Author;
+
 namespace LibraryManagementSystem.Winforms.Books;
 
 public class BookAuthor

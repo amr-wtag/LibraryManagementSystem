@@ -42,7 +42,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             dataGridViewBooks.Location = new Point(30, 119);
             dataGridViewBooks.Name = "dataGridViewBooks";
             dataGridViewBooks.RowHeadersWidth = 82;
-            dataGridViewBooks.Size = new Size(1148, 859);
+            dataGridViewBooks.Size = new Size(1400, 1009);
             dataGridViewBooks.TabIndex = 1;
             // 
             // multiSelectComboBox1
@@ -55,12 +55,11 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // 
             // multiSelectComboBox2
             // 
-            multiSelectComboBox2.LabelText = "Select...";
+            multiSelectComboBox2.LabelText = "Select Author:";
             multiSelectComboBox2.Location = new Point(452, 34);
             multiSelectComboBox2.Name = "multiSelectComboBox2";
             multiSelectComboBox2.Size = new Size(320, 50);
             multiSelectComboBox2.TabIndex = 3;
-            multiSelectComboBox2.Load += multiSelectComboBox2_Load;
             // 
             // multiSelectComboBox3
             // 
@@ -69,13 +68,12 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             multiSelectComboBox3.Name = "multiSelectComboBox3";
             multiSelectComboBox3.Size = new Size(282, 50);
             multiSelectComboBox3.TabIndex = 4;
-            multiSelectComboBox3.Load += multiSelectComboBox3_Load;
             // 
             // BookListForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1210, 1013);
+            ClientSize = new Size(1462, 1163);
             Controls.Add(multiSelectComboBox3);
             Controls.Add(multiSelectComboBox2);
             Controls.Add(multiSelectComboBox1);

@@ -10,10 +10,13 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         public BookListForm()
         {
             InitializeComponent();
+
             this.Load += BookListForm_Load;
-            //multiSelectComboBox1.SelectedValuesChanged += MultiSelectComboBox1_SelectedValuesChanged;
-            //multiSelectComboBox2.SelectedValuesChanged += MultiSelectComboBox2_SelectedValuesChanged;
-            //multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBo3_SelectedValuesChanged;
+
+            // Hook up event handlers
+            multiSelectComboBox1.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            multiSelectComboBox2.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
         }
 
         private async void BookListForm_Load(object? sender, EventArgs e)
@@ -22,8 +25,10 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             if (!string.IsNullOrEmpty(token))
             {
-                await LoadBookFilterOptionsAsync(); // load options into multiselect
-                await ShowBooksAsync();             // show all books initially
+                await LoadBookFilterOptionsAsync();
+                await LoadAuthorFilterOptionsAsync();
+                //await LoadGenreFilterOptionsAsync();
+                await ShowBooksAsync(); // Show all books initially
             }
             else
             {
@@ -38,10 +43,12 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 .GetSelectedItems()
                 .Select(opt => opt.Value.ToString())
                 .ToList();
+
             var selectedAuthorIds = multiSelectComboBox2
                 .GetSelectedItems()
                 .Select(opt => opt.Value.ToString())
                 .ToList();
+
             var selectedGenreIds = multiSelectComboBox3
                 .GetSelectedItems()
                 .Select(opt => opt.Value.ToString())
@@ -49,9 +56,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             await ShowBooksAsync(selectedBookIds, selectedAuthorIds, selectedGenreIds);
         }
-
-
-
 
         private async Task ShowBooksAsync(List<string>? bookIds = null, List<string>? authorIds = null, List<string>? genreIds = null)
         {
@@ -63,14 +67,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
             try
             {
-                //string url = "books";
-
-                //if (filterIds != null && filterIds.Any())
-                //{
-                //    string queryParams = string.Join("&", filterIds.Select(id => $"bookIds={id}"));
-                //    url += $"?{queryParams}";
-                //}
-
                 var queryParts = new List<string>();
 
                 if (bookIds != null && bookIds.Any())
@@ -87,8 +83,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 {
                     url += "?" + string.Join("&", queryParts);
                 }
-
-                Console.WriteLine($"Requesting URL: {url}"); // Optional: for debugging
 
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
@@ -123,7 +117,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 MessageBox.Show("An error occurred:\n" + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private async Task LoadBookFilterOptionsAsync()
         {
@@ -172,14 +165,47 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             }
         }
 
-        private void multiSelectComboBox2_Load(object sender, EventArgs e)
+        private async Task LoadAuthorFilterOptionsAsync()
         {
+            var token = Properties.Settings.Default.JwtToken;
+            using var client = ApiClientHelper.CreateClient();
+            client.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-        }
+            try
+            {
+                var response = await client.GetAsync("author/id-titles");
+                var result = await response.Content.ReadAsStringAsync();
 
-        private void multiSelectComboBox3_Load(object sender, EventArgs e)
-        {
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseObject = JsonSerializer.Deserialize<AuthorSummaryResponse>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
 
+                    var authors = responseObject?.Values;
+
+                    if (authors != null && authors.Any())
+                    {
+                        var options = authors.Select(author => new DropDownOption
+                        {
+                            Label = author.Name ?? "(Unnamed)",
+                            Value = author.Id
+                        }).ToList();
+
+                        multiSelectComboBox2.SetItems(options);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to fetch authors.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading authors: " + ex.Message);
+            }
         }
     }
 }

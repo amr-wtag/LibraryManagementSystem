@@ -15,11 +15,11 @@ namespace LibraryManagementAPI.Repositories
         }
         public async Task<List<AuthorSummaryDto>> GetAuthorIdTitleAsync()
         {
-            return await _context.Books
+            return await _context.Authors
                 .Select(b => new AuthorSummaryDto
                 {
                     Id = b.Id,
-                    Title = b.Title
+                    Name = b.Name
                 })
                 .ToListAsync();
         }

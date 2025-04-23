@@ -15,12 +15,8 @@
       <Compile Update="Forms\Authentication\LoginForms.cs">
         <SubType>Form</SubType>
       </Compile>
-      <Compile Update="Forms\Books\BookListForm.cs">
-        <SubType>Form</SubType>
-      </Compile>
-      <Compile Update="Forms\Books\BookListForm.cs">
-        <SubType>Form</SubType>
-      </Compile>
+      <Compile Update="Forms\Books\BookListForm.cs" />
+      <Compile Update="Forms\Books\BookListForm.cs" />
       <Compile Update="test\test.cs">
         <SubType>Form</SubType>
       </Compile>

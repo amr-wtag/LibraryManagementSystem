@@ -27,7 +27,6 @@ partial class DashboardForm
         usersButton = new Button();
         contentPanel = new Panel();
         buttonPanel = new Panel();
-        multiSelectComboBox1 = new MultiSelectComboBox();
         bookReservation = new Button();
         logOutButton = new Button();
         buttonPanel.SuspendLayout();
@@ -74,7 +73,6 @@ partial class DashboardForm
         // buttonPanel
         // 
         buttonPanel.BackColor = Color.FromArgb(44, 62, 80);
-        buttonPanel.Controls.Add(multiSelectComboBox1);
         buttonPanel.Controls.Add(usersButton);
         buttonPanel.Controls.Add(bookReservation);
         buttonPanel.Controls.Add(logOutButton);
@@ -85,16 +83,6 @@ partial class DashboardForm
         buttonPanel.Name = "buttonPanel";
         buttonPanel.Size = new Size(334, 1086);
         buttonPanel.TabIndex = 1;
-        // 
-        // multiSelectComboBox1
-        // 
-        multiSelectComboBox1.BackColor = SystemColors.Control;
-        multiSelectComboBox1.Location = new Point(41, 651);
-        multiSelectComboBox1.Margin = new Padding(6, 6, 6, 6);
-        multiSelectComboBox1.Name = "multiSelectComboBox1";
-        multiSelectComboBox1.Size = new Size(256, 39);
-        multiSelectComboBox1.TabIndex = 5;
-        multiSelectComboBox1.Load += multiSelectComboBox1_Load;
         // 
         // bookReservation
         // 
@@ -118,7 +106,7 @@ partial class DashboardForm
         logOutButton.FlatStyle = FlatStyle.Flat;
         logOutButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         logOutButton.ForeColor = Color.White;
-        logOutButton.Location = new Point(37, 956);
+        logOutButton.Location = new Point(26, 310);
         logOutButton.Margin = new Padding(4, 2, 4, 2);
         logOutButton.Name = "logOutButton";
         logOutButton.Size = new Size(271, 85);
@@ -147,5 +135,4 @@ partial class DashboardForm
     private Panel buttonPanel;
     private Button logOutButton;
     private Button bookReservation;
-    private MultiSelectComboBox multiSelectComboBox1;
 }

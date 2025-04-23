@@ -90,6 +90,5 @@ public partial class DashboardForm : Form
         new DropDownOption { Label = "Option 3", Value = 3 }
     };
 
-        multiSelectComboBox1.SetItems(options);
     }
 }
