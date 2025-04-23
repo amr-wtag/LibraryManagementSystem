@@ -58,9 +58,9 @@ public class AuthRepository : IAuthRepository
         return "User registered successfully";
     }
 
-    public async Task<string?> LoginAsync(string username, string email, string password)
+    public async Task<string?> LoginAsync(string identifier, string password)
     {
-        var user = await _userManager.FindByNameAsync(username) ?? await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindByNameAsync(identifier) ?? await _userManager.FindByEmailAsync(identifier);
         if (user == null)
         {
             return null;

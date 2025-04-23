@@ -29,7 +29,7 @@ public partial class LoginForms : Form
 
     private async void loginButton_click(object sender, EventArgs e)
     {
-        var userName = txtUserName.Text;
+        var identifier = txtUserName.Text;
         var password = txtPassword.Text;
 
         using var client = new HttpClient();
@@ -38,7 +38,7 @@ public partial class LoginForms : Form
 
         var loginData = new LoginDto
         {
-            UserName = userName,
+            Identifier = identifier,
             Password = password
         };
 
