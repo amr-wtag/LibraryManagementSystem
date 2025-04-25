@@ -14,8 +14,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             this.Load += BookListForm_Load;
 
             // Hook up event handlers
-            multiSelectComboBox1.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            multiSelectComboBox2.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            bookSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            authorSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
             multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
         }
 
@@ -39,12 +39,12 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
         private async void MultiSelectComboBoxes_SelectedValuesChanged(object? sender, EventArgs e)
         {
-            var selectedBookIds = multiSelectComboBox1
+            var selectedBookIds = bookSelectComboBox
                 .GetSelectedItems()
                 .Select(opt => opt.Value.ToString())
                 .ToList();
 
-            var selectedAuthorIds = multiSelectComboBox2
+            var selectedAuthorIds = authorSelectComboBox
                 .GetSelectedItems()
                 .Select(opt => opt.Value.ToString())
                 .ToList();
@@ -147,7 +147,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                             Value = book.Id
                         }).ToList();
 
-                        multiSelectComboBox1.SetItems(options);
+                        bookSelectComboBox.SetItems(options);
                     }
                     else
                     {
@@ -194,7 +194,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                             Value = author.Id
                         }).ToList();
 
-                        multiSelectComboBox2.SetItems(options);
+                        authorSelectComboBox.SetItems(options);
                     }
                 }
                 else

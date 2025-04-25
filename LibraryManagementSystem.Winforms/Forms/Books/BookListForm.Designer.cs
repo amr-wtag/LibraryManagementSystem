@@ -29,37 +29,37 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         private void InitializeComponent()
         {
             dataGridViewBooks = new DataGridView();
-            multiSelectComboBox1 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
-            multiSelectComboBox2 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            bookSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            authorSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
             multiSelectComboBox3 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).BeginInit();
             SuspendLayout();
             // 
             // dataGridViewBooks
             // 
-            dataGridViewBooks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewBooks.ColumnHeadersHeight = 46;
-            dataGridViewBooks.Location = new Point(30, 119);
+            dataGridViewBooks.Dock = DockStyle.Fill;
+            dataGridViewBooks.Location = new Point(0, 0);
             dataGridViewBooks.Name = "dataGridViewBooks";
             dataGridViewBooks.RowHeadersWidth = 82;
-            dataGridViewBooks.Size = new Size(1400, 1009);
+            dataGridViewBooks.Size = new Size(1462, 1163);
             dataGridViewBooks.TabIndex = 1;
             // 
-            // multiSelectComboBox1
+            // bookSelectComboBox
             // 
-            multiSelectComboBox1.LabelText = "Select Books:";
-            multiSelectComboBox1.Location = new Point(81, 34);
-            multiSelectComboBox1.Name = "multiSelectComboBox1";
-            multiSelectComboBox1.Size = new Size(334, 50);
-            multiSelectComboBox1.TabIndex = 2;
+            bookSelectComboBox.LabelText = "Select Books:";
+            bookSelectComboBox.Location = new Point(81, 34);
+            bookSelectComboBox.Name = "bookSelectComboBox";
+            bookSelectComboBox.Size = new Size(334, 50);
+            bookSelectComboBox.TabIndex = 2;
             // 
-            // multiSelectComboBox2
+            // authorSelectComboBox
             // 
-            multiSelectComboBox2.LabelText = "Select Author:";
-            multiSelectComboBox2.Location = new Point(452, 34);
-            multiSelectComboBox2.Name = "multiSelectComboBox2";
-            multiSelectComboBox2.Size = new Size(320, 50);
-            multiSelectComboBox2.TabIndex = 3;
+            authorSelectComboBox.LabelText = "Select Author:";
+            authorSelectComboBox.Location = new Point(452, 34);
+            authorSelectComboBox.Name = "authorSelectComboBox";
+            authorSelectComboBox.Size = new Size(320, 50);
+            authorSelectComboBox.TabIndex = 3;
             // 
             // multiSelectComboBox3
             // 
@@ -75,8 +75,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1462, 1163);
             Controls.Add(multiSelectComboBox3);
-            Controls.Add(multiSelectComboBox2);
-            Controls.Add(multiSelectComboBox1);
+            Controls.Add(authorSelectComboBox);
+            Controls.Add(bookSelectComboBox);
             Controls.Add(dataGridViewBooks);
             Margin = new Padding(6);
             Name = "BookListForm";
@@ -89,8 +89,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
         #endregion
 
-        private Component.MultiSelectComboBox multiSelectComboBox1;
-        private Component.MultiSelectComboBox multiSelectComboBox2;
+        private Component.MultiSelectComboBox bookSelectComboBox;
+        private Component.MultiSelectComboBox authorSelectComboBox;
         private Component.MultiSelectComboBox multiSelectComboBox3;
     }
 }

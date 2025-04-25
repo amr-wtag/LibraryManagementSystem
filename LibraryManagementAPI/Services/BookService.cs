@@ -29,7 +29,7 @@ public class BookService
 
     public async Task<BookDto> UpdateBookAsync(BookRequestDto dto)
     {
-        var existingBook = await _bookRepository.GetFilteredBookAsync(dto.Id, null, null, null);
+        var existingBook = await _bookRepository.GetFilteredBookAsync(null, [dto.Id], [], []);
         if (existingBook == null || !existingBook.Any())
         {
             throw new Exception("Book not found");
