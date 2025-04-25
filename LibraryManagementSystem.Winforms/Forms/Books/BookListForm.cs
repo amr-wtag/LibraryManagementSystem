@@ -17,6 +17,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             bookSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
             authorSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
             multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            dataGridViewBooks.CellMouseClick += DataGridViewBooks_CellMouseClick;
         }
 
         private async void BookListForm_Load(object? sender, EventArgs e)
@@ -87,6 +88,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
 
+                dataGridViewBooks.Visible = true;
+
+
                 if (response.IsSuccessStatusCode)
                 {
                     var booksWrapper = JsonSerializer.Deserialize<BookListResponse>(result, new JsonSerializerOptions
@@ -104,7 +108,18 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                             CopiesAvailable = book.CopiesAvailable,
                         }).ToList();
 
+                        // Hide and suspend updates
+                        dataGridViewBooks.Visible = false;
+                        dataGridViewBooks.SuspendLayout();
+
+                        dataGridViewBooks.DataSource = null;
                         dataGridViewBooks.DataSource = displayBooks;
+
+                        // Set AutoSize mode AFTER setting the data source
+                        dataGridViewBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+                        dataGridViewBooks.ResumeLayout();
+                        dataGridViewBooks.Visible = true;
                     }
                 }
                 else
@@ -208,5 +223,34 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             }
 
         }
+
+        private void DataGridViewBooks_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
+            {
+                dataGridViewBooks.ClearSelection();
+                dataGridViewBooks.Rows[e.RowIndex].Selected = true;
+
+                // Optional: Get data from selected row
+                var selectedBook = dataGridViewBooks.Rows[e.RowIndex].DataBoundItem as BookDisplayModel;
+
+                // Show context menu at mouse position
+                bookRowContextMenu.Show(Cursor.Position);
+            }
+        }
+
+        private void ViewDetails_Click(object? sender, EventArgs e)
+        {
+            var selectedBook = GetSelectedBook();
+            MessageBox.Show($"Title: {selectedBook?.Title}\nAvailable: {selectedBook?.CopiesAvailable}", "Book Details");
+        }
+
+        private BookDisplayModel? GetSelectedBook()
+        {
+            return dataGridViewBooks.SelectedRows.Count > 0
+                ? dataGridViewBooks.SelectedRows[0].DataBoundItem as BookDisplayModel
+                : null;
+        }
+
     }
 }
