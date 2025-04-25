@@ -1,7 +1,8 @@
 namespace LibraryManagementAPI.DTOs;
 
-public class AddBookRequestDto
+public class BookRequestDto
 {
+    public Guid Id { get; set; }
     public string Title { get; set; } = string.Empty;
     public int CopiesAvailable { get; set; }
 

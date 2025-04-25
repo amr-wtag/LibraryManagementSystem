@@ -15,12 +15,33 @@ public class BookRepository : IBookRepository
         _context = context;
     }
 
+    public async Task<Book> AddBookAsync(Book book)
+    {
+        _context.Books.Add(book);
+        await _context.SaveChangesAsync();
+
+        return book;
+    }
+
+    public async Task<Book> UpdateBookAsync(Book book)
+    {
+        _context.Books.Update(book);
+        await _context.SaveChangesAsync();
+
+        return book;
+    }
+
     public async Task<List<Book>> GetFilteredBookAsync(string? title, List<Guid>? bookIds, List<Guid>? authorIds, List<Guid>? genreIds)
     {
         var query = _context.Books
             .Include(b => b.BookAuthors).ThenInclude(ba => ba.Author)
             .Include(b => b.BookGenres).ThenInclude(bg => bg.Genre)
             .AsQueryable();
+
+        if (id.HasValue)
+        {
+            query = query.Where(b => b.Id == id.Value);
+        }
 
         if (!string.IsNullOrWhiteSpace(title))
         {

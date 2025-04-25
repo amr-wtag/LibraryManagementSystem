@@ -28,10 +28,30 @@ public class BooksController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> AddBookAsync([FromBody] AddBookRequestDto dto)
+    public async Task<IActionResult> AddBookAsync([FromBody] BookRequestDto dto)
     {
         var result = await _bookService.AddBookAsync(dto);
         return Ok(result);
+    }
+
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateBookAsync(Guid id, [FromBody] BookRequestDto dto)
+    {
+        if (id != dto.Id)
+        {
+            return BadRequest("Book ID mismatch.");
+        }
+
+        try
+        {
+            var updatedBook = await _bookService.UpdateBookAsync(dto);
+            return Ok(updatedBook);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
+        }
     }
 
     [HttpGet("id-titles")]
