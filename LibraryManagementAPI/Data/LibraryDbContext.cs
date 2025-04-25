@@ -1,6 +1,5 @@
-using Bogus;
+using LibraryManagementAPI.Helpers;
 using LibraryManagementAPI.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +12,10 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
     }
 
     public DbSet<Book> Books { get; set; }
+    public DbSet<Author> Authors { get; set; }
+    public DbSet<BookAuthor> BookAuthors { get; set; }
+    public DbSet<Genre> Genres { get; set; }
+    public DbSet<BookGenre> BookGenres { get; set; }
     public DbSet<BookReservation> BookReservations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,60 +33,42 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
             .WithMany(u => u.BookReservations)
             .HasForeignKey(br => br.UserId);
 
+        modelBuilder.Entity<BookAuthor>()
+            .HasKey(ba => new { ba.BookId, ba.AuthorId });
+
+        modelBuilder.Entity<BookAuthor>()
+            .HasOne(ba => ba.Book)
+            .WithMany(b => b.BookAuthors)
+            .HasForeignKey(ba => ba.BookId);
+
+        modelBuilder.Entity<BookAuthor>()
+            .HasOne(ba => ba.Author)
+            .WithMany(a => a.BookAuthors)
+            .HasForeignKey(ba => ba.AuthorId);
+
+        modelBuilder.Entity<BookGenre>()
+            .HasKey(bg => new { bg.BookId, bg.GenreId });
+
+        modelBuilder.Entity<BookGenre>()
+            .HasOne(bg => bg.Book)
+            .WithMany(b => b.BookGenres)
+            .HasForeignKey(bg => bg.BookId);
+
+        modelBuilder.Entity<BookGenre>()
+            .HasOne(bg => bg.Genre)
+            .WithMany(g => g.BookGenres)
+            .HasForeignKey(bg => bg.GenreId);
+
+
         // Call Seed Data
-        SeedData(modelBuilder);
+        LibraryDbSeeder.Seed(modelBuilder);
     }
 
-    private void SeedData(ModelBuilder modelBuilder)
+    // use TimestampHelper to update timestamp
+    public override int SaveChanges()
     {
-        var passwordHasher = new PasswordHasher<User>();
+        TimestampHelper.UpdateTimeStamp(ChangeTracker);
 
-        // Generate Roles
-        var adminRole = new Role { Id = Guid.NewGuid(), Name = "Admin", NormalizedName = "ADMIN" };
-        var librarianRole = new Role { Id = Guid.NewGuid(), Name = "Librarian", NormalizedName = "LIBRARIAN" };
-        var userRole = new Role { Id = Guid.NewGuid(), Name = "User", NormalizedName = "USER" };
-
-        var roles = new List<Role> { adminRole, librarianRole, userRole };
-        modelBuilder.Entity<Role>().HasData(roles);
-
-        // Generate Users
-        var userFaker = new Faker<User>()
-            .RuleFor(u => u.Id, f => Guid.NewGuid())
-            .RuleFor(u => u.UserName, f => f.Internet.UserName())
-            .RuleFor(u => u.FullName, f => f.Name.FullName())
-            .RuleFor(u => u.Email, f => f.Internet.Email())
-            .RuleFor(u => u.NormalizedEmail, (f, u) => u.Email.ToUpper())
-            .RuleFor(u => u.NormalizedUserName, (f, u) => u.UserName.ToUpper())
-            .RuleFor(u => u.EmailConfirmed, f => true);
-
-        var users = userFaker.Generate(5);
-        foreach (var user in users) user.PasswordHash = passwordHasher.HashPassword(user, "Password123!");
-
-        modelBuilder.Entity<User>().HasData(users);
-
-        // Assign Roles to Users (First User -> Admin, Second -> Librarian, Rest -> User)
-        var userRoles = new List<IdentityUserRole<Guid>>
-        {
-            new() { UserId = users[0].Id, RoleId = adminRole.Id },
-            new() { UserId = users[1].Id, RoleId = librarianRole.Id }
-        };
-
-        for (var i = 2; i < users.Count; i++)
-            userRoles.Add(new IdentityUserRole<Guid> { UserId = users[i].Id, RoleId = userRole.Id });
-
-        modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(userRoles);
-
-        // Generate Books with Categories
-        var bookCategories = new[] { "Fiction", "Science", "History", "Technology", "Mystery" };
-
-        var bookFaker = new Faker<Book>()
-            .RuleFor(b => b.Id, f => Guid.NewGuid())
-            .RuleFor(b => b.Title, f => f.Lorem.Sentence(3))
-            .RuleFor(b => b.Author, f => f.Name.FullName())
-            .RuleFor(b => b.Category, f => f.PickRandom(bookCategories))
-            .RuleFor(b => b.CopiesAvailable, f => f.Random.Int(1, 20));
-
-        var books = bookFaker.Generate(10);
-        modelBuilder.Entity<Book>().HasData(books);
+        return base.SaveChanges();
     }
 }

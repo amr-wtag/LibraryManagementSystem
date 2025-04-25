@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.Models;
+using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementAPI.Controllers;
-
-using Services;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -16,45 +17,41 @@ public class BooksController : ControllerBase
         _bookService = bookService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+    [HttpGet("filter")]
+    public async Task<ActionResult<List<Book>>> GetFilteredBooksAsync(
+        [FromQuery] Guid? id,
+        [FromQuery] string? title, [FromQuery] string? author, [FromQuery] string? genre)
     {
-        var books = await _bookService.GetAllBooksAsync();
+        var books = await _bookService.GetFilteredBookAsync(id, title, author, genre);
+
         return Ok(books);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<ActionResult<Book>> GetBook(Guid id)
+    [HttpPost("create")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> AddBookAsync([FromBody] BookRequestDto dto)
     {
+        var result = await _bookService.AddBookAsync(dto);
+        return Ok(result);
+    }
+
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> UpdateBookAsync(Guid id, [FromBody] BookRequestDto dto)
+    {
+        if (id != dto.Id)
+        {
+            return BadRequest("Book ID mismatch.");
+        }
+
         try
         {
-            var book = await _bookService.GetBookByIdAsync(id);
-            return Ok(book);
-
+            var updatedBook = await _bookService.UpdateBookAsync(dto);
+            return Ok(updatedBook);
         }
-        catch (KeyNotFoundException exception)
+        catch (Exception ex)
         {
-            return NotFound(new { message = exception.Message });
-
+            return StatusCode(500, new { message = ex.Message });
         }
-
-    }
-
-    [HttpGet("by-author/{author}")]
-    public async Task<ActionResult<List<Book>>> GetBookByAuthor(string author)
-    {
-        if (string.IsNullOrWhiteSpace(author))
-        {
-            return BadRequest("Author parameter cannot be empty.");
-        }
-
-        var books = await _bookService.GetBooksByAuthorAsync(author);
-
-        if (books.Count == 0)
-        {
-            return NotFound("No books found for the given author.");
-        }
-
-        return Ok(books);
     }
 }

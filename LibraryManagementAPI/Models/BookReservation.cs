@@ -1,6 +1,8 @@
-﻿namespace LibraryManagementAPI.Models;
+﻿using System.Text.Json.Serialization;
 
-public class BookReservation
+namespace LibraryManagementAPI.Models;
+
+public class BookReservation : BaseEntity
 {
     public Guid Id { get; set; }
     public Guid BookId { get; set; }
@@ -13,5 +15,5 @@ public class BookReservation
 
     public Book? Book { get; set; }
 
-    public User? User { get; set; }
+    [JsonIgnore] public User? User { get; set; }
 }

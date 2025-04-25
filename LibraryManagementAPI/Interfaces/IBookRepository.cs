@@ -1,10 +1,10 @@
-namespace LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Models;
 
-using Models;
+namespace LibraryManagementAPI.interfaces;
 
 public interface IBookRepository
 {
-    Task<IEnumerable<Book>> GetAllBooksAsync();
-    Task<Book?> GetBookByIdAsync(Guid id);
-    Task<List<Book>> GetBooksByAuthorAsync(string? author);
+    Task<List<Book>> GetFilteredBookAsync(Guid? id, string? title, string? author, string? genre);
+    Task<Book> AddBookAsync(Book book);
+    Task<Book> UpdateBookAsync(Book book);
 }

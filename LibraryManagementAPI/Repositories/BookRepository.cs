@@ -1,9 +1,9 @@
-namespace LibraryManagementAPI.Repositories;
-
-using Data;
-using interfaces;
+using LibraryManagementAPI.Data;
+using LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using Models;
+
+namespace LibraryManagementAPI.Repositories;
 
 public class BookRepository : IBookRepository
 {
@@ -14,21 +14,51 @@ public class BookRepository : IBookRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Book>> GetAllBooksAsync()
+    public async Task<Book> AddBookAsync(Book book)
     {
-        return await _context.Books.ToListAsync();
+        _context.Books.Add(book);
+        await _context.SaveChangesAsync();
+
+        return book;
     }
 
-    public async Task<Book?> GetBookByIdAsync(Guid id)
+    public async Task<Book> UpdateBookAsync(Book book)
     {
-        return await _context.Books.FindAsync(id);
+        _context.Books.Update(book);
+        await _context.SaveChangesAsync();
+
+        return book;
     }
 
-    public async Task<List<Book>> GetBooksByAuthorAsync(string? author)
+    public async Task<List<Book>> GetFilteredBookAsync(Guid? id, string? title, string? author, string? genre)
     {
-        return await _context.Books
-            .Where(book => !string.IsNullOrEmpty(book.Author) &&
-                           (author == null || book.Author.ToLower().Contains(author.ToLower())))
-            .ToListAsync();
+        var query = _context.Books
+            .Include(b => b.BookAuthors).ThenInclude(ba => ba.Author)
+            .Include(b => b.BookGenres).ThenInclude(bg => bg.Genre)
+            .AsQueryable();
+
+        if (id.HasValue)
+        {
+            query = query.Where(b => b.Id == id.Value);
+        }
+
+        if (!string.IsNullOrWhiteSpace(title))
+        {
+            query = query.Where(b => b.Title!.ToLower().Contains(title.ToLower()));
+        }
+
+        if (!string.IsNullOrWhiteSpace(author))
+        {
+            query = query.Where(b => b.BookAuthors!.Any(ba =>
+                ba.Author != null && ba.Author.Name!.ToLower().Contains(author.ToLower())));
+        }
+
+        if (!string.IsNullOrWhiteSpace(genre))
+        {
+            query = query.Where(b =>
+                b.BookGenres!.Any(bg => bg.Genre != null && bg.Genre.Name!.ToLower().Contains(genre.ToLower())));
+        }
+
+        return await query.ToListAsync();
     }
 }
