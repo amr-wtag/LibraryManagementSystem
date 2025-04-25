@@ -34,10 +34,10 @@ public class BookReservationController : ControllerBase
         {
             var reservations = new List<BookReservation>();
 
-            foreach (var bookId in dto.BookIds)
+            foreach (var item in dto.Reservations)
             {
                 var reservation =
-                    await _bookReservationService.AddBookReservationAsync(bookId, dto.UserId, dto.DueDate);
+                    await _bookReservationService.AddBookReservationAsync(item.BookId, dto.UserId, item.DueDate);
                 reservations.Add(reservation);
             }
 
