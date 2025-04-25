@@ -23,7 +23,7 @@ public static class BookMapper
         };
     }
 
-    public static Book MapToEntity(this AddBookRequestDto dto)
+    public static Book MapToEntity(this BookRequestDto dto)
     {
         return new Book
         {
