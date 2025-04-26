@@ -123,9 +123,9 @@ partial class DashboardForm
         ClientSize = new Size(1560, 1086);
         Controls.Add(contentPanel);
         Controls.Add(buttonPanel);
-        FormBorderStyle = FormBorderStyle.FixedSingle;
+        FormBorderStyle = FormBorderStyle.Sizable;
         Margin = new Padding(4, 2, 4, 2);
-        MaximizeBox = false;
+        MaximizeBox = true;
         Name = "DashboardForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Library Dashboard";
