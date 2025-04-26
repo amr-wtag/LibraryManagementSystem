@@ -1,6 +1,5 @@
 using System.Security.Claims;
 using System.Text;
-using System.Text.Json.Serialization;
 using DotNetEnv;
 using LibraryManagementAPI.Data;
 using LibraryManagementAPI.interfaces;
@@ -111,17 +110,19 @@ builder.Services.AddAuthentication(options =>
             ValidateIssuer = false,
             ValidateAudience = false,
             ValidateLifetime = true,
-            RoleClaimType = ClaimTypes.Role,
+            RoleClaimType = ClaimTypes.Role
         };
     });
 
 builder.Services.AddAuthorization();
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-        options.JsonSerializerOptions.MaxDepth = 64; // Increase if needed
-    });
+builder.Services.AddControllers();
+/*
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    options.JsonSerializerOptions.MaxDepth = 64; // Increase if needed
+});
+*/
 
 var app = builder.Build();
 
