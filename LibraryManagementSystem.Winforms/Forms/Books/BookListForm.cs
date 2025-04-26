@@ -88,6 +88,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
 
+
                 dataGridViewBooks.Visible = true;
 
 
@@ -100,13 +101,20 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
                     var books = booksWrapper?.Value;
 
+
                     if (books != null)
                     {
+
                         var displayBooks = books.Select(book => new BookDisplayModel
                         {
                             Title = book.Title ?? "",
                             CopiesAvailable = book.CopiesAvailable,
+                            Authors = book.Authors != null
+        ? string.Join(", ", book.Authors.Values.Select(author => author.Name)) : "",
+                            Genres = book.Genres != null ? string.Join(", ", book.Genres.Values.Select(genre => genre.Name))
+        : ""
                         }).ToList();
+
 
                         // Hide and suspend updates
                         dataGridViewBooks.Visible = false;
@@ -242,7 +250,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         private void ViewDetails_Click(object? sender, EventArgs e)
         {
             var selectedBook = GetSelectedBook();
-            MessageBox.Show($"Title: {selectedBook?.Title}\nAvailable: {selectedBook?.CopiesAvailable}", "Book Details");
+            MessageBox.Show($"Title: {selectedBook?.Title}\nAvailable: {selectedBook?.CopiesAvailable}\nBookAuthors: {selectedBook.Authors}\nBookGenre: {selectedBook.Genres}", "Book Details");
         }
 
         private BookDisplayModel? GetSelectedBook()
