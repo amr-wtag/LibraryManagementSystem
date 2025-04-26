@@ -57,6 +57,20 @@ namespace LibraryManagementSystem.Winforms.Component
             return checkedListBox.CheckedItems.Cast<DropDownOption>().ToList();
         }
 
+        public void SetSelectedValues(List<string> selectedIds)
+        {
+            for (int i = 0; i < checkedListBox.Items.Count; i++)
+            {
+                if (checkedListBox.Items[i] is DropDownOption option)
+                {
+                    checkedListBox.SetItemChecked(i, selectedIds.Contains(option.Value));
+                }
+            }
+
+            UpdateText();
+        }
+
+
         private void UpdateText()
         {
             var selected = GetSelectedItems();
