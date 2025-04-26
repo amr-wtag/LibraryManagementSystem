@@ -5,7 +5,7 @@ namespace LibraryManagementSystem.Winforms.Component
     public partial class MultiSelectComboBox : UserControl
     {
         public event EventHandler? SelectedValuesChanged;
-        private Label titleLabel;
+        private Label? titleLabel;
         private string _labelText = "Select...";
 
         public MultiSelectComboBox()
@@ -85,7 +85,10 @@ namespace LibraryManagementSystem.Winforms.Component
             set
             {
                 _labelText = value;
-                titleLabel.Text = value;
+                if (titleLabel != null)
+                {
+                    titleLabel.Text = value;
+                }
             }
         }
     }

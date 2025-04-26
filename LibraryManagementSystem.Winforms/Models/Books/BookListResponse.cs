@@ -6,4 +6,5 @@ public class BookListResponse
 {
     [JsonPropertyName("$values")]
     public List<Book> Value { get; set; } = new();
+
 }
