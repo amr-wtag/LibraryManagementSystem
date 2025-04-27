@@ -55,8 +55,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Users
                         var displayUser = users?.Value.Select(user => new UserDisplayModal
                         {
                             FullName = user.FullName ?? "",
-                            //Email = user.Email ?? "",
-                            //Role = user.Role,
+                            Email = user.Email ?? "",
+                            Role = user.Role ?? "",
                         }).ToList();
                         DataGridViewUsers.DataSource = displayUser;
                         //MessageBox.Show($"Users found.{users}");

@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using System.Text.Json;
 using LibraryManagementSystem.Winforms.Forms.Books;
 using LibraryManagementSystem.Winforms.Forms.Users;
@@ -54,6 +55,8 @@ public partial class DashboardForm : Form
             var response = await client.PostAsync("auth/logout", null);
             var result = await response.Content.ReadAsStringAsync();
 
+            MessageBox.Show(response.ToString());
+
             if (response.IsSuccessStatusCode)
             {
                 var json = JsonSerializer.Deserialize<JsonElement>(result);
@@ -67,6 +70,17 @@ public partial class DashboardForm : Form
                 new LoginForms().Show();
                 this.Close();
 
+            }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                // Token expired or invalid -> force logout
+                MessageBox.Show("Session expired. Please login again.", "Unauthorized", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                Properties.Settings.Default.JwtToken = string.Empty;
+                Properties.Settings.Default.Save();
+
+                new LoginForms().Show();
+                this.Close();
             }
             else
             {

@@ -51,6 +51,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             resources.ApplyResources(dataGridViewBooks, "dataGridViewBooks");
             dataGridViewBooks.AutoGenerateColumns = false;
             dataGridViewBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewBooks.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dataGridViewBooks.Columns.AddRange(new DataGridViewColumn[] { titleDataGridViewTextBoxColumn, copiesAvailableDataGridViewTextBoxColumn, authorsDataGridViewTextBoxColumn, genresDataGridViewTextBoxColumn });
             dataGridViewBooks.DataSource = bookBindingSource;
             dataGridViewBooks.Name = "dataGridViewBooks";
