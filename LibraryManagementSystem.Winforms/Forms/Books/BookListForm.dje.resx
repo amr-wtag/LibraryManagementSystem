@@ -117,62 +117,89 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="booksLayoutPanel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="booksLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dataGridViewBooks.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="filterTableLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="dataGridViewBooks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="filterTableLayoutPanel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="filterTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 1, 2, 1</value>
+  </data>
+  <data name="filterTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1126, 68</value>
+  </data>
+  <data name="filterTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewBooks.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dataGridViewBooks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 71</value>
+  </data>
   <data name="dataGridViewBooks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 1, 2, 1</value>
   </data>
   <data name="dataGridViewBooks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1036, 497</value>
+    <value>1126, 615</value>
+  </data>
+  <data name="dataGridViewBooks.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="booksLayoutPanel.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="booksLayoutPanel.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="booksLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1130, 687</value>
   </data>
   <data name="bookSelectComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 25</value>
+    <value>2, 44</value>
   </data>
   <data name="bookSelectComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 1, 2, 1</value>
   </data>
   <data name="bookSelectComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 23</value>
-  </data>
-  <data name="authorSelectComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 25</value>
-  </data>
-  <data name="authorSelectComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 1, 2, 1</value>
-  </data>
-  <data name="authorSelectComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 23</value>
+    <value>300, 23</value>
   </data>
   <data name="multiSelectComboBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 25</value>
+    <value>625, 44</value>
   </data>
   <data name="multiSelectComboBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 1, 2, 1</value>
   </data>
   <data name="multiSelectComboBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 23</value>
+    <value>275, 23</value>
   </data>
-  <data name="filterTableLayoutPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="authorSelectComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>306, 44</value>
+  </data>
+  <data name="authorSelectComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 1, 2, 1</value>
   </data>
-  <data name="filterTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1036, 49</value>
+  <data name="authorSelectComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 23</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1036, 497</value>
+    <value>1130, 687</value>
   </data>
 </root>
