@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
+using LibraryManagementSystem.Winforms.Forms.BookReservation;
 using LibraryManagementSystem.Winforms.Forms.Books;
 using LibraryManagementSystem.Winforms.Forms.Users;
 using LibraryManagementSystem.Winforms.helpers;
@@ -14,6 +15,7 @@ public partial class DashboardForm : Form
     {
         InitializeComponent();
         logOutButton.Click += logOutButton_Click;
+        OpenChildForm(new BookListForm());
     }
 
     private void BooksButton_Click(object sender, EventArgs e)
@@ -104,5 +106,10 @@ public partial class DashboardForm : Form
         new DropDownOption { Label = "Option 3", Value = 3 }
     };
 
+    }
+
+    private void bookReservation_Click(object sender, EventArgs e)
+    {
+        OpenChildForm(new BookReservationForm());
     }
 }

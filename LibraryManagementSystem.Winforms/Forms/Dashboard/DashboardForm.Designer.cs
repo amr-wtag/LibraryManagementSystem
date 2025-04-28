@@ -98,6 +98,7 @@ partial class DashboardForm
         bookReservation.TabIndex = 3;
         bookReservation.Text = "BookReservation";
         bookReservation.UseVisualStyleBackColor = true;
+        bookReservation.Click += bookReservation_Click;
         // 
         // logOutButton
         // 
@@ -123,9 +124,7 @@ partial class DashboardForm
         ClientSize = new Size(1560, 1086);
         Controls.Add(contentPanel);
         Controls.Add(buttonPanel);
-        FormBorderStyle = FormBorderStyle.Sizable;
         Margin = new Padding(4, 2, 4, 2);
-        MaximizeBox = true;
         Name = "DashboardForm";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Library Dashboard";

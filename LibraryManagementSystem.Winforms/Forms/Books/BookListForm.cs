@@ -14,10 +14,10 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             this.Load += BookListForm_Load;
 
             // Hook up event handlers
-            bookSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            authorSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            dataGridViewBooks.CellMouseClick += DataGridViewBooks_CellMouseClick;
+            //bookSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            //authorSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            //multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            //dataGridViewBooks.CellMouseClick += DataGridViewBooks_CellMouseClick;
         }
 
         private async void BookListForm_Load(object? sender, EventArgs e)
@@ -105,6 +105,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                     if (books != null)
                     {
 
+                        dataGridViewBooks.Visible = false;
+                        dataGridViewBooks.SuspendLayout();
+
                         var displayBooks = books.Select(book => new BookDisplayModel
                         {
                             Title = book.Title ?? "",
@@ -117,8 +120,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
 
                         // Hide and suspend updates
-                        dataGridViewBooks.Visible = false;
-                        dataGridViewBooks.SuspendLayout();
+
 
                         dataGridViewBooks.DataSource = null;
                         dataGridViewBooks.DataSource = displayBooks;

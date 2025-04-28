@@ -65,7 +65,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             booksLayoutPanel.Controls.Add(dataGridViewBooks, 0, 1);
             booksLayoutPanel.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
             booksLayoutPanel.Name = "booksLayoutPanel";
-            booksLayoutPanel.Dock = DockStyle.Fill;
             // 
             // filterTableLayoutPanel
             // 
@@ -101,7 +100,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             dataGridViewBooks.Columns.AddRange(new DataGridViewColumn[] { titleDataGridViewTextBoxColumn, copiesAvailableDataGridViewTextBoxColumn, authorsDataGridViewTextBoxColumn, genresDataGridViewTextBoxColumn });
             dataGridViewBooks.DataSource = bookBindingSource;
             dataGridViewBooks.Name = "dataGridViewBooks";
-            dataGridViewBooks.Dock = DockStyle.Fill;
             // 
             // titleDataGridViewTextBoxColumn
             // 
