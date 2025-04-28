@@ -13,9 +13,9 @@ public class BookReservationService
     }
 
     public async Task<IEnumerable<BookReservation>> GetBookReservationsAsync(Guid? id = null, Guid? userId = null,
-        Guid? bookId = null)
+        Guid? bookId = null, string status = "")
     {
-        return await _bookReservationRepository.GetBookReservationsAsync(id, userId, bookId);
+        return await _bookReservationRepository.GetBookReservationsAsync(id, userId, bookId, status);
     }
 
     public async Task<BookReservation> AddBookReservationAsync(Guid bookId, Guid userId, DateTime dueDate)

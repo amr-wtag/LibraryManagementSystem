@@ -15,7 +15,7 @@ public class BookReservationRepository : IBookReservationRepository
     }
 
     public async Task<List<BookReservation>> GetBookReservationsAsync(Guid? id = null, Guid? userId = null,
-        Guid? bookId = null)
+        Guid? bookId = null, string status = "")
     {
         var query = _context.BookReservations
             .Include(r => r.Book)
@@ -35,6 +35,11 @@ public class BookReservationRepository : IBookReservationRepository
         if (bookId.HasValue)
         {
             query = query.Where(r => r.BookId == bookId.Value);
+        }
+
+        if (status != "")
+        {
+            query = query.Where(r => r.Status == status);
         }
 
 
