@@ -33,11 +33,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 
         private async Task ShowBookReservationsAsync()
         {
-            var token = Properties.Settings.Default.JwtToken;
             using var client = ApiClientHelper.CreateClient();
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-
             var response = await client.GetAsync("bookreservation");
             var result = await response.Content.ReadAsStringAsync();
 
@@ -62,16 +58,39 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                         BookTitle = bookReservation.Book?.Title,
                     }).ToList();
 
-                    BookReservationTableView.DataSource = bookReservations;
+                    BookReservationTableView.DataSource = displayBookReservations;
+
                 }
 
             }
         }
 
-        //private async void BookReservationTableView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    await ShowBookReservationsAsync();
+        private void addReservation_Click(object sender, EventArgs e)
+        {
 
-        //}
+        }
+
+        private async void returnBook_Click(object sender, EventArgs e)
+        {
+            var currentRow = BookReservationTableView.CurrentRow;
+
+            if (currentRow.DataBoundItem is BookReservationDisplayModal reservation)
+            {
+                var reservationId = reservation.Id;
+                var queryString = string.Join("&id={userId}");
+                using var client = ApiClientHelper.CreateClient();
+
+                var response = await client.GetAsync("bookreservation" + queryString);
+                var result = await response.Content.ReadAsStringAsync();
+
+
+                // Do what you need with userId
+                MessageBox.Show($"id: {result}");
+            }
+            else
+            {
+                MessageBox.Show("Failed to retrieve reservation data.");
+            }
+        }
     }
 }

@@ -157,6 +157,7 @@
             returnBook.TabIndex = 1;
             returnBook.Text = "ReturnBook";
             returnBook.UseVisualStyleBackColor = true;
+            returnBook.Click += returnBook_Click;
             // 
             // addReservation
             // 
@@ -170,6 +171,7 @@
             addReservation.TabIndex = 0;
             addReservation.Text = "AddReservation";
             addReservation.UseVisualStyleBackColor = true;
+            addReservation.Click += addReservation_Click;
             // 
             // BookReservationTableView
             // 

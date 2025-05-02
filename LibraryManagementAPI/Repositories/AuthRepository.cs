@@ -95,7 +95,7 @@ public class AuthRepository : IAuthRepository
         var claims = new List<Claim>
     {
         new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new(ClaimTypes.Name, user.UserName)
+        new(ClaimTypes.Name, user.UserName?? string.Empty)
     };
 
         // Get the user's roles asynchronously and add them as claims
@@ -114,7 +114,7 @@ public class AuthRepository : IAuthRepository
             _configuration["JwtSettings:Issuer"],
             _configuration["JwtSettings:Audience"],
             claims,
-            expires: DateTime.Now.AddMinutes(int.Parse(_configuration["JwtSettings:ExpiryMinutes"])),
+            expires: DateTime.Now.AddDays(1),
             signingCredentials: creds
         );
 

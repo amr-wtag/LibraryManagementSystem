@@ -1,5 +1,6 @@
 using System.Data;
 using System.Text.Json;
+using LibraryManagementSystem.Winforms.dataHelpers;
 using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.Books;
 
@@ -14,10 +15,10 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             this.Load += BookListForm_Load;
 
             // Hook up event handlers
-            //bookSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            //authorSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            //multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            //dataGridViewBooks.CellMouseClick += DataGridViewBooks_CellMouseClick;
+            bookSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            authorSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            dataGridViewBooks.CellMouseClick += DataGridViewBooks_CellMouseClick;
         }
 
         private async void BookListForm_Load(object? sender, EventArgs e)
@@ -145,48 +146,11 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
         private async Task LoadBookFilterOptionsAsync()
         {
-            var token = Properties.Settings.Default.JwtToken;
-            using var client = ApiClientHelper.CreateClient();
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            var options = await BookDropdownHelper.LoadBookOptionsAsync();
 
-            try
+            if (options.Any())
             {
-                var response = await client.GetAsync("books/id-titles");
-                var result = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseObject = JsonSerializer.Deserialize<BookSummaryResponse>(result, new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-
-                    var books = responseObject?.Values;
-
-                    if (books != null && books.Any())
-                    {
-                        var options = books.Select(book => new DropDownOption
-                        {
-                            Label = book.Title ?? "(Untitled)",
-                            Value = book.Id
-                        }).ToList();
-
-                        bookSelectComboBox.SetItems(options);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No books available.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Failed to fetch book list.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
+                bookSelectComboBox.SetItems(options);
             }
         }
 
