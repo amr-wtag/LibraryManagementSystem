@@ -156,10 +156,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
         private async Task LoadAuthorFilterOptionsAsync()
         {
-            var token = Properties.Settings.Default.JwtToken;
             using var client = ApiClientHelper.CreateClient();
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             try
             {

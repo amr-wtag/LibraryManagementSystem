@@ -67,8 +67,11 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 
         private void addReservation_Click(object sender, EventArgs e)
         {
+            AddReservationForm addReservationForm = new AddReservationForm();
 
+            addReservationForm.Show();
         }
+
 
         private async void returnBook_Click(object sender, EventArgs e)
         {
