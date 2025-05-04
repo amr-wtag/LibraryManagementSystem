@@ -16,6 +16,9 @@
     <Compile Update="Forms\BookReservation\BookReservationForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\BookReservation\BookReservationRow\BookReservationRowControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Forms\Books\BookListForm.cs">
       <SubType>Form</SubType>
     </Compile>

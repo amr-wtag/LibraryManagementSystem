@@ -16,7 +16,6 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
         {
             await LoadUserOptionAsync();
 
-
         }
 
         private async Task LoadUserOptionAsync()
@@ -33,8 +32,6 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                 });
 
                 var users = responseObject?.Values ?? new List<UserSummary>();
-
-                MessageBox.Show($"Loaded {users[0].userName} users.");
 
                 var userOptions = users.Select(user => new DropDownOption
                 {
