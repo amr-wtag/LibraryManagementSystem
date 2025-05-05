@@ -146,14 +146,6 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             {
                 MessageBox.Show("Exception: " + ex.Message);
             }
-
-
-
-            // Show or send the JSON
-            MessageBox.Show(json);
-
-            // Optional: Send to API
-            // await SendReservationAsync(json);
         }
 
 

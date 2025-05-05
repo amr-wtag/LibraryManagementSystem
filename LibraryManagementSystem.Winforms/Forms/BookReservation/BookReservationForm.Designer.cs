@@ -97,7 +97,7 @@
             // 
             // multiSelectComboBox1
             // 
-            multiSelectComboBox1.LabelText = "UserIds:";
+            multiSelectComboBox1.LabelText = "Users:";
             multiSelectComboBox1.Location = new Point(2, 1);
             multiSelectComboBox1.Margin = new Padding(2, 1, 2, 1);
             multiSelectComboBox1.Name = "multiSelectComboBox1";
@@ -106,7 +106,7 @@
             // 
             // multiSelectComboBox2
             // 
-            multiSelectComboBox2.LabelText = "BookIds:";
+            multiSelectComboBox2.LabelText = "Books:";
             multiSelectComboBox2.Location = new Point(202, 1);
             multiSelectComboBox2.Margin = new Padding(2, 1, 2, 1);
             multiSelectComboBox2.Name = "multiSelectComboBox2";

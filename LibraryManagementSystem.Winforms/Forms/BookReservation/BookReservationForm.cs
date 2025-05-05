@@ -75,21 +75,14 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 
         private async void returnBook_Click(object sender, EventArgs e)
         {
-            var currentRow = BookReservationTableView.CurrentRow;
 
-            if (currentRow.DataBoundItem is BookReservationDisplayModal reservation)
+            if (BookReservationTableView.CurrentRow?.DataBoundItem is BookReservationDisplayModal selectedReservation)
             {
-                var reservationId = reservation.Id;
-                var queryString = string.Join("&id={userId}");
-                using var client = ApiClientHelper.CreateClient();
+                Guid reservationId = selectedReservation.Id;
 
-                var response = await client.GetAsync("bookreservation" + queryString);
-                var result = await response.Content.ReadAsStringAsync();
-
-
-                // Do what you need with userId
-                MessageBox.Show($"id: {result}");
+                MessageBox.Show($"Reservation ID: {reservationId}");
             }
+
             else
             {
                 MessageBox.Show("Failed to retrieve reservation data.");

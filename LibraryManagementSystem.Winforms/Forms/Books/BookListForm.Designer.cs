@@ -41,10 +41,16 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             copiesAvailableDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             authorsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             genresDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bookBindingSource2 = new BindingSource(components);
+            bookBindingSource1 = new BindingSource(components);
+            bookDtoBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).BeginInit();
             booksLayoutPanel.SuspendLayout();
             filterTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bookBindingSource2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bookBindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bookDtoBindingSource).BeginInit();
             SuspendLayout();
             // 
             // bookBindingSource
@@ -69,7 +75,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             booksLayoutPanel.Name = "booksLayoutPanel";
             booksLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 23F));
             booksLayoutPanel.RowStyles.Add(new RowStyle());
-            booksLayoutPanel.Size = new Size(789, 493);
+            booksLayoutPanel.Size = new Size(935, 564);
             booksLayoutPanel.TabIndex = 1;
             // 
             // filterTableLayoutPanel
@@ -85,7 +91,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             filterTableLayoutPanel.Margin = new Padding(2, 1, 2, 1);
             filterTableLayoutPanel.Name = "filterTableLayoutPanel";
             filterTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 21F));
-            filterTableLayoutPanel.Size = new Size(785, 21);
+            filterTableLayoutPanel.Size = new Size(931, 21);
             filterTableLayoutPanel.TabIndex = 0;
             // 
             // bookSelectComboBox
@@ -101,7 +107,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // multiSelectComboBox3
             // 
             multiSelectComboBox3.Dock = DockStyle.Left;
-            multiSelectComboBox3.LabelText = "Status:";
+            multiSelectComboBox3.LabelText = "Select Genres:";
             multiSelectComboBox3.Location = new Point(402, 1);
             multiSelectComboBox3.Margin = new Padding(2, 1, 2, 1);
             multiSelectComboBox3.Name = "multiSelectComboBox3";
@@ -111,7 +117,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // authorSelectComboBox
             // 
             authorSelectComboBox.Dock = DockStyle.Fill;
-            authorSelectComboBox.LabelText = "Select Author:";
+            authorSelectComboBox.LabelText = "Select Authors:";
             authorSelectComboBox.Location = new Point(202, 1);
             authorSelectComboBox.Margin = new Padding(2, 1, 2, 1);
             authorSelectComboBox.Name = "authorSelectComboBox";
@@ -120,48 +126,64 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // 
             // dataGridViewBooks
             // 
+            dataGridViewBooks.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridViewBooks.AutoGenerateColumns = false;
-            dataGridViewBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewBooks.ColumnHeadersHeight = 46;
             dataGridViewBooks.Columns.AddRange(new DataGridViewColumn[] { titleDataGridViewTextBoxColumn, copiesAvailableDataGridViewTextBoxColumn, authorsDataGridViewTextBoxColumn, genresDataGridViewTextBoxColumn });
-            dataGridViewBooks.DataSource = bookBindingSource;
-            dataGridViewBooks.Dock = DockStyle.Fill;
+            dataGridViewBooks.DataSource = bookBindingSource2;
             dataGridViewBooks.Location = new Point(2, 24);
             dataGridViewBooks.Margin = new Padding(2, 1, 2, 1);
             dataGridViewBooks.Name = "dataGridViewBooks";
+            dataGridViewBooks.RowHeadersVisible = false;
             dataGridViewBooks.RowHeadersWidth = 82;
-            dataGridViewBooks.Size = new Size(785, 468);
+            dataGridViewBooks.Size = new Size(931, 539);
             dataGridViewBooks.TabIndex = 1;
             // 
             // titleDataGridViewTextBoxColumn
             // 
             titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-            titleDataGridViewTextBoxColumn.MinimumWidth = 10;
+            titleDataGridViewTextBoxColumn.HeaderText = "Title";
             titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            titleDataGridViewTextBoxColumn.Width = 232;
             // 
             // copiesAvailableDataGridViewTextBoxColumn
             // 
             copiesAvailableDataGridViewTextBoxColumn.DataPropertyName = "CopiesAvailable";
-            copiesAvailableDataGridViewTextBoxColumn.MinimumWidth = 10;
+            copiesAvailableDataGridViewTextBoxColumn.HeaderText = "CopiesAvailable";
             copiesAvailableDataGridViewTextBoxColumn.Name = "copiesAvailableDataGridViewTextBoxColumn";
+            copiesAvailableDataGridViewTextBoxColumn.Width = 232;
             // 
             // authorsDataGridViewTextBoxColumn
             // 
             authorsDataGridViewTextBoxColumn.DataPropertyName = "Authors";
-            authorsDataGridViewTextBoxColumn.MinimumWidth = 10;
+            authorsDataGridViewTextBoxColumn.HeaderText = "Authors";
             authorsDataGridViewTextBoxColumn.Name = "authorsDataGridViewTextBoxColumn";
+            authorsDataGridViewTextBoxColumn.Width = 232;
             // 
             // genresDataGridViewTextBoxColumn
             // 
             genresDataGridViewTextBoxColumn.DataPropertyName = "Genres";
-            genresDataGridViewTextBoxColumn.MinimumWidth = 10;
+            genresDataGridViewTextBoxColumn.HeaderText = "Genres";
             genresDataGridViewTextBoxColumn.Name = "genresDataGridViewTextBoxColumn";
+            genresDataGridViewTextBoxColumn.Width = 232;
+            // 
+            // bookBindingSource2
+            // 
+            bookBindingSource2.DataSource = typeof(Models.Books.Book);
+            // 
+            // bookBindingSource1
+            // 
+            bookBindingSource1.DataSource = typeof(Models.Books.Book);
+            // 
+            // bookDtoBindingSource
+            // 
+            bookDtoBindingSource.DataSource = typeof(Models.BookDto);
             // 
             // BookListForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(789, 493);
+            ClientSize = new Size(935, 564);
             Controls.Add(booksLayoutPanel);
             Margin = new Padding(2, 1, 2, 1);
             Name = "BookListForm";
@@ -169,6 +191,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             booksLayoutPanel.ResumeLayout(false);
             filterTableLayoutPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bookBindingSource2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bookBindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bookDtoBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -177,13 +202,16 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         private BindingSource bookBindingSource;
         private TableLayoutPanel booksLayoutPanel;
         private DataGridView dataGridViewBooks;
-        private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn copiesAvailableDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn authorsDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn genresDataGridViewTextBoxColumn;
         private TableLayoutPanel filterTableLayoutPanel;
         private Component.MultiSelectComboBox bookSelectComboBox;
         private Component.MultiSelectComboBox multiSelectComboBox3;
         private Component.MultiSelectComboBox authorSelectComboBox;
+        private BindingSource bookBindingSource1;
+        private BindingSource bookDtoBindingSource;
+        private BindingSource bookBindingSource2;
+        private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn copiesAvailableDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn authorsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn genresDataGridViewTextBoxColumn;
     }
 }
