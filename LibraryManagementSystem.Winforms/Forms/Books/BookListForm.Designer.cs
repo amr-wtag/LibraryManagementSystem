@@ -65,52 +65,57 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             booksLayoutPanel.Dock = DockStyle.Fill;
             booksLayoutPanel.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
             booksLayoutPanel.Location = new Point(0, 0);
+            booksLayoutPanel.Margin = new Padding(2, 1, 2, 1);
             booksLayoutPanel.Name = "booksLayoutPanel";
-            booksLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            booksLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 23F));
             booksLayoutPanel.RowStyles.Add(new RowStyle());
-            booksLayoutPanel.Size = new Size(1142, 925);
+            booksLayoutPanel.Size = new Size(789, 493);
             booksLayoutPanel.TabIndex = 1;
             // 
             // filterTableLayoutPanel
             // 
-            filterTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 184F));
-            filterTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 328F));
-            filterTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+            filterTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
+            filterTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
+            filterTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             filterTableLayoutPanel.Controls.Add(bookSelectComboBox, 0, 0);
             filterTableLayoutPanel.Controls.Add(multiSelectComboBox3, 2, 0);
             filterTableLayoutPanel.Controls.Add(authorSelectComboBox, 1, 0);
             filterTableLayoutPanel.Dock = DockStyle.Fill;
-            filterTableLayoutPanel.Location = new Point(3, 3);
+            filterTableLayoutPanel.Location = new Point(2, 1);
+            filterTableLayoutPanel.Margin = new Padding(2, 1, 2, 1);
             filterTableLayoutPanel.Name = "filterTableLayoutPanel";
-            filterTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            filterTableLayoutPanel.Size = new Size(1136, 44);
+            filterTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 21F));
+            filterTableLayoutPanel.Size = new Size(785, 21);
             filterTableLayoutPanel.TabIndex = 0;
             // 
             // bookSelectComboBox
             // 
             bookSelectComboBox.Dock = DockStyle.Fill;
             bookSelectComboBox.LabelText = "Select Books:";
-            bookSelectComboBox.Location = new Point(3, 3);
+            bookSelectComboBox.Location = new Point(2, 1);
+            bookSelectComboBox.Margin = new Padding(2, 1, 2, 1);
             bookSelectComboBox.Name = "bookSelectComboBox";
-            bookSelectComboBox.Size = new Size(178, 38);
+            bookSelectComboBox.Size = new Size(196, 19);
             bookSelectComboBox.TabIndex = 0;
             // 
             // multiSelectComboBox3
             // 
-            multiSelectComboBox3.Dock = DockStyle.Fill;
-            multiSelectComboBox3.LabelText = "Select...";
-            multiSelectComboBox3.Location = new Point(515, 3);
+            multiSelectComboBox3.Dock = DockStyle.Left;
+            multiSelectComboBox3.LabelText = "Status:";
+            multiSelectComboBox3.Location = new Point(402, 1);
+            multiSelectComboBox3.Margin = new Padding(2, 1, 2, 1);
             multiSelectComboBox3.Name = "multiSelectComboBox3";
-            multiSelectComboBox3.Size = new Size(618, 38);
+            multiSelectComboBox3.Size = new Size(200, 19);
             multiSelectComboBox3.TabIndex = 1;
             // 
             // authorSelectComboBox
             // 
             authorSelectComboBox.Dock = DockStyle.Fill;
             authorSelectComboBox.LabelText = "Select Author:";
-            authorSelectComboBox.Location = new Point(187, 3);
+            authorSelectComboBox.Location = new Point(202, 1);
+            authorSelectComboBox.Margin = new Padding(2, 1, 2, 1);
             authorSelectComboBox.Name = "authorSelectComboBox";
-            authorSelectComboBox.Size = new Size(322, 38);
+            authorSelectComboBox.Size = new Size(196, 19);
             authorSelectComboBox.TabIndex = 2;
             // 
             // dataGridViewBooks
@@ -121,10 +126,11 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             dataGridViewBooks.Columns.AddRange(new DataGridViewColumn[] { titleDataGridViewTextBoxColumn, copiesAvailableDataGridViewTextBoxColumn, authorsDataGridViewTextBoxColumn, genresDataGridViewTextBoxColumn });
             dataGridViewBooks.DataSource = bookBindingSource;
             dataGridViewBooks.Dock = DockStyle.Fill;
-            dataGridViewBooks.Location = new Point(3, 53);
+            dataGridViewBooks.Location = new Point(2, 24);
+            dataGridViewBooks.Margin = new Padding(2, 1, 2, 1);
             dataGridViewBooks.Name = "dataGridViewBooks";
             dataGridViewBooks.RowHeadersWidth = 82;
-            dataGridViewBooks.Size = new Size(1136, 899);
+            dataGridViewBooks.Size = new Size(785, 468);
             dataGridViewBooks.TabIndex = 1;
             // 
             // titleDataGridViewTextBoxColumn
@@ -153,10 +159,11 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // 
             // BookListForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1142, 925);
+            ClientSize = new Size(789, 493);
             Controls.Add(booksLayoutPanel);
+            Margin = new Padding(2, 1, 2, 1);
             Name = "BookListForm";
             ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();
             booksLayoutPanel.ResumeLayout(false);
