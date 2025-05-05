@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
 using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.BookReservations;
 
@@ -80,7 +81,36 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             {
                 Guid reservationId = selectedReservation.Id;
 
-                MessageBox.Show($"Reservation ID: {reservationId}");
+                //var payload = new ReturnBookRequest
+                //{
+                //    ReservationIds = new List<Guid> { reservationId }
+                //};
+
+
+
+                using var client = ApiClientHelper.CreateClient();
+                try
+                {
+                    //var response = await client.PostAsJsonAsync("BookReservation/return", payload);
+                    var payload = new List<Guid> { reservationId };
+                    var response = await client.PostAsJsonAsync("BookReservation/return", payload);
+
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Book returned successfully!");
+                    }
+                    else
+                    {
+                        var error = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show($"Error: {response.StatusCode}\n{error}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Exception: " + ex.Message);
+                }
+
             }
 
             else
