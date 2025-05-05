@@ -38,6 +38,7 @@
             dueDateLabel = new Label();
             addReservation = new Button();
             bookReservationPanel = new FlowLayoutPanel();
+            submitButton = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -53,6 +54,7 @@
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 2);
             tableLayoutPanel1.Controls.Add(bookReservationPanel, 0, 3);
+            tableLayoutPanel1.Controls.Add(submitButton, 0, 4);
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(2, 1, 2, 1);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -60,8 +62,8 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 23F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 31F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 352F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 325F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 47F));
             tableLayoutPanel1.Size = new Size(765, 467);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -164,11 +166,26 @@
             // 
             // bookReservationPanel
             // 
-            bookReservationPanel = new FlowLayoutPanel();
-            bookReservationPanel.FlowDirection = FlowDirection.TopDown;
+            bookReservationPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             bookReservationPanel.AutoScroll = true;
+            bookReservationPanel.AutoSize = true;
+            bookReservationPanel.FlowDirection = FlowDirection.TopDown;
+            bookReservationPanel.Location = new Point(3, 98);
+            bookReservationPanel.Name = "bookReservationPanel";
+            bookReservationPanel.Size = new Size(759, 0);
+            bookReservationPanel.TabIndex = 5;
             bookReservationPanel.WrapContents = false;
-            bookReservationPanel.Dock = DockStyle.Fill;
+            // 
+            // submitButton
+            // 
+            submitButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            submitButton.Location = new Point(329, 423);
+            submitButton.Name = "submitButton";
+            submitButton.Size = new Size(107, 41);
+            submitButton.TabIndex = 6;
+            submitButton.Text = "Submit Button";
+            submitButton.UseVisualStyleBackColor = true;
+            submitButton.Click += submitButton_Click;
             // 
             // AddReservationForm
             // 
@@ -200,5 +217,6 @@
         private Label dueDateLabel;
         private Button addReservation;
         private FlowLayoutPanel bookReservationPanel;
+        private Button submitButton;
     }
 }

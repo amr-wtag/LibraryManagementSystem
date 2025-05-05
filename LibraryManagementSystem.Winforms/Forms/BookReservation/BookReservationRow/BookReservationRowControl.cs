@@ -1,5 +1,4 @@
-﻿
-using LibraryManagementSystem.Winforms.helpers;
+﻿using LibraryManagementSystem.Winforms.dataHelpers;
 
 namespace LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservationRow
 {
@@ -11,6 +10,15 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservation
         {
             InitializeComponent();
             removeButton.Click += RemoveButton_Click;
+
+            // Subscribe to the Load event
+            this.Load += BookReservationRowControl_Load;
+        }
+
+        private async void BookReservationRowControl_Load(object sender, EventArgs e)
+        {
+            // Call SetBookOptions when the control is loaded
+            await SetBookOptions();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -31,9 +39,21 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservation
         public DateTime DueDate => issueDateTimePicker.Value;
 
         // Set the available book options in the dropdown
-        public void SetBookOptions(List<DropDownOption> bookOptions)
+        public async Task SetBookOptions()
         {
-            bookDropdown.SetOptions(bookOptions);
+            // Fetch the book options asynchronously
+            var options = await BookDropdownHelper.LoadBookOptionsAsync();
+
+            if (options.Any())
+            {
+                // Set the options in the dropdown
+                bookDropdown.SetOptions(options);
+            }
+            else
+            {
+                // Handle the case when no options are available (optional)
+                MessageBox.Show("No book options available.");
+            }
         }
     }
 }

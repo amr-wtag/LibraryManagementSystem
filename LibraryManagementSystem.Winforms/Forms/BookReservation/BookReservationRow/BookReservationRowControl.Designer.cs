@@ -41,7 +41,7 @@
             bookDropdown.Location = new Point(6, 10);
             bookDropdown.Margin = new Padding(6, 10, 6, 6);
             bookDropdown.Name = "bookDropdown";
-            bookDropdown.Size = new Size(169, 34);
+            bookDropdown.Size = new Size(169, 26);
             bookDropdown.TabIndex = 0;
             // 
             // issueDateTimePicker
@@ -62,7 +62,7 @@
             removeButton.Location = new Point(416, 6);
             removeButton.Margin = new Padding(6);
             removeButton.Name = "removeButton";
-            removeButton.Size = new Size(90, 38);
+            removeButton.Size = new Size(90, 30);
             removeButton.TabIndex = 2;
             removeButton.Text = "X Remove";
             removeButton.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             tableLayoutPanel1.ColumnCount = 3;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Controls.Add(bookDropdown, 0, 0);
             tableLayoutPanel1.Controls.Add(removeButton, 2, 0);
             tableLayoutPanel1.Controls.Add(issueDateTimePicker, 1, 0);
@@ -81,7 +81,7 @@
             tableLayoutPanel1.Margin = new Padding(2, 1, 2, 1);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Size = new Size(512, 42);
             tableLayoutPanel1.TabIndex = 3;
             // 

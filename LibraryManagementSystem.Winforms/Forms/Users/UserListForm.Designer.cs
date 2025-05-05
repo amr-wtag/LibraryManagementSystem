@@ -30,12 +30,12 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewUsers = new DataGridView();
-            userBindingSource = new BindingSource(components);
-            userBindingSource1 = new BindingSource(components);
-            userBindingSource2 = new BindingSource(components);
             fullNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             roleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            userBindingSource = new BindingSource(components);
+            userBindingSource1 = new BindingSource(components);
+            userBindingSource2 = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)DataGridViewUsers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)userBindingSource1).BeginInit();
@@ -53,21 +53,10 @@
             DataGridViewUsers.Location = new Point(0, 0);
             DataGridViewUsers.Margin = new Padding(2, 1, 2, 1);
             DataGridViewUsers.Name = "DataGridViewUsers";
+            DataGridViewUsers.RowHeadersVisible = false;
             DataGridViewUsers.RowHeadersWidth = 82;
             DataGridViewUsers.Size = new Size(776, 433);
             DataGridViewUsers.TabIndex = 0;
-            // 
-            // userBindingSource
-            // 
-            userBindingSource.DataSource = typeof(Models.Users.User);
-            // 
-            // userBindingSource1
-            // 
-            userBindingSource1.DataSource = typeof(Models.Users.User);
-            // 
-            // userBindingSource2
-            // 
-            userBindingSource2.DataSource = typeof(Models.Users.User);
             // 
             // fullNameDataGridViewTextBoxColumn
             // 
@@ -86,6 +75,18 @@
             roleDataGridViewTextBoxColumn.DataPropertyName = "Role";
             roleDataGridViewTextBoxColumn.HeaderText = "Role";
             roleDataGridViewTextBoxColumn.Name = "roleDataGridViewTextBoxColumn";
+            // 
+            // userBindingSource
+            // 
+            userBindingSource.DataSource = typeof(Models.Users.User);
+            // 
+            // userBindingSource1
+            // 
+            userBindingSource1.DataSource = typeof(Models.Users.User);
+            // 
+            // userBindingSource2
+            // 
+            userBindingSource2.DataSource = typeof(Models.Users.User);
             // 
             // UserListForm
             // 

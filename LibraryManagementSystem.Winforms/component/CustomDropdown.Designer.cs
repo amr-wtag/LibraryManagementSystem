@@ -14,24 +14,24 @@
 
         private void InitializeComponent()
         {
-            this.comboBox = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
+            comboBox = new ComboBox();
+            SuspendLayout();
             // 
             // comboBox
             // 
-            this.comboBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox.FormattingEnabled = true;
-            this.comboBox.Location = new System.Drawing.Point(0, 0);
-            this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(200, 21);
-            this.comboBox.TabIndex = 0;
+            comboBox.Dock = DockStyle.Fill;
+            comboBox.FormattingEnabled = true;
+            comboBox.Location = new Point(0, 0);
+            comboBox.Name = "comboBox";
+            comboBox.Size = new Size(200, 23);
+            comboBox.TabIndex = 0;
             // 
             // CustomDropdown
             // 
-            this.Controls.Add(this.comboBox);
-            this.Name = "CustomDropdown";
-            this.Size = new System.Drawing.Size(200, 21);
-            this.ResumeLayout(false);
+            Controls.Add(comboBox);
+            Name = "CustomDropdown";
+            Size = new Size(200, 21);
+            ResumeLayout(false);
         }
     }
 }
