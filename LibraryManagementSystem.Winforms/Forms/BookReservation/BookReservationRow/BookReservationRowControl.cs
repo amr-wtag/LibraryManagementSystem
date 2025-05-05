@@ -1,20 +1,4 @@
-﻿//namespace LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservationRow
-//{
-//    public partial class BookReservationRowControl : UserControl
-//    {
-
-//        public event EventHandler RemoveClicked;
-//        public BookReservationRowControl()
-//        {
-//            InitializeComponent();
-//        }
-
-//        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-//        {
-
-//        }
-//    }
-//}
+﻿
 using LibraryManagementSystem.Winforms.helpers;
 
 namespace LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservationRow

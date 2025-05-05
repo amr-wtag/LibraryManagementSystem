@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservationRow;
 using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.Users;
 
@@ -6,6 +7,8 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 {
     public partial class AddReservationForm : Form
     {
+        private List<BookReservationRowControl> bookRows = new List<BookReservationRowControl>();
+
         public AddReservationForm()
         {
             InitializeComponent();
@@ -49,6 +52,36 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             {
                 MessageBox.Show("Error loading users: " + ex.Message);
             }
+        }
+
+        private void addReservation_Click(object sender, EventArgs e)
+        {
+            var row = new BookReservationRowControl();
+            row.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            row.Width = bookReservationPanel.ClientSize.Width - 20;
+
+            // Create a container to hold the row
+            var container = new Panel
+            {
+                AutoSize = true,
+                Width = bookReservationPanel.Width - 25,
+                Padding = new Padding(2),
+                AutoSizeMode = AutoSizeMode.GrowAndShrink
+            };
+
+            row.Dock = DockStyle.Fill;
+
+            container.Controls.Add(row);
+            bookReservationPanel.Controls.Add(container);
+            bookRows.Add(row);
+
+            // Hook up the row's internal [ - ] button event
+            row.RemoveClicked += (s, args) =>
+            {
+                bookRows.Remove(row);
+                bookReservationPanel.Controls.Remove(container);
+                container.Dispose();
+            };
         }
     }
 }
