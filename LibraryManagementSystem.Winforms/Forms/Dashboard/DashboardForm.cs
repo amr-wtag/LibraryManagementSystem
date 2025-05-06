@@ -69,8 +69,8 @@ public partial class DashboardForm : Form
                 Properties.Settings.Default.JwtToken = string.Empty;
                 Properties.Settings.Default.Save();
 
-                new LoginForms().Show();
                 this.Close();
+                new LoginForms().Show();
 
             }
             else if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -81,8 +81,8 @@ public partial class DashboardForm : Form
                 Properties.Settings.Default.JwtToken = string.Empty;
                 Properties.Settings.Default.Save();
 
-                new LoginForms().Show();
                 this.Close();
+                new LoginForms().Show();
             }
             else
             {

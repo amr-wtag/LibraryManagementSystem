@@ -8,9 +8,14 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 {
     public partial class BookListForm : Form
     {
+        private ToolStripMenuItem viewDetailsMenuItem;
+        private ToolStripMenuItem editBookMenuItem;
+
         public BookListForm()
         {
             InitializeComponent();
+
+            InitializeContextMenu();
 
             this.Load += BookListForm_Load;
 
@@ -21,6 +26,23 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             dataGridViewBooks.CellMouseClick += DataGridViewBooks_CellMouseClick;
         }
 
+        private void InitializeContextMenu()
+        {
+            bookRowContextMenu = new ContextMenuStrip();
+
+            viewDetailsMenuItem = new ToolStripMenuItem("View Details");
+            viewDetailsMenuItem.Click += ViewDetails_Click;
+
+            editBookMenuItem = new ToolStripMenuItem("Edit Book");
+            editBookMenuItem.Click += EditBook_Click;
+
+            bookRowContextMenu.Items.AddRange(new ToolStripItem[]
+            {
+                viewDetailsMenuItem,
+                editBookMenuItem
+            });
+        }
+
         private async void BookListForm_Load(object? sender, EventArgs e)
         {
             var token = Properties.Settings.Default.JwtToken;
@@ -29,7 +51,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             {
                 await LoadBookFilterOptionsAsync();
                 await LoadAuthorFilterOptionsAsync();
-                //await LoadGenreFilterOptionsAsync();
                 await ShowBooksAsync(); // Show all books initially
             }
             else
@@ -89,9 +110,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 var response = await client.GetAsync(url);
                 var result = await response.Content.ReadAsStringAsync();
 
-
                 dataGridViewBooks.Visible = true;
-
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -102,31 +121,24 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
                     var books = booksWrapper?.Value;
 
-
                     if (books != null)
                     {
-
                         dataGridViewBooks.Visible = false;
                         dataGridViewBooks.SuspendLayout();
+
 
                         var displayBooks = books.Select(book => new BookDisplayModel
                         {
                             Title = book.Title ?? "",
                             CopiesAvailable = book.CopiesAvailable,
                             Authors = book.Authors != null
-        ? string.Join(", ", book.Authors.Values.Select(author => author.Name)) : "",
-                            Genres = book.Genres != null ? string.Join(", ", book.Genres.Values.Select(genre => genre.Name))
-        : ""
+                                ? string.Join(", ", book.Authors.Values.Select(author => author.Name)) : "",
+                            Genres = book.Genres != null
+                                ? string.Join(", ", book.Genres.Values.Select(genre => genre.Name)) : ""
                         }).ToList();
-
-
-                        // Hide and suspend updates
-
 
                         dataGridViewBooks.DataSource = null;
                         dataGridViewBooks.DataSource = displayBooks;
-
-                        // Set AutoSize mode AFTER setting the data source
                         dataGridViewBooks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
                         dataGridViewBooks.ResumeLayout();
@@ -192,7 +204,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             {
                 MessageBox.Show("Error loading authors: " + ex.Message);
             }
-
         }
 
         private void DataGridViewBooks_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
@@ -202,10 +213,6 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 dataGridViewBooks.ClearSelection();
                 dataGridViewBooks.Rows[e.RowIndex].Selected = true;
 
-                // Optional: Get data from selected row
-                var selectedBook = dataGridViewBooks.Rows[e.RowIndex].DataBoundItem as BookDisplayModel;
-
-                // Show context menu at mouse position
                 bookRowContextMenu.Show(Cursor.Position);
             }
         }
@@ -213,7 +220,35 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         private void ViewDetails_Click(object? sender, EventArgs e)
         {
             var selectedBook = GetSelectedBook();
-            MessageBox.Show($"Title: {selectedBook?.Title}\nAvailable: {selectedBook?.CopiesAvailable}\nBookAuthors: {selectedBook.Authors}\nBookGenre: {selectedBook.Genres}", "Book Details");
+            if (selectedBook != null)
+            {
+                MessageBox.Show(
+                    $"Title: {selectedBook.Title}\n" +
+                    $"Available: {selectedBook.CopiesAvailable}\n" +
+                    $"BookAuthors: {selectedBook.Authors}\n" +
+                    $"BookGenre: {selectedBook.Genres}",
+                    "Book Details"
+                );
+            }
+        }
+
+        private void EditBook_Click(object? sender, EventArgs e)
+        {
+            var selectedBook = GetSelectedBook();
+            if (selectedBook != null)
+            {
+                MessageBox.Show(
+                    $"(EDIT MODE)\nTitle: {selectedBook.Title}\n" +
+                    $"Available: {selectedBook.CopiesAvailable}\n" +
+                    $"BookAuthors: {selectedBook.Authors}\n" +
+                    $"BookGenre: {selectedBook.Genres}",
+                    "Edit Book"
+                );
+
+                // TODO: Replace with EditBookForm or logic
+                // var editForm = new EditBookForm(selectedBook);
+                // editForm.ShowDialog();
+            }
         }
 
         private BookDisplayModel? GetSelectedBook()
@@ -222,6 +257,5 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 ? dataGridViewBooks.SelectedRows[0].DataBoundItem as BookDisplayModel
                 : null;
         }
-
     }
 }
