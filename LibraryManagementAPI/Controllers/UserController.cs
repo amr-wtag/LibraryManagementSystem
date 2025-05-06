@@ -1,3 +1,4 @@
+using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -18,9 +19,16 @@ public class UserController : ControllerBase
 
     [Authorize(Roles = "Admin,Librarian")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
+    public async Task<ActionResult<IEnumerable<User>>>? GetAllUsers()
     {
         var users = await _userService.GetAllUsersAsync();
         return Ok(users);
+    }
+
+    [HttpGet("id-username")]
+    public async Task<ActionResult<UserSummaryDto?>> GetUserIdUserNameAsync()
+    {
+        var result = await _userService.GetUserIdUserNameAsync();
+        return Ok(result);
     }
 }

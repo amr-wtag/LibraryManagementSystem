@@ -33,7 +33,7 @@ namespace LibraryManagementAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
 
                     b.HasData(
                         new
@@ -83,7 +83,7 @@ namespace LibraryManagementAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
 
                     b.HasData(
                         new
@@ -180,7 +180,7 @@ namespace LibraryManagementAPI.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("BookAuthors");
+                    b.ToTable("BookAuthors", (string)null);
 
                     b.HasData(
                         new
@@ -303,7 +303,7 @@ namespace LibraryManagementAPI.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("BookGenres");
+                    b.ToTable("BookGenres", (string)null);
 
                     b.HasData(
                         new
@@ -484,7 +484,7 @@ namespace LibraryManagementAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("BookReservations");
+                    b.ToTable("BookReservations", (string)null);
                 });
 
             modelBuilder.Entity("LibraryManagementAPI.Models.Genre", b =>
@@ -504,7 +504,7 @@ namespace LibraryManagementAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
                 });
 
             modelBuilder.Entity("LibraryManagementAPI.Models.Role", b =>

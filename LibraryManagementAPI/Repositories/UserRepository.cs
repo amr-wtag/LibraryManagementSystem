@@ -1,3 +1,4 @@
+using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.interfaces;
 using LibraryManagementAPI.Models;
 using Microsoft.AspNetCore.Identity;
@@ -17,5 +18,14 @@ public class UserRepository : IUserRepository
     public async Task<IEnumerable<User>> GetAllUsersAsync()
     {
         return await _userManager.Users.OrderBy(u => u.CreatedAt).ToListAsync();
+    }
+
+    public async Task<List<UserSummaryDto>> GetUserIdUserNameAsync()
+    {
+        return await _userManager.Users.Select(u => new UserSummaryDto
+        {
+            Id = u.Id,
+            UserName = u.UserName
+        }).ToListAsync();
     }
 }
