@@ -1,6 +1,7 @@
 using System.Data;
 using System.Text.Json;
 using LibraryManagementSystem.Winforms.dataHelpers;
+using LibraryManagementSystem.Winforms.Forms.BookUpdate;
 using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.Books;
 
@@ -133,6 +134,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                             CopiesAvailable = book.CopiesAvailable,
                             Authors = book.Authors != null
                                 ? string.Join(", ", book.Authors.Values.Select(author => author.Name)) : "",
+                            AuthorIds = book.Authors != null
+        ? book.Authors.Values.Select(author => author.Id).ToList()
+        : new List<Guid>(),
                             Genres = book.Genres != null
                                 ? string.Join(", ", book.Genres.Values.Select(genre => genre.Name)) : ""
                         }).ToList();
@@ -235,15 +239,22 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         private void EditBook_Click(object? sender, EventArgs e)
         {
             var selectedBook = GetSelectedBook();
+
             if (selectedBook != null)
             {
-                MessageBox.Show(
-                    $"(EDIT MODE)\nTitle: {selectedBook.Title}\n" +
-                    $"Available: {selectedBook.CopiesAvailable}\n" +
-                    $"BookAuthors: {selectedBook.Authors}\n" +
-                    $"BookGenre: {selectedBook.Genres}",
-                    "Edit Book"
-                );
+                var bookUpdateFrom = new BookUpdateFrom(selectedBook);
+                this.Hide();
+
+                bookUpdateFrom.Show();
+                //MessageBox.Show(
+                //    $"(EDIT MODE)\nTitle: {selectedBook.Title}\n" +
+                //    $"Available: {selectedBook.CopiesAvailable}\n" +
+                //    $"BookAuthors: {selectedBook.Authors}\n" +
+                //    $"BookGenre: {selectedBook.Genres}",
+                //    "Edit Book"
+                //);
+
+
 
                 // TODO: Replace with EditBookForm or logic
                 // var editForm = new EditBookForm(selectedBook);
