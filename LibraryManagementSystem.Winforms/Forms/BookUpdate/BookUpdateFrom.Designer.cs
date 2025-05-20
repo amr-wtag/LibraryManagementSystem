@@ -38,7 +38,7 @@
             authorsLabel = new Label();
             tableLayoutPanel4 = new TableLayoutPanel();
             genreLabel = new Label();
-            genreMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            genreSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -154,7 +154,7 @@
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             tableLayoutPanel4.Controls.Add(genreLabel, 0, 0);
-            tableLayoutPanel4.Controls.Add(genreMultiSelectComboBox, 1, 0);
+            tableLayoutPanel4.Controls.Add(genreSelectComboBox, 1, 0);
             tableLayoutPanel4.Dock = DockStyle.Fill;
             tableLayoutPanel4.Location = new Point(3, 94);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -174,13 +174,13 @@
             genreLabel.TabIndex = 0;
             genreLabel.Text = "Genres:";
             // 
-            // genreMultiSelectComboBox
+            // genreSelectComboBox
             // 
-            genreMultiSelectComboBox.LabelText = "Select...";
-            genreMultiSelectComboBox.Location = new Point(103, 3);
-            genreMultiSelectComboBox.Name = "genreMultiSelectComboBox";
-            genreMultiSelectComboBox.Size = new Size(381, 22);
-            genreMultiSelectComboBox.TabIndex = 1;
+            genreSelectComboBox.LabelText = "";
+            genreSelectComboBox.Location = new Point(103, 3);
+            genreSelectComboBox.Name = "genreSelectComboBox";
+            genreSelectComboBox.Size = new Size(381, 22);
+            genreSelectComboBox.TabIndex = 1;
             // 
             // BookUpdateFrom
             // 
@@ -214,6 +214,6 @@
         private Component.MultiSelectComboBox authorSelectComboBox;
         private TableLayoutPanel tableLayoutPanel4;
         private Label genreLabel;
-        private Component.MultiSelectComboBox genreMultiSelectComboBox;
+        private Component.MultiSelectComboBox genreSelectComboBox;
     }
 }

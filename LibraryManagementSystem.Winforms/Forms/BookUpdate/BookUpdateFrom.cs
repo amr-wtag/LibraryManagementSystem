@@ -20,16 +20,10 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
             InitializeComponent();
             textBox1.Text = selectedBook.Title;
 
-            MessageBox.Show(
-                    $"(EDIT MODE)\nTitle: {selectedBook.Title}\n" +
-                    $"Available: {selectedBook.CopiesAvailable}\n" +
-                     $"BookAuthors: {(selectedBook.AuthorIds != null && selectedBook.AuthorIds.Any() ? selectedBook.AuthorIds[0].ToString() : "No Author")}\n" +
-                    $"BookGenre: {selectedBook.Genres}",
-                    "Edit Book"
-                );
-
             _selectedAuthorIds = selectedBook.AuthorIds?.Select(a => a).ToList() ?? new List<Guid>();
+            _selectedGenreIds = selectedBook.GenreIds?.Select(a => a).ToList() ?? new List<Guid>();
             LoadAuthorsList();
+            LoadGenreList();
 
         }
 
@@ -99,17 +93,18 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
 
             try
             {
-                var response = await client.GetAsync("author/id-titles");
+                var response = await client.GetAsync("genre/id-names");
                 var result = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var responseObject = JsonSerializer.Deserialize<AuthorSummaryResponse>(result, new JsonSerializerOptions
+                    var responseObject = JsonSerializer.Deserialize<GenreSummaryResponse>(result, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     });
 
                     var authors = responseObject?.Values;
+
 
                     if (authors != null && authors.Any())
                     {
@@ -119,12 +114,14 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
                             Value = author.Id
                         }).ToList();
 
-                        authorSelectComboBox.SetItems(options);
 
-                        if (_selectedAuthorIds != null && _selectedAuthorIds.Count != 0)
+
+                        genreSelectComboBox.SetItems(options);
+
+                        if (_selectedGenreIds != null && _selectedGenreIds.Count != 0)
                         {
-                            authorSelectComboBox.SetSelectedValues(
-    _selectedAuthorIds.Select(id => id.ToString()).ToList()
+                            genreSelectComboBox.SetSelectedValues(
+    _selectedGenreIds.Select(id => id.ToString()).ToList()
 );
                         }
                     }
