@@ -34,10 +34,16 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
         }
 
         private List<Guid> _selectedAuthorIds = new();
+        private List<Guid> _selectedGenreIds = new();
 
         private async void LoadAuthorsList()
         {
             await LoadAuthorFilterOptionsAsync();
+        }
+
+        private async void LoadGenreList()
+        {
+            await LoadGenreFilterOptionsAsync();
         }
 
         private async Task LoadAuthorFilterOptionsAsync()
@@ -70,7 +76,56 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
 
                         if (_selectedAuthorIds != null && _selectedAuthorIds.Count != 0)
                         {
-                            authorSelectComboBox.SetSelectedValues(_selectedAuthorIds);
+                            authorSelectComboBox.SetSelectedValues(
+    _selectedAuthorIds.Select(id => id.ToString()).ToList()
+);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to fetch authors.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading authors: " + ex.Message);
+            }
+
+        }
+        private async Task LoadGenreFilterOptionsAsync()
+        {
+            using var client = ApiClientHelper.CreateClient();
+
+            try
+            {
+                var response = await client.GetAsync("author/id-titles");
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseObject = JsonSerializer.Deserialize<AuthorSummaryResponse>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    var authors = responseObject?.Values;
+
+                    if (authors != null && authors.Any())
+                    {
+                        var options = authors.Select(author => new DropDownOption
+                        {
+                            Label = author.Name ?? "(Unnamed)",
+                            Value = author.Id
+                        }).ToList();
+
+                        authorSelectComboBox.SetItems(options);
+
+                        if (_selectedAuthorIds != null && _selectedAuthorIds.Count != 0)
+                        {
+                            authorSelectComboBox.SetSelectedValues(
+    _selectedAuthorIds.Select(id => id.ToString()).ToList()
+);
                         }
                     }
                 }
