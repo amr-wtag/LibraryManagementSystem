@@ -1,8 +1,9 @@
-namespace LibraryManagementAPI.Interfaces;
 
-using DTOs;
+using LibraryManagementAPI.DTOs;
+
+namespace LibraryManagementAPI.Interfaces;
 
 public interface IGenreRepository
 {
-    public Task<List<GenreSummaryDto>> GetGenreIdNamesAsync();
+    public Task<List<GenreSummaryDto>> GetGenreIdNameAsync();
 }

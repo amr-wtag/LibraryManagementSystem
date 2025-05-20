@@ -8,18 +8,18 @@ using Services;
 [ApiController]
 public class GenreController : ControllerBase
 {
-    private readonly GenreServices _genreServices;
+    private readonly GenreService _genreService;
 
-    public GenreController(GenreServices genreServices)
+    public GenreController(GenreService genreService)
     {
-        _genreServices = genreServices;
+        _genreService = genreService;
     }
 
 
     [HttpGet("id-names")]
     public async Task<ActionResult<List<GenreSummaryDto>>> GetGenreIdNamesAsync()
     {
-        var result = await _genreServices.GetGenreIdNamesAsync();
+        var result = await _genreService.GetGenreIdNamesAsync();
 
         return Ok(result);
     }

@@ -3,18 +3,18 @@ namespace LibraryManagementAPI.Services;
 using DTOs;
 using Interfaces;
 
-public class GenreServices
+public class GenreService
 {
     private readonly IGenreRepository _genreRepository;
 
-    public GenreServices(IGenreRepository genreRepository)
+    public GenreService(IGenreRepository genreRepository)
     {
         _genreRepository = genreRepository;
     }
 
     public async Task<List<GenreSummaryDto>> GetGenreIdNamesAsync()
     {
-        return await _genreRepository.GetGenreIdNamesAsync();
+        return await _genreRepository.GetGenreIdNameAsync();
     }
 
 }
