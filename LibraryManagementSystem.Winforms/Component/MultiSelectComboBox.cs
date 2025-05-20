@@ -63,12 +63,16 @@ namespace LibraryManagementSystem.Winforms.Component
             {
                 if (checkedListBox.Items[i] is DropDownOption option)
                 {
-                    checkedListBox.SetItemChecked(i, selectedIds.Contains(option.Value));
+                    // Convert option.Value to string for proper comparison
+                    var valueAsString = option.Value?.ToString();
+
+                    checkedListBox.SetItemChecked(i, selectedIds.Contains(valueAsString));
                 }
             }
 
             UpdateText();
         }
+
 
 
         private void UpdateText()

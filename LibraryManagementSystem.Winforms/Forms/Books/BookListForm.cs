@@ -138,7 +138,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
         ? book.Authors.Values.Select(author => author.Id).ToList()
         : new List<Guid>(),
                             Genres = book.Genres != null
-                                ? string.Join(", ", book.Genres.Values.Select(genre => genre.Name)) : ""
+                                ? string.Join(", ", book.Genres.Values.Select(genre => genre.Name)) : "",
+                            GenreIds = book.Genres !=null
+                            ?book.Genres.Values.Select(genre=> genre.Id).ToList(): new List<Guid>(),
                         }).ToList();
 
                         dataGridViewBooks.DataSource = null;

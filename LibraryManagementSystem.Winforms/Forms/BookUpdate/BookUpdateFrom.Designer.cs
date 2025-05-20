@@ -34,11 +34,15 @@
             bookTItle = new Label();
             textBox1 = new TextBox();
             tableLayoutPanel3 = new TableLayoutPanel();
-            authorsLabel = new Label();
             authorSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            authorsLabel = new Label();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            genreLabel = new Label();
+            genreMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -48,6 +52,7 @@
             tableLayoutPanel1.Controls.Add(updateBookHeader, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 2);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 3);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(2, 1, 2, 1);
@@ -56,7 +61,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 23F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 140F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 8F));
             tableLayoutPanel1.Size = new Size(784, 488);
             tableLayoutPanel1.TabIndex = 0;
@@ -75,8 +80,8 @@
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18.41379F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 81.58621F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.Controls.Add(bookTItle, 0, 0);
             tableLayoutPanel2.Controls.Add(textBox1, 1, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
@@ -92,7 +97,7 @@
             // 
             bookTItle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             bookTItle.AutoSize = true;
-            bookTItle.Location = new Point(40, 6);
+            bookTItle.Location = new Point(18, 6);
             bookTItle.Margin = new Padding(4, 6, 4, 4);
             bookTItle.Name = "bookTItle";
             bookTItle.Size = new Size(63, 23);
@@ -102,44 +107,80 @@
             // textBox1
             // 
             textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(146, 5);
+            textBox1.Location = new Point(103, 5);
             textBox1.Margin = new Padding(3, 5, 3, 3);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(631, 23);
+            textBox1.Size = new Size(674, 23);
             textBox1.TabIndex = 1;
             // 
             // tableLayoutPanel3
             // 
             tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 18.2519283F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 81.74807F));
-            tableLayoutPanel3.Controls.Add(authorsLabel, 0, 0);
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
             tableLayoutPanel3.Controls.Add(authorSelectComboBox, 1, 0);
+            tableLayoutPanel3.Controls.Add(authorsLabel, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
             tableLayoutPanel3.Location = new Point(3, 60);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.Size = new Size(778, 28);
             tableLayoutPanel3.TabIndex = 2;
+            // 
+            // authorSelectComboBox
+            // 
+            authorSelectComboBox.LabelText = "";
+            authorSelectComboBox.Location = new Point(103, 3);
+            authorSelectComboBox.Name = "authorSelectComboBox";
+            authorSelectComboBox.Size = new Size(381, 22);
+            authorSelectComboBox.TabIndex = 1;
             // 
             // authorsLabel
             // 
             authorsLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             authorsLabel.AutoSize = true;
-            authorsLabel.Location = new Point(45, 0);
+            authorsLabel.Location = new Point(24, 6);
+            authorsLabel.Margin = new Padding(4, 6, 4, 4);
+            authorsLabel.MaximumSize = new Size(63, 23);
             authorsLabel.Name = "authorsLabel";
-            authorsLabel.Size = new Size(52, 28);
+            authorsLabel.Size = new Size(52, 18);
             authorsLabel.TabIndex = 0;
             authorsLabel.Text = "Authors:";
             // 
-            // authorSelectComboBox
+            // tableLayoutPanel4
             // 
-            authorSelectComboBox.LabelText = "";
-            authorSelectComboBox.Location = new Point(145, 3);
-            authorSelectComboBox.Name = "authorSelectComboBox";
-            authorSelectComboBox.Size = new Size(630, 22);
-            authorSelectComboBox.TabIndex = 1;
+            tableLayoutPanel4.ColumnCount = 2;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
+            tableLayoutPanel4.Controls.Add(genreLabel, 0, 0);
+            tableLayoutPanel4.Controls.Add(genreMultiSelectComboBox, 1, 0);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(3, 94);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Size = new Size(778, 28);
+            tableLayoutPanel4.TabIndex = 3;
+            // 
+            // genreLabel
+            // 
+            genreLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            genreLabel.AutoSize = true;
+            genreLabel.Location = new Point(27, 6);
+            genreLabel.Margin = new Padding(4, 6, 4, 4);
+            genreLabel.Name = "genreLabel";
+            genreLabel.Size = new Size(46, 18);
+            genreLabel.TabIndex = 0;
+            genreLabel.Text = "Genres:";
+            // 
+            // genreMultiSelectComboBox
+            // 
+            genreMultiSelectComboBox.LabelText = "Select...";
+            genreMultiSelectComboBox.Location = new Point(103, 3);
+            genreMultiSelectComboBox.Name = "genreMultiSelectComboBox";
+            genreMultiSelectComboBox.Size = new Size(381, 22);
+            genreMultiSelectComboBox.TabIndex = 1;
             // 
             // BookUpdateFrom
             // 
@@ -156,6 +197,8 @@
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -169,5 +212,8 @@
         private TableLayoutPanel tableLayoutPanel3;
         private Label authorsLabel;
         private Component.MultiSelectComboBox authorSelectComboBox;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Label genreLabel;
+        private Component.MultiSelectComboBox genreMultiSelectComboBox;
     }
 }

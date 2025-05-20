@@ -8,4 +8,5 @@ public class BookDisplayModel
 
     public List<Guid>? AuthorIds { get; set; }
     public string Genres { get; set; } = string.Empty;
+    public List<Guid>? GenreIds { get; set; }
 }
