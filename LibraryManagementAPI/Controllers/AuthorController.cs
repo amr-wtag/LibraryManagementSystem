@@ -2,8 +2,7 @@
 using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LibraryManagementAPI.Controllers
-{
+namespace LibraryManagementAPI.Controllers;
     [Route("api/[controller]")]
     [ApiController]
     public class AuthorController : ControllerBase
@@ -23,4 +22,4 @@ namespace LibraryManagementAPI.Controllers
             return Ok(result);
         }
     }
-}
+
