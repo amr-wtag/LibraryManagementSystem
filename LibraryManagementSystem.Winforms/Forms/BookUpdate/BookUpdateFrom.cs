@@ -19,6 +19,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
         {
             InitializeComponent();
             textBox1.Text = selectedBook.Title;
+            booksAvailableTextBox.Text = selectedBook.CopiesAvailable.ToString();
 
             _selectedAuthorIds = selectedBook.AuthorIds?.Select(a => a).ToList() ?? new List<Guid>();
             _selectedGenreIds = selectedBook.GenreIds?.Select(a => a).ToList() ?? new List<Guid>();
