@@ -130,6 +130,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
                         var displayBooks = books.Select(book => new BookDisplayModel
                         {
+                            Id = book.Id,
                             Title = book.Title ?? "",
                             CopiesAvailable = book.CopiesAvailable,
                             Authors = book.Authors != null
