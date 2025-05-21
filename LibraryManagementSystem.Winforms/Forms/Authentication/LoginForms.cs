@@ -67,8 +67,8 @@ public partial class LoginForms : Form
                 // mainForm.Show();
                 // this.Hide();
                 var dashboardListForm = new DashboardForm();
-                dashboardListForm.Show();
                 this.Hide();
+                dashboardListForm.Show();
             }
             else
             {

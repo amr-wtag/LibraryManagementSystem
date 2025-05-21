@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using LibraryManagementSystem.Winforms.Forms.Dashboard;
 using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.Books;
 
@@ -137,6 +130,14 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
                 MessageBox.Show("Error loading authors: " + ex.Message);
             }
 
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            var dashboardForm = new DashboardForm();
+
+            this.Hide();
+            dashboardForm.Show();
         }
     }
 }
