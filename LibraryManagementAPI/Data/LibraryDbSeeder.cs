@@ -25,8 +25,8 @@ public static class LibraryDbSeeder
             .RuleFor(u => u.UserName, f => f.Internet.UserName())
             .RuleFor(u => u.FullName, f => f.Name.FullName())
             .RuleFor(u => u.Email, f => f.Internet.Email())
-            .RuleFor(u => u.NormalizedEmail, (f, u) => u.Email.ToUpper())
-            .RuleFor(u => u.NormalizedUserName, (f, u) => u.UserName.ToUpper())
+            .RuleFor(u => u.NormalizedEmail, (f, u) => u.Email?.ToUpper())
+            .RuleFor(u => u.NormalizedUserName, (f, u) => u.UserName?.ToUpper())
             .RuleFor(u => u.EmailConfirmed, f => true);
 
         var users = userFaker.Generate(5);
@@ -73,12 +73,12 @@ public static class LibraryDbSeeder
         // Create BookAuthor relationships
         var bookAuthors = new List<BookAuthor>();
         foreach (var book in books)
-        foreach (var author in authors.OrderBy(a => Guid.NewGuid()).Take(2)) // Assign two random authors for each book
-            bookAuthors.Add(new BookAuthor
-            {
-                BookId = book.Id,
-                AuthorId = author.Id
-            });
+            foreach (var author in authors.OrderBy(a => Guid.NewGuid()).Take(2)) // Assign two random authors for each book
+                bookAuthors.Add(new BookAuthor
+                {
+                    BookId = book.Id,
+                    AuthorId = author.Id
+                });
 
         modelBuilder.Entity<BookAuthor>().HasData(bookAuthors);
 

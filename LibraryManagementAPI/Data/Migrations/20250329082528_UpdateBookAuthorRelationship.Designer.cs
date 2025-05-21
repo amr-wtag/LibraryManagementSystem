@@ -620,7 +620,7 @@ namespace LibraryManagementAPI.Migrations
                         new
                         {
                             UserId = new Guid("f84cf6ef-8308-4642-9a7c-df9797a0f98a"),
-                            RoleId = new Guid("e06d6c4c-60f0-45e9-a73e-7edb15cce456")
+                            RoleId = new Guid("9d6979a7-56cc-48a0-b317-e7cd33547820")
                         });
                 });
 

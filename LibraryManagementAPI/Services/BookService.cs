@@ -13,9 +13,9 @@ public class BookService
         _bookRepository = bookRepository;
     }
 
-    public async Task<List<BookDto>> GetFilteredBookAsync(Guid? id, string? title, string? author, string? genre)
+    public async Task<List<BookDto>> GetFilteredBookAsync(string? title, List<Guid>? bookIds, List<Guid>? authorIds, List<Guid>? genreIds)
     {
-        var books = await _bookRepository.GetFilteredBookAsync(id, title, author, genre);
+        var books = await _bookRepository.GetFilteredBookAsync(title, bookIds, authorIds, genreIds);
         return books.Select(book => book.MapToDto()).ToList();
     }
 
@@ -29,7 +29,7 @@ public class BookService
 
     public async Task<BookDto> UpdateBookAsync(BookRequestDto dto)
     {
-        var existingBook = await _bookRepository.GetFilteredBookAsync(dto.Id, null, null, null);
+        var existingBook = await _bookRepository.GetFilteredBookAsync(null, [dto.Id], [], []);
         if (existingBook == null || !existingBook.Any())
         {
             throw new Exception("Book not found");
@@ -47,4 +47,11 @@ public class BookService
 
         return updatedBook.MapToDto();
     }
+
+    public async Task<List<BookSummaryDto>> GetBookIdTitleAsync()
+    {
+        return await _bookRepository.GetBookIdTitleAsync();
+    }
+
+
 }

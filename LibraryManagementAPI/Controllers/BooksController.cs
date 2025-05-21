@@ -17,17 +17,16 @@ public class BooksController : ControllerBase
         _bookService = bookService;
     }
 
-    [HttpGet("filter")]
+    [HttpGet]
     public async Task<ActionResult<List<Book>>> GetFilteredBooksAsync(
-        [FromQuery] Guid? id,
-        [FromQuery] string? title, [FromQuery] string? author, [FromQuery] string? genre)
+        [FromQuery] string? title, [FromQuery] List<Guid>? bookIds, [FromQuery] List<Guid>? authorIds, [FromQuery] List<Guid>? genreIds)
     {
-        var books = await _bookService.GetFilteredBookAsync(id, title, author, genre);
+        var books = await _bookService.GetFilteredBookAsync(title, bookIds, authorIds, genreIds);
 
         return Ok(books);
     }
 
-    [HttpPost("create")]
+    [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> AddBookAsync([FromBody] BookRequestDto dto)
     {
@@ -54,4 +53,12 @@ public class BooksController : ControllerBase
             return StatusCode(500, new { message = ex.Message });
         }
     }
+
+    [HttpGet("id-titles")]
+    public async Task<ActionResult<List<BookSummaryDto>>> GetBookIdTitlesAsync()
+    {
+        var result = await _bookService.GetBookIdTitleAsync();
+        return Ok(result);
+    }
+
 }

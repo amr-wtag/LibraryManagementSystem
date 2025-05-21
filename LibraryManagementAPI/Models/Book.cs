@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace LibraryManagementAPI.Models;
 
 public class Book : BaseEntity
@@ -6,7 +8,7 @@ public class Book : BaseEntity
     public string? Title { get; set; }
     public int CopiesAvailable { get; set; }
 
-    public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
-    public ICollection<BookGenre> BookGenres { get; set; } = new List<BookGenre>();
-    public ICollection<BookReservation>? BookReservations { get; set; }
+    [JsonIgnore] public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
+    [JsonIgnore] public ICollection<BookGenre> BookGenres { get; set; } = new List<BookGenre>();
+    [JsonIgnore] public ICollection<BookReservation>? BookReservations { get; set; }
 }
