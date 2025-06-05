@@ -5,7 +5,7 @@ namespace LibraryManagementAPI.interfaces;
 
 public interface IUserRepository
 {
-    Task<IEnumerable<User>> GetAllUsersAsync();
+    Task<IEnumerable<User>> GetAllUsersAsync(Guid userId);
 
     Task<List<UserSummaryDto>> GetUserIdUserNameAsync();
 }
