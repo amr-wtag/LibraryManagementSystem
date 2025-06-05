@@ -56,6 +56,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                         IssuedDate = bookReservation.IssuedDate,
                         DueDate = bookReservation.DueDate,
                         ReturnDate = bookReservation.ReturnDate,
+                        Status=bookReservation.Status,
                         BookTitle = bookReservation.Book?.Title,
                     }).ToList();
 
