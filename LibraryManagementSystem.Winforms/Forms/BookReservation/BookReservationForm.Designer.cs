@@ -43,11 +43,11 @@
             bookReserVationtableBindingSource = new BindingSource(components);
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             UserName = new DataGridViewTextBoxColumn();
+            Book = new DataGridViewTextBoxColumn();
             issuedDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             dueDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             returnDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             statusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Book = new DataGridViewTextBoxColumn();
             bookReservationTableLayoutPanel.SuspendLayout();
             filterLayoutPanel.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -188,7 +188,7 @@
             BookReservationTableView.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             BookReservationTableView.ColumnHeadersHeight = 46;
             BookReservationTableView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            BookReservationTableView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, UserName, issuedDateDataGridViewTextBoxColumn, dueDateDataGridViewTextBoxColumn, returnDateDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn, Book });
+            BookReservationTableView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, UserName, Book, issuedDateDataGridViewTextBoxColumn, dueDateDataGridViewTextBoxColumn, returnDateDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn });
             BookReservationTableView.DataSource = bookReservationBindingSource;
             BookReservationTableView.Dock = DockStyle.Fill;
             BookReservationTableView.Location = new Point(24, 140);
@@ -217,6 +217,13 @@
             UserName.MinimumWidth = 10;
             UserName.Name = "UserName";
             // 
+            // Book
+            // 
+            Book.DataPropertyName = "BookTitle";
+            Book.HeaderText = "Book";
+            Book.MinimumWidth = 10;
+            Book.Name = "Book";
+            // 
             // issuedDateDataGridViewTextBoxColumn
             // 
             issuedDateDataGridViewTextBoxColumn.DataPropertyName = "IssuedDate";
@@ -244,13 +251,6 @@
             statusDataGridViewTextBoxColumn.HeaderText = "Status";
             statusDataGridViewTextBoxColumn.MinimumWidth = 10;
             statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            // 
-            // Book
-            // 
-            Book.DataPropertyName = "BookTitle";
-            Book.HeaderText = "Book";
-            Book.MinimumWidth = 10;
-            Book.Name = "Book";
             // 
             // BookReservationForm
             // 
@@ -287,10 +287,10 @@
         private DataGridViewTextBoxColumn bookDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn UserName;
+        private DataGridViewTextBoxColumn Book;
         private DataGridViewTextBoxColumn issuedDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn dueDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn returnDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn Book;
     }
 }
