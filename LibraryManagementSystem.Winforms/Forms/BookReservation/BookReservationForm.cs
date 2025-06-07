@@ -1,7 +1,8 @@
-﻿using System.Net.Http.Json;
-using System.Text.Json;
-using LibraryManagementSystem.Winforms.helpers;
+﻿using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.BookReservations;
+using LibraryManagementSystem.Winforms.Models.Users;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 {
@@ -32,6 +33,47 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             }
         }
 
+        private async Task<string?> GetUserName(Guid userId)
+        {
+            using var client = ApiClientHelper.CreateClient();
+
+
+            try
+            {
+                var response = await client.GetAsync("user");
+
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var users = JsonSerializer.Deserialize<UserListResponse>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                    });
+                    if (users != null)
+                    {
+                        var user = users.Value.FirstOrDefault(u => u.Id == userId);
+
+                        return user?.UserName;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No users found.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to fetch users");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return null;
+        }
+
         private async Task ShowBookReservationsAsync()
         {
             using var client = ApiClientHelper.CreateClient();
@@ -49,18 +91,26 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 
                 if (bookReservations != null)
                 {
-                    var displayBookReservations = bookReservations.Select(bookReservation => new BookReservationDisplayModal
+                    var tasks = bookReservations.Select(async bookReservation =>
                     {
-                        Id = bookReservation.Id,
-                        UserId = bookReservation.UserId,
-                        IssuedDate = bookReservation.IssuedDate,
-                        DueDate = bookReservation.DueDate,
-                        ReturnDate = bookReservation.ReturnDate,
-                        Status=bookReservation.Status,
-                        BookTitle = bookReservation.Book?.Title,
-                    }).ToList();
+                        var userName = await GetUserName(bookReservation.UserId);
 
-                    BookReservationTableView.DataSource = displayBookReservations;
+
+                        return new BookReservationDisplayModal
+                        {
+                            Id = bookReservation.Id,
+                            UserName = userName ?? "Unknown",
+                            IssuedDate = bookReservation.IssuedDate,
+                            DueDate = bookReservation.DueDate,
+                            ReturnDate = bookReservation.ReturnDate,
+                            Status = bookReservation.Status,
+                            BookTitle = bookReservation?.Book?.Title,
+                        };
+                    });
+
+                    var displayBookReservations = await Task.WhenAll(tasks);
+
+                    BookReservationTableView.DataSource = displayBookReservations.ToList();
 
                 }
 

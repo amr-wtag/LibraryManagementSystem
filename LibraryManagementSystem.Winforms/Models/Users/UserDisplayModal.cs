@@ -8,6 +8,7 @@ namespace LibraryManagementSystem.Winforms.Models.Users
     public class UserDisplayModal
     {
         public string FullName { get; set; }
+        public string userName { get; set; }
         public string Email { get; set; }
         public string Role { get; set; }
     }
