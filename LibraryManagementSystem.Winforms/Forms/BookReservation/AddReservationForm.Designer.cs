@@ -34,9 +34,7 @@
             userDropdownControl = new LibraryManagementSystem.Winforms.component.CustomDropdown();
             userLabel = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
-            bookLabel = new Label();
-            dueDateLabel = new Label();
-            addReservation = new Button();
+            bookReservation = new LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservationRow.BookReservationRowControl();
             bookReservationPanel = new FlowLayoutPanel();
             submitButton = new Button();
             tableLayoutPanel1.SuspendLayout();
@@ -46,7 +44,6 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel1.BackColor = SystemColors.ControlDark;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
@@ -55,26 +52,27 @@
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 2);
             tableLayoutPanel1.Controls.Add(bookReservationPanel, 0, 3);
             tableLayoutPanel1.Controls.Add(submitButton, 0, 4);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(2, 1, 2, 1);
+            tableLayoutPanel1.Margin = new Padding(4, 2, 4, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 5;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 23F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 31F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 325F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 47F));
-            tableLayoutPanel1.Size = new Size(765, 467);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 49F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 128F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 689F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 76F));
+            tableLayoutPanel1.Size = new Size(1421, 996);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(2, 0);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(4, 0);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(761, 23);
+            label1.Size = new Size(1413, 49);
             label1.TabIndex = 0;
             label1.Text = "Add Reservation Form";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -87,20 +85,21 @@
             tableLayoutPanel2.Controls.Add(userDropdownControl, 1, 0);
             tableLayoutPanel2.Controls.Add(userLabel, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 26);
+            tableLayoutPanel2.Location = new Point(6, 55);
+            tableLayoutPanel2.Margin = new Padding(6);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(759, 25);
+            tableLayoutPanel2.Size = new Size(1409, 54);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // userDropdownControl
             // 
             userDropdownControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            userDropdownControl.Location = new Point(334, 1);
-            userDropdownControl.Margin = new Padding(2, 1, 2, 1);
+            userDropdownControl.Location = new Point(620, 2);
+            userDropdownControl.Margin = new Padding(4, 2, 4, 2);
             userDropdownControl.Name = "userDropdownControl";
-            userDropdownControl.Size = new Size(140, 23);
+            userDropdownControl.Size = new Size(260, 50);
             userDropdownControl.TabIndex = 1;
             // 
             // userLabel
@@ -108,61 +107,37 @@
             userLabel.Anchor = AnchorStyles.Right;
             userLabel.AutoSize = true;
             userLabel.BackColor = SystemColors.Control;
-            userLabel.Location = new Point(299, 5);
+            userLabel.Location = new Point(550, 11);
             userLabel.Margin = new Padding(0);
             userLabel.Name = "userLabel";
-            userLabel.Size = new Size(33, 15);
+            userLabel.Size = new Size(66, 32);
             userLabel.TabIndex = 2;
             userLabel.Text = "User:";
             // 
             // tableLayoutPanel3
             // 
-            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnCount = 1;
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44.768856F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55.231144F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 347F));
-            tableLayoutPanel3.Controls.Add(bookLabel, 0, 0);
-            tableLayoutPanel3.Controls.Add(dueDateLabel, 1, 0);
-            tableLayoutPanel3.Controls.Add(addReservation, 2, 0);
+            tableLayoutPanel3.Controls.Add(bookReservation, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(3, 57);
+            tableLayoutPanel3.Location = new Point(6, 121);
+            tableLayoutPanel3.Margin = new Padding(6);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(759, 35);
+            tableLayoutPanel3.Size = new Size(1409, 116);
             tableLayoutPanel3.TabIndex = 4;
             // 
-            // bookLabel
+            // bookReservation
             // 
-            bookLabel.AutoSize = true;
-            bookLabel.Dock = DockStyle.Fill;
-            bookLabel.Location = new Point(3, 0);
-            bookLabel.Name = "bookLabel";
-            bookLabel.Size = new Size(178, 35);
-            bookLabel.TabIndex = 0;
-            bookLabel.Text = "Book";
-            bookLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // dueDateLabel
-            // 
-            dueDateLabel.AutoSize = true;
-            dueDateLabel.Dock = DockStyle.Fill;
-            dueDateLabel.Location = new Point(187, 0);
-            dueDateLabel.Name = "dueDateLabel";
-            dueDateLabel.Size = new Size(221, 35);
-            dueDateLabel.TabIndex = 1;
-            dueDateLabel.Text = "Due Date";
-            dueDateLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // addReservation
-            // 
-            addReservation.Location = new Point(414, 3);
-            addReservation.Name = "addReservation";
-            addReservation.Size = new Size(113, 29);
-            addReservation.TabIndex = 2;
-            addReservation.Text = "AddReservation";
-            addReservation.UseVisualStyleBackColor = true;
-            addReservation.Click += addReservation_Click;
+            bookReservation.AutoSize = true;
+            bookReservation.Dock = DockStyle.Fill;
+            bookReservation.Location = new Point(4, 2);
+            bookReservation.Margin = new Padding(4, 2, 4, 2);
+            bookReservation.Name = "bookReservation";
+            bookReservation.Size = new Size(1401, 112);
+            bookReservation.TabIndex = 0;
+            //bookReservation.Load += bookReservation_Load;
             // 
             // bookReservationPanel
             // 
@@ -170,18 +145,20 @@
             bookReservationPanel.AutoScroll = true;
             bookReservationPanel.AutoSize = true;
             bookReservationPanel.FlowDirection = FlowDirection.TopDown;
-            bookReservationPanel.Location = new Point(3, 98);
+            bookReservationPanel.Location = new Point(6, 249);
+            bookReservationPanel.Margin = new Padding(6);
             bookReservationPanel.Name = "bookReservationPanel";
-            bookReservationPanel.Size = new Size(759, 0);
+            bookReservationPanel.Size = new Size(1409, 0);
             bookReservationPanel.TabIndex = 5;
             bookReservationPanel.WrapContents = false;
             // 
             // submitButton
             // 
             submitButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            submitButton.Location = new Point(329, 423);
+            submitButton.Location = new Point(611, 938);
+            submitButton.Margin = new Padding(6);
             submitButton.Name = "submitButton";
-            submitButton.Size = new Size(107, 41);
+            submitButton.Size = new Size(199, 64);
             submitButton.TabIndex = 6;
             submitButton.Text = "Submit Button";
             submitButton.UseVisualStyleBackColor = true;
@@ -189,11 +166,11 @@
             // 
             // AddReservationForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(765, 467);
+            ClientSize = new Size(1421, 996);
             Controls.Add(tableLayoutPanel1);
-            Margin = new Padding(2, 1, 2, 1);
+            Margin = new Padding(4, 2, 4, 2);
             Name = "AddReservationForm";
             Text = "AddReservationForm";
             tableLayoutPanel1.ResumeLayout(false);
@@ -213,10 +190,8 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Label userLabel;
         private TableLayoutPanel tableLayoutPanel3;
-        private Label bookLabel;
-        private Label dueDateLabel;
-        private Button addReservation;
         private FlowLayoutPanel bookReservationPanel;
         private Button submitButton;
+        private BookReservationRow.BookReservationRowControl bookReservation;
     }
 }
