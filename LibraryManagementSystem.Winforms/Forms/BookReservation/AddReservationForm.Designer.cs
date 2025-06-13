@@ -39,6 +39,7 @@
             submitButton = new Button();
             bookReservationDataGridView = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bookTitleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             issuedDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             dueDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             returnDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
