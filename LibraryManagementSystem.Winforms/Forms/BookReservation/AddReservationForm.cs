@@ -164,5 +164,10 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                 MessageBox.Show("Exception: " + ex.Message);
             }
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
