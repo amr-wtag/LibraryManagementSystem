@@ -39,8 +39,6 @@
             returnBook = new Button();
             addReservation = new Button();
             BookReservationTableView = new DataGridView();
-            bookReservationBindingSource = new BindingSource(components);
-            bookReserVationtableBindingSource = new BindingSource(components);
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             UserName = new DataGridViewTextBoxColumn();
             Book = new DataGridViewTextBoxColumn();
@@ -48,6 +46,8 @@
             dueDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             returnDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             statusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bookReservationBindingSource = new BindingSource(components);
+            bookReserVationtableBindingSource = new BindingSource(components);
             bookReservationTableLayoutPanel.SuspendLayout();
             filterLayoutPanel.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -73,6 +73,7 @@
             bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 53F));
             bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 85F));
             bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 755F));
+            bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             bookReservationTableLayoutPanel.Size = new Size(1623, 998);
             bookReservationTableLayoutPanel.TabIndex = 0;
             // 
@@ -184,7 +185,6 @@
             BookReservationTableView.AllowUserToOrderColumns = true;
             BookReservationTableView.AutoGenerateColumns = false;
             BookReservationTableView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            BookReservationTableView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedHeaders;
             BookReservationTableView.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
             BookReservationTableView.ColumnHeadersHeight = 46;
             BookReservationTableView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -194,14 +194,11 @@
             BookReservationTableView.Location = new Point(24, 140);
             BookReservationTableView.Margin = new Padding(4, 2, 4, 2);
             BookReservationTableView.Name = "BookReservationTableView";
+            BookReservationTableView.RowHeadersVisible = false;
             BookReservationTableView.RowHeadersWidth = 82;
             BookReservationTableView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             BookReservationTableView.Size = new Size(1618, 856);
             BookReservationTableView.TabIndex = 2;
-            // 
-            // bookReservationBindingSource
-            // 
-            bookReservationBindingSource.DataSource = typeof(Models.BookReservations.BookReservation);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -251,6 +248,10 @@
             statusDataGridViewTextBoxColumn.HeaderText = "Status";
             statusDataGridViewTextBoxColumn.MinimumWidth = 10;
             statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            // 
+            // bookReservationBindingSource
+            // 
+            bookReservationBindingSource.DataSource = typeof(Models.BookReservations.BookReservation);
             // 
             // BookReservationForm
             // 
