@@ -93,7 +93,7 @@ public class BookReservationRepository : IBookReservationRepository
     {
         var reservations = await _context.BookReservations
             .Include(r => r.Book)
-            .Where(r => reservationIds.Contains(r.Id) && r.Status == "Issued")
+            .Where(r => reservationIds.Contains(r.Id) && (r.Status == "Issued" || r.Status == "Returned"))
             .ToListAsync();
 
         if (reservations.Count != reservationIds.Count)
