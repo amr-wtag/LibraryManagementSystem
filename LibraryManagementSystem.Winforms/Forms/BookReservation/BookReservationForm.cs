@@ -16,7 +16,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             this.Load += BookReservationForm_Load;
             booksMultiSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
             usersMultiSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            statusMultiSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            statusDropdown.SelectedIndexChanged += MultiSelectComboBoxes_SelectedValuesChanged;
 
         }
 
@@ -109,7 +109,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 
             if (options.Any())
             {
-                statusMultiSelectComboBox.SetItems(options);
+                statusDropdown.SetOptions(options);
             }
 
             return Task.CompletedTask; // Ensure a Task is always returned
@@ -128,15 +128,12 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                 .Select(opt => opt.Value.ToString())
                 .ToList();
 
-            var selectedStatus = statusMultiSelectComboBox
-                .GetSelectedItems()
-                .Select(opt => opt.Value.ToString())
-                .ToList();
+            var selectedStatus = statusDropdown.SelectedValue?.ToString();
 
             await ShowBookReservationsAsync(selectedUserIds, selectedBookIds, selectedStatus);
         }
 
-        private async Task ShowBookReservationsAsync(List<string>? userIds = null, List<string>? bookIds = null, List<string>? statuses=null)
+        private async Task ShowBookReservationsAsync(List<string>? userIds = null, List<string>? bookIds = null, string? statuses=null)
         {
 
             using var client = ApiClientHelper.CreateClient();
@@ -154,7 +151,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                 }
                 if(statuses != null && statuses.Any())
                 {
-                    queryParts.AddRange(statuses.Select(status => $"status={status}"));
+                    queryParts.Add( $"status={statuses}");
                 }
 
                 string url = "bookreservation";

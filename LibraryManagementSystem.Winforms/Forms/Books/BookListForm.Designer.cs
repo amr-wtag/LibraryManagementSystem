@@ -68,6 +68,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             booksLayoutPanel.AutoSize = true;
             booksLayoutPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             booksLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            booksLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            booksLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             booksLayoutPanel.Controls.Add(filterTableLayoutPanel, 0, 0);
             booksLayoutPanel.Controls.Add(dataGridViewBooks, 0, 1);
             booksLayoutPanel.Dock = DockStyle.Fill;
@@ -77,8 +79,9 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             booksLayoutPanel.Name = "booksLayoutPanel";
             booksLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 49F));
             booksLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            booksLayoutPanel.Size = new Size(1736, 1060);
-            booksLayoutPanel.TabIndex = 1;
+            booksLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            booksLayoutPanel.Size = new Size(1364, 1054);
+            booksLayoutPanel.TabIndex = 0;
             // 
             // filterTableLayoutPanel
             // 
@@ -93,7 +96,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             filterTableLayoutPanel.Margin = new Padding(4, 2, 4, 2);
             filterTableLayoutPanel.Name = "filterTableLayoutPanel";
             filterTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-            filterTableLayoutPanel.Size = new Size(1728, 45);
+            filterTableLayoutPanel.Size = new Size(1356, 45);
             filterTableLayoutPanel.TabIndex = 0;
             // 
             // bookSelectComboBox
@@ -140,8 +143,8 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             dataGridViewBooks.Name = "dataGridViewBooks";
             dataGridViewBooks.RowHeadersVisible = false;
             dataGridViewBooks.RowHeadersWidth = 82;
-            dataGridViewBooks.Size = new Size(1728, 1007);
-            dataGridViewBooks.TabIndex = 1;
+            dataGridViewBooks.Size = new Size(1356, 1001);
+            dataGridViewBooks.TabIndex = 2;
             // 
             // titleDataGridViewTextBoxColumn
             // 
@@ -187,7 +190,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1736, 1060);
+            ClientSize = new Size(1364, 1054);
             Controls.Add(booksLayoutPanel);
             Margin = new Padding(4, 2, 4, 2);
             Name = "BookListForm";
