@@ -31,9 +31,11 @@
             components = new System.ComponentModel.Container();
             bookReservationTableLayoutPanel = new TableLayoutPanel();
             filterLayoutPanel = new TableLayoutPanel();
+            label2 = new Label();
             usersMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
-            booksMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            label1 = new Label();
             statusMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            booksMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             refresh = new Button();
             returnBook = new Button();
@@ -48,6 +50,7 @@
             statusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             bookReservationBindingSource = new BindingSource(components);
             bookReserVationtableBindingSource = new BindingSource(components);
+            label3 = new Label();
             bookReservationTableLayoutPanel.SuspendLayout();
             filterLayoutPanel.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -69,24 +72,31 @@
             bookReservationTableLayoutPanel.Location = new Point(0, 0);
             bookReservationTableLayoutPanel.Margin = new Padding(4, 2, 4, 2);
             bookReservationTableLayoutPanel.Name = "bookReservationTableLayoutPanel";
-            bookReservationTableLayoutPanel.RowCount = 3;
+            bookReservationTableLayoutPanel.RowCount = 4;
             bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 53F));
             bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 85F));
             bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 755F));
+            bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             bookReservationTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             bookReservationTableLayoutPanel.Size = new Size(1623, 998);
             bookReservationTableLayoutPanel.TabIndex = 0;
             // 
             // filterLayoutPanel
             // 
-            filterLayoutPanel.ColumnCount = 4;
-            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 371F));
-            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 371F));
-            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 371F));
+            filterLayoutPanel.ColumnCount = 7;
+            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 300F));
+            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle());
+            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 300F));
+            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle());
             filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 505F));
-            filterLayoutPanel.Controls.Add(usersMultiSelectComboBox, 0, 0);
-            filterLayoutPanel.Controls.Add(booksMultiSelectComboBox, 1, 0);
-            filterLayoutPanel.Controls.Add(statusMultiSelectComboBox, 2, 0);
+            filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            filterLayoutPanel.Controls.Add(label3, 4, 0);
+            filterLayoutPanel.Controls.Add(label2, 2, 0);
+            filterLayoutPanel.Controls.Add(usersMultiSelectComboBox, 1, 0);
+            filterLayoutPanel.Controls.Add(label1, 0, 0);
+            filterLayoutPanel.Controls.Add(statusMultiSelectComboBox, 5, 0);
+            filterLayoutPanel.Controls.Add(booksMultiSelectComboBox, 3, 0);
             filterLayoutPanel.Dock = DockStyle.Fill;
             filterLayoutPanel.Location = new Point(24, 2);
             filterLayoutPanel.Margin = new Padding(4, 2, 4, 2);
@@ -96,32 +106,55 @@
             filterLayoutPanel.Size = new Size(1618, 49);
             filterLayoutPanel.TabIndex = 0;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Fill;
+            label2.Location = new Point(400, 8);
+            label2.Margin = new Padding(8);
+            label2.Name = "label2";
+            label2.Size = new Size(83, 33);
+            label2.TabIndex = 4;
+            label2.Text = "Books:";
+            // 
             // usersMultiSelectComboBox
             // 
-            usersMultiSelectComboBox.LabelText = "Users:";
-            usersMultiSelectComboBox.Location = new Point(4, 2);
+            usersMultiSelectComboBox.LabelText = "";
+            usersMultiSelectComboBox.Location = new Point(96, 2);
             usersMultiSelectComboBox.Margin = new Padding(4, 2, 4, 2);
             usersMultiSelectComboBox.Name = "usersMultiSelectComboBox";
-            usersMultiSelectComboBox.Size = new Size(353, 45);
+            usersMultiSelectComboBox.Size = new Size(292, 45);
             usersMultiSelectComboBox.TabIndex = 0;
             // 
-            // booksMultiSelectComboBox
+            // label1
             // 
-            booksMultiSelectComboBox.LabelText = "Books:";
-            booksMultiSelectComboBox.Location = new Point(375, 2);
-            booksMultiSelectComboBox.Margin = new Padding(4, 2, 4, 2);
-            booksMultiSelectComboBox.Name = "booksMultiSelectComboBox";
-            booksMultiSelectComboBox.Size = new Size(363, 45);
-            booksMultiSelectComboBox.TabIndex = 1;
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Fill;
+            label1.Location = new Point(8, 8);
+            label1.Margin = new Padding(8);
+            label1.Name = "label1";
+            label1.Size = new Size(76, 33);
+            label1.TabIndex = 3;
+            label1.Text = "Users:";
             // 
             // statusMultiSelectComboBox
             // 
-            statusMultiSelectComboBox.LabelText = "Status:";
-            statusMultiSelectComboBox.Location = new Point(746, 2);
+            statusMultiSelectComboBox.Dock = DockStyle.Fill;
+            statusMultiSelectComboBox.LabelText = "";
+            statusMultiSelectComboBox.Location = new Point(894, 2);
             statusMultiSelectComboBox.Margin = new Padding(4, 2, 4, 2);
             statusMultiSelectComboBox.Name = "statusMultiSelectComboBox";
-            statusMultiSelectComboBox.Size = new Size(363, 45);
+            statusMultiSelectComboBox.Size = new Size(497, 45);
             statusMultiSelectComboBox.TabIndex = 2;
+            // 
+            // booksMultiSelectComboBox
+            // 
+            booksMultiSelectComboBox.LabelText = "";
+            booksMultiSelectComboBox.Location = new Point(495, 2);
+            booksMultiSelectComboBox.Margin = new Padding(4, 2, 4, 2);
+            booksMultiSelectComboBox.Name = "booksMultiSelectComboBox";
+            booksMultiSelectComboBox.Size = new Size(292, 45);
+            booksMultiSelectComboBox.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
@@ -197,7 +230,7 @@
             BookReservationTableView.RowHeadersVisible = false;
             BookReservationTableView.RowHeadersWidth = 82;
             BookReservationTableView.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            BookReservationTableView.Size = new Size(1618, 856);
+            BookReservationTableView.Size = new Size(1618, 751);
             BookReservationTableView.TabIndex = 2;
             // 
             // idDataGridViewTextBoxColumn
@@ -253,6 +286,17 @@
             // 
             bookReservationBindingSource.DataSource = typeof(Models.BookReservations.BookReservation);
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Dock = DockStyle.Fill;
+            label3.Location = new Point(799, 8);
+            label3.Margin = new Padding(8);
+            label3.Name = "label3";
+            label3.Size = new Size(83, 33);
+            label3.TabIndex = 5;
+            label3.Text = "Status:";
+            // 
             // BookReservationForm
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -264,6 +308,7 @@
             Text = "BookReservationtable";
             bookReservationTableLayoutPanel.ResumeLayout(false);
             filterLayoutPanel.ResumeLayout(false);
+            filterLayoutPanel.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)BookReservationTableView).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookReservationBindingSource).EndInit();
@@ -275,7 +320,6 @@
 
         private TableLayoutPanel bookReservationTableLayoutPanel;
         private TableLayoutPanel filterLayoutPanel;
-        private Component.MultiSelectComboBox usersMultiSelectComboBox;
         private Component.MultiSelectComboBox booksMultiSelectComboBox;
         private Component.MultiSelectComboBox statusMultiSelectComboBox;
         private TableLayoutPanel tableLayoutPanel1;
@@ -293,5 +337,9 @@
         private DataGridViewTextBoxColumn dueDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn returnDateDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+        private Component.MultiSelectComboBox usersMultiSelectComboBox;
+        private Label label1;
+        private Label label2;
+        private Label label3;
     }
 }

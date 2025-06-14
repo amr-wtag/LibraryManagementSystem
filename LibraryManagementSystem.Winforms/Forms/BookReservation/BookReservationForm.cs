@@ -154,7 +154,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                 }
                 if(statuses != null && statuses.Any())
                 {
-                    queryParts.AddRange(statuses.Select(status => $"statuses={statuses}"));
+                    queryParts.AddRange(statuses.Select(status => $"status={status}"));
                 }
 
                 string url = "bookreservation";
