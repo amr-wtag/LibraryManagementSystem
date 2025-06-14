@@ -4,7 +4,7 @@
     <Compile Update="Component\CustomDropdown.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="component\MultiSelectComboBox.cs">
+    <Compile Update="Component\MultiSelectComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Form1.cs">

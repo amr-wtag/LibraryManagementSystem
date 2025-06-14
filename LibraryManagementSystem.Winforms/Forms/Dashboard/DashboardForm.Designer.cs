@@ -27,6 +27,7 @@ partial class DashboardForm
         usersButton = new Button();
         contentPanel = new Panel();
         buttonPanel = new Panel();
+        addBook = new Button();
         bookReservation = new Button();
         logOutButton = new Button();
         buttonPanel.SuspendLayout();
@@ -73,6 +74,7 @@ partial class DashboardForm
         // buttonPanel
         // 
         buttonPanel.BackColor = Color.FromArgb(44, 62, 80);
+        buttonPanel.Controls.Add(addBook);
         buttonPanel.Controls.Add(usersButton);
         buttonPanel.Controls.Add(bookReservation);
         buttonPanel.Controls.Add(logOutButton);
@@ -83,6 +85,20 @@ partial class DashboardForm
         buttonPanel.Name = "buttonPanel";
         buttonPanel.Size = new Size(334, 1086);
         buttonPanel.TabIndex = 1;
+        // 
+        // addBook
+        // 
+        addBook.FlatAppearance.BorderSize = 0;
+        addBook.FlatStyle = FlatStyle.Flat;
+        addBook.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+        addBook.ForeColor = Color.White;
+        addBook.Location = new Point(82, 328);
+        addBook.Margin = new Padding(6, 4, 6, 4);
+        addBook.Name = "addBook";
+        addBook.Size = new Size(201, 64);
+        addBook.TabIndex = 1;
+        addBook.Text = "Add Book";
+        addBook.Click += addBook_Click;
         // 
         // bookReservation
         // 
@@ -107,7 +123,7 @@ partial class DashboardForm
         logOutButton.FlatStyle = FlatStyle.Flat;
         logOutButton.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
         logOutButton.ForeColor = Color.White;
-        logOutButton.Location = new Point(26, 310);
+        logOutButton.Location = new Point(26, 432);
         logOutButton.Margin = new Padding(4, 2, 4, 2);
         logOutButton.Name = "logOutButton";
         logOutButton.Size = new Size(271, 85);
@@ -134,4 +150,5 @@ partial class DashboardForm
     private Panel buttonPanel;
     private Button logOutButton;
     private Button bookReservation;
+    private Button addBook;
 }
