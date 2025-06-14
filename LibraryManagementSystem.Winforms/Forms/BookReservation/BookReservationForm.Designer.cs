@@ -31,9 +31,9 @@
             components = new System.ComponentModel.Container();
             bookReservationTableLayoutPanel = new TableLayoutPanel();
             filterLayoutPanel = new TableLayoutPanel();
-            multiSelectComboBox1 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
-            multiSelectComboBox2 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
-            multiSelectComboBox3 = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            usersMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            booksMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
+            statusMultiSelectComboBox = new LibraryManagementSystem.Winforms.Component.MultiSelectComboBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             refresh = new Button();
             returnBook = new Button();
@@ -84,9 +84,9 @@
             filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 371F));
             filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 371F));
             filterLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 505F));
-            filterLayoutPanel.Controls.Add(multiSelectComboBox1, 0, 0);
-            filterLayoutPanel.Controls.Add(multiSelectComboBox2, 1, 0);
-            filterLayoutPanel.Controls.Add(multiSelectComboBox3, 2, 0);
+            filterLayoutPanel.Controls.Add(usersMultiSelectComboBox, 0, 0);
+            filterLayoutPanel.Controls.Add(booksMultiSelectComboBox, 1, 0);
+            filterLayoutPanel.Controls.Add(statusMultiSelectComboBox, 2, 0);
             filterLayoutPanel.Dock = DockStyle.Fill;
             filterLayoutPanel.Location = new Point(24, 2);
             filterLayoutPanel.Margin = new Padding(4, 2, 4, 2);
@@ -96,32 +96,32 @@
             filterLayoutPanel.Size = new Size(1618, 49);
             filterLayoutPanel.TabIndex = 0;
             // 
-            // multiSelectComboBox1
+            // usersMultiSelectComboBox
             // 
-            multiSelectComboBox1.LabelText = "Users:";
-            multiSelectComboBox1.Location = new Point(4, 2);
-            multiSelectComboBox1.Margin = new Padding(4, 2, 4, 2);
-            multiSelectComboBox1.Name = "multiSelectComboBox1";
-            multiSelectComboBox1.Size = new Size(353, 45);
-            multiSelectComboBox1.TabIndex = 0;
+            usersMultiSelectComboBox.LabelText = "Users:";
+            usersMultiSelectComboBox.Location = new Point(4, 2);
+            usersMultiSelectComboBox.Margin = new Padding(4, 2, 4, 2);
+            usersMultiSelectComboBox.Name = "usersMultiSelectComboBox";
+            usersMultiSelectComboBox.Size = new Size(353, 45);
+            usersMultiSelectComboBox.TabIndex = 0;
             // 
-            // multiSelectComboBox2
+            // booksMultiSelectComboBox
             // 
-            multiSelectComboBox2.LabelText = "Books:";
-            multiSelectComboBox2.Location = new Point(375, 2);
-            multiSelectComboBox2.Margin = new Padding(4, 2, 4, 2);
-            multiSelectComboBox2.Name = "multiSelectComboBox2";
-            multiSelectComboBox2.Size = new Size(363, 45);
-            multiSelectComboBox2.TabIndex = 1;
+            booksMultiSelectComboBox.LabelText = "Books:";
+            booksMultiSelectComboBox.Location = new Point(375, 2);
+            booksMultiSelectComboBox.Margin = new Padding(4, 2, 4, 2);
+            booksMultiSelectComboBox.Name = "booksMultiSelectComboBox";
+            booksMultiSelectComboBox.Size = new Size(363, 45);
+            booksMultiSelectComboBox.TabIndex = 1;
             // 
-            // multiSelectComboBox3
+            // statusMultiSelectComboBox
             // 
-            multiSelectComboBox3.LabelText = "Status:";
-            multiSelectComboBox3.Location = new Point(746, 2);
-            multiSelectComboBox3.Margin = new Padding(4, 2, 4, 2);
-            multiSelectComboBox3.Name = "multiSelectComboBox3";
-            multiSelectComboBox3.Size = new Size(363, 45);
-            multiSelectComboBox3.TabIndex = 2;
+            statusMultiSelectComboBox.LabelText = "Status:";
+            statusMultiSelectComboBox.Location = new Point(746, 2);
+            statusMultiSelectComboBox.Margin = new Padding(4, 2, 4, 2);
+            statusMultiSelectComboBox.Name = "statusMultiSelectComboBox";
+            statusMultiSelectComboBox.Size = new Size(363, 45);
+            statusMultiSelectComboBox.TabIndex = 2;
             // 
             // tableLayoutPanel1
             // 
@@ -275,9 +275,9 @@
 
         private TableLayoutPanel bookReservationTableLayoutPanel;
         private TableLayoutPanel filterLayoutPanel;
-        private Component.MultiSelectComboBox multiSelectComboBox1;
-        private Component.MultiSelectComboBox multiSelectComboBox2;
-        private Component.MultiSelectComboBox multiSelectComboBox3;
+        private Component.MultiSelectComboBox usersMultiSelectComboBox;
+        private Component.MultiSelectComboBox booksMultiSelectComboBox;
+        private Component.MultiSelectComboBox statusMultiSelectComboBox;
         private TableLayoutPanel tableLayoutPanel1;
         private Button refresh;
         private Button addReservation;

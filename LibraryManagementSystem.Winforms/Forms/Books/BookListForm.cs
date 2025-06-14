@@ -84,11 +84,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
         private async Task ShowBooksAsync(List<string>? bookIds = null, List<string>? authorIds = null, List<string>? genreIds = null)
         {
-            var token = Properties.Settings.Default.JwtToken;
             using var client = ApiClientHelper.CreateClient();
-
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             try
             {

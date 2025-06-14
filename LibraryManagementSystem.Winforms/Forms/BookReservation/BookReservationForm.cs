@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.Winforms.helpers;
+﻿using LibraryManagementSystem.Winforms.dataHelpers;
+using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.BookReservations;
 using LibraryManagementSystem.Winforms.Models.Users;
 using System.Net.Http.Json;
@@ -13,9 +14,11 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             InitializeComponent();
 
             this.Load += BookReservationForm_Load;
+            booksMultiSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            usersMultiSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            statusMultiSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
 
         }
-
 
         private async void BookReservationForm_Load(object? sender, EventArgs e)
         {
@@ -24,6 +27,9 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 
             if (!string.IsNullOrEmpty(token))
             {
+                await LoadBookFilterOptionsAsync();
+                await LoadUserFilterOptionsAsync();
+                await LoadStatusFilterOptions();
                 await ShowBookReservationsAsync();
             }
             else
@@ -74,47 +80,128 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             return null;
         }
 
-        private async Task ShowBookReservationsAsync()
+        private async Task LoadBookFilterOptionsAsync()
         {
-            using var client = ApiClientHelper.CreateClient();
-            var response = await client.GetAsync("bookreservation");
-            var result = await response.Content.ReadAsStringAsync();
+            var options = await BookDropdownHelper.LoadBookOptionsAsync();
 
-            if (response.IsSuccessStatusCode)
+            if (options.Any())
             {
-                var bookReservationsWrapper = JsonSerializer.Deserialize<BookReservationListResponse>(result, new JsonSerializerOptions
+                booksMultiSelectComboBox.SetItems(options);
+            }
+        }
+
+        private async Task LoadUserFilterOptionsAsync()
+        {
+            var options = await UserDropdownHelper.LoadUserOptionsAsync();
+
+            if (options.Any())
+            {
+                usersMultiSelectComboBox.SetItems(options);
+            }
+        }
+
+        private Task LoadStatusFilterOptions()
+        {
+            var options = new List<DropDownOption> {
+        new DropDownOption { Label = "Issued", Value = "Issued" },
+        new DropDownOption { Label = "Returned", Value = "Returned" }
+    };
+
+            if (options.Any())
+            {
+                statusMultiSelectComboBox.SetItems(options);
+            }
+
+            return Task.CompletedTask; // Ensure a Task is always returned
+        }
+
+
+        private async void MultiSelectComboBoxes_SelectedValuesChanged(object? sender, EventArgs e)
+        {
+            var selectedUserIds = usersMultiSelectComboBox
+                .GetSelectedItems()
+                .Select(opt => opt.Value.ToString())
+                .ToList();
+
+            var selectedBookIds = booksMultiSelectComboBox
+                .GetSelectedItems()
+                .Select(opt => opt.Value.ToString())
+                .ToList();
+
+            var selectedStatus = statusMultiSelectComboBox
+                .GetSelectedItems()
+                .Select(opt => opt.Value.ToString())
+                .ToList();
+
+            await ShowBookReservationsAsync(selectedUserIds, selectedBookIds, selectedStatus);
+        }
+
+        private async Task ShowBookReservationsAsync(List<string>? userIds = null, List<string>? bookIds = null, List<string>? statuses=null)
+        {
+
+            using var client = ApiClientHelper.CreateClient();
+
+            try
+            {
+                var queryParts = new List<string>();
+                if (userIds != null && userIds.Any())
                 {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                var bookReservations = bookReservationsWrapper?.BookReservations;
-
-                if (bookReservations != null)
+                    queryParts.AddRange(userIds.Select(id => $"userIds={id}"));
+                }
+                if (bookIds != null && bookIds.Any())
                 {
-                    var tasks = bookReservations.Select(async bookReservation =>
-                    {
-                        var userName = await GetUserName(bookReservation.UserId);
-
-
-                        return new BookReservationDisplayModal
-                        {
-                            Id = bookReservation.Id,
-                            UserName = userName ?? "Unknown",
-                            IssuedDate = bookReservation.IssuedDate,
-                            DueDate = bookReservation.DueDate,
-                            ReturnDate = bookReservation.ReturnDate,
-                            Status = bookReservation.Status,
-                            BookTitle = bookReservation?.Book?.Title,
-                        };
-                    });
-
-                    var displayBookReservations = await Task.WhenAll(tasks);
-
-                    BookReservationTableView.DataSource = displayBookReservations.ToList();
-
+                    queryParts.AddRange(bookIds.Select(id => $"bookIds={id}"));
+                }
+                if(statuses != null && statuses.Any())
+                {
+                    queryParts.AddRange(statuses.Select(status => $"statuses={statuses}"));
                 }
 
+                string url = "bookreservation";
+                if (queryParts.Any())
+                {
+                    url += "?" + string.Join("&", queryParts);
+                }
+
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    var bookReservationsWrapper = JsonSerializer.Deserialize<BookReservationListResponse>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    var bookReservations = bookReservationsWrapper?.BookReservations;
+
+                    if (bookReservations != null)
+                    {
+                        var tasks = bookReservations.Select(async bookReservation =>
+                        {
+                            var userName = await GetUserName(bookReservation.UserId);
+
+
+                            return new BookReservationDisplayModal
+                            {
+                                Id = bookReservation.Id,
+                                UserName = userName ?? "Unknown",
+                                IssuedDate = bookReservation.IssuedDate,
+                                DueDate = bookReservation.DueDate,
+                                ReturnDate = bookReservation.ReturnDate,
+                                Status = bookReservation.Status,
+                                BookTitle = bookReservation?.Book?.Title,
+                            };
+                        });
+
+                        var displayBookReservations = await Task.WhenAll(tasks);
+
+                        BookReservationTableView.DataSource = displayBookReservations.ToList();
+
+                    }
+
+                }
             }
+            catch (Exception ex) { }
         }
 
         private void addReservation_Click(object sender, EventArgs e)
@@ -132,17 +219,12 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             {
                 Guid reservationId = selectedReservation.Id;
 
-                //var payload = new ReturnBookRequest
-                //{
-                //    ReservationIds = new List<Guid> { reservationId }
-                //};
 
 
 
                 using var client = ApiClientHelper.CreateClient();
                 try
                 {
-                    //var response = await client.PostAsJsonAsync("BookReservation/return", payload);
                     var payload = new List<Guid> { reservationId };
                     var response = await client.PostAsJsonAsync("BookReservation/return", payload);
 
