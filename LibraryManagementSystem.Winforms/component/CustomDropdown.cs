@@ -36,6 +36,7 @@ namespace LibraryManagementSystem.Winforms.component
                 comboBox.ValueMember = "Value";
                 comboBox.DataSource = options;
                 comboBox.SelectedIndex = -1;
+                comboBox.SelectedText = "Select..";
 
                 // Re-subscribe after setting
                 comboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;

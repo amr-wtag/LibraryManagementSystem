@@ -159,10 +159,12 @@
             // 
             // statusDropdown
             // 
+            statusDropdown.AccessibleName = "";
             statusDropdown.Location = new Point(893, 3);
             statusDropdown.Name = "statusDropdown";
             statusDropdown.Size = new Size(217, 42);
             statusDropdown.TabIndex = 6;
+            statusDropdown.Tag = "";
             // 
             // tableLayoutPanel1
             // 

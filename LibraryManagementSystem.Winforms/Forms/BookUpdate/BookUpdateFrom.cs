@@ -12,18 +12,31 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
     public partial class BookUpdateFrom : Form
     {
         public Guid bookId;
-        public BookUpdateFrom(Models.Books.BookDisplayModel selectedBook)
+        private readonly bool _isUpdateMode;
+
+        // Constructor for Update
+        public BookUpdateFrom(BookDisplayModel selectedBook)
         {
             InitializeComponent();
+            _isUpdateMode = true;
             bookId = selectedBook.Id;
             textBox1.Text = selectedBook.Title;
             booksAvailableTextBox.Text = selectedBook.CopiesAvailable.ToString();
-
-            _selectedAuthorIds = selectedBook.AuthorIds?.Select(a => a).ToList() ?? new List<Guid>();
-            _selectedGenreIds = selectedBook.GenreIds?.Select(a => a).ToList() ?? new List<Guid>();
+            _selectedAuthorIds = selectedBook.AuthorIds?.ToList() ?? new();
+            _selectedGenreIds = selectedBook.GenreIds?.ToList() ?? new();
             LoadAuthorsList();
             LoadGenreList();
         }
+
+        // Constructor for Add
+        public BookUpdateFrom()
+        {
+            InitializeComponent();
+            _isUpdateMode = false;
+            LoadAuthorsList();
+            LoadGenreList();
+        }
+
 
         private List<Guid> _selectedAuthorIds = new();
         private List<Guid> _selectedGenreIds = new();
@@ -146,12 +159,6 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
 
         private async void submitButton_Click(object sender, EventArgs e)
         {
-            if (!Guid.TryParse(bookId.ToString(), out Guid parsedId))
-            {
-                MessageBox.Show("Invalid book ID.");
-                return;
-            }
-
             if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
                 MessageBox.Show("Title is required.");
@@ -165,15 +172,13 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
             }
 
             var authorIds = authorSelectComboBox.GetSelectedItems()
-    .Select(val => Guid.Parse(val.Value.ToString())).ToList();
+                .Select(val => Guid.Parse(val.Value.ToString())).ToList();
 
             var genreIds = genreSelectComboBox.GetSelectedItems()
                 .Select(val => Guid.Parse(val.Value.ToString())).ToList();
 
-
             var bookRequest = new BookRequestDto
             {
-                Id = parsedId,
                 Title = textBox1.Text.Trim(),
                 CopiesAvailable = copiesAvailable,
                 AuthorIds = authorIds,
@@ -183,28 +188,39 @@ namespace LibraryManagementSystem.Winforms.Forms.BookUpdate
             try
             {
                 using var client = ApiClientHelper.CreateClient();
-                var response = await client.PutAsJsonAsync($"books/{bookId}", bookRequest);
+                HttpResponseMessage response;
+
+                if (_isUpdateMode)
+                {
+                    bookRequest.Id = bookId;
+                    response = await client.PutAsJsonAsync($"books/{bookId}", bookRequest);
+                }
+                else
+                {
+                    response = await client.PostAsJsonAsync("books", bookRequest);
+                }
 
                 if (response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Book updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(_isUpdateMode ? "Book updated successfully!" : "Book added successfully!",
+                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     var dashboardForm = new DashboardForm();
-                    this.Hide(); // or use this.Close() if you don't need to come back
+                    this.Hide();
                     dashboardForm.Show();
-
-
                 }
                 else
                 {
                     var error = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show($"Failed to update book.\n{error}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Failed to {(_isUpdateMode ? "update" : "add")} book.\n{error}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error updating book: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
     }
 }

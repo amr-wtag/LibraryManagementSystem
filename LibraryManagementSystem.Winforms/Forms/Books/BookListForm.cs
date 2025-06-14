@@ -283,9 +283,10 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             if (selectedBook != null)
             {
                 var bookUpdateFrom = new BookUpdateFrom(selectedBook);
-                this.Hide();
 
                 bookUpdateFrom.Show();
+                this.Hide();
+
                 //MessageBox.Show(
                 //    $"(EDIT MODE)\nTitle: {selectedBook.Title}\n" +
                 //    $"Available: {selectedBook.CopiesAvailable}\n" +

@@ -1,11 +1,12 @@
-﻿using System.Net;
-using System.Net.Http.Headers;
-using System.Text.Json;
-using LibraryManagementSystem.Winforms.Forms.BookReservation;
+﻿using LibraryManagementSystem.Winforms.Forms.BookReservation;
 using LibraryManagementSystem.Winforms.Forms.Books;
+using LibraryManagementSystem.Winforms.Forms.BookUpdate;
 using LibraryManagementSystem.Winforms.Forms.Users;
 using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Views.Authentication;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace LibraryManagementSystem.Winforms.Forms.Dashboard;
 
@@ -111,5 +112,10 @@ public partial class DashboardForm : Form
     private void bookReservation_Click(object sender, EventArgs e)
     {
         OpenChildForm(new BookReservationForm());
+    }
+
+    private void addBook_Click(object sender, EventArgs e)
+    {
+        OpenChildForm(new BookUpdateFrom());
     }
 }
