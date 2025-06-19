@@ -15,5 +15,7 @@ public class BookReservation : BaseEntity
 
     public Book? Book { get; set; }
 
+    public bool IsMarkedOverdue { get; set; } = false;
+
     [JsonIgnore] public User? User { get; set; }
 }
