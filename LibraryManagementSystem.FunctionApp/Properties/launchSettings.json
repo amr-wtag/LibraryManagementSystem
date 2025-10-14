@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "LibraryManagementSystem.FunctionApp": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 4000",
+      "launchBrowser": false
+    }
+  }
+}
