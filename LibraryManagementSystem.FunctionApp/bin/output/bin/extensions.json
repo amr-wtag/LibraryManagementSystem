@@ -1,0 +1,5 @@
+{
+  "extensions":[
+    { "name": "Startup", "typeName":"LibraryManagementSystem.FunctionApp.Startup, LibraryManagementSystem.FunctionApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"}
+  ]
+}

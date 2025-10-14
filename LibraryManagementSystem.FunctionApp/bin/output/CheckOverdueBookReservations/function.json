@@ -1,0 +1,16 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions.Generator-4.6.0",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "timerTrigger",
+      "schedule": "* * * * * *",
+      "useMonitor": true,
+      "runOnStartup": false,
+      "name": "timer"
+    }
+  ],
+  "disabled": false,
+  "scriptFile": "../bin/LibraryManagementSystem.FunctionApp.dll",
+  "entryPoint": "LibraryManagementSystem.FunctionApp.OverdueCheckerFunction.Run"
+}

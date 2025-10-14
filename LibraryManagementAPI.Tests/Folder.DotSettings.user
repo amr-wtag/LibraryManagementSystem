@@ -1,0 +1,10 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ce1cd8c2_002De3f9_002D488c_002D976b_002D916fb056f257/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Can_Assign_Author_To_BookAuthors" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::6A9B0330-E5C1-A17F-82D8-5C0B12E780B3::net8.0::LibraryManagementAPI.Tests.Models.AuthorTests.Can_Assign_Author_To_BookAuthors&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6A9B0330-E5C1-A17F-82D8-5C0B12E780B3::net8.0::LibraryManagementAPI.Tests.Models.BaseEntityTests.BaseEntity_CreatedAt_ShouldBeSetOnCreation&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6A9B0330-E5C1-A17F-82D8-5C0B12E780B3::net8.0::LibraryManagementAPI.Tests.Models.BaseEntityTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6A9B0330-E5C1-A17F-82D8-5C0B12E780B3::net8.0::LibraryManagementAPI.Tests.Models.BookAuthorTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::6A9B0330-E5C1-A17F-82D8-5C0B12E780B3::net8.0::LibraryManagementAPI.Tests.Models.BookTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
