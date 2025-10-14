@@ -3,10 +3,10 @@ name: .NET Core CI
 on:
   push:
     branches:
-      - main  # Or your default branch name, like `master`
+      - main  # Trigger when code is pushed to the main branch
   pull_request:
     branches:
-      - main  # Or your default branch name, like `master`
+      - main  # Trigger when a PR is created or updated targeting the main branch
 
 jobs:
   build:
@@ -14,32 +14,24 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Checkout your repository
+      uses: actions/checkout@v3  # Checkout the repository code
 
     - name: Set up .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0'  # Specify your .NET version here
+        dotnet-version: '8.0'  # Use .NET version 8.0 or whichever version you're using
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore  # Restore NuGet dependencies
 
     - name: Build project
-      run: dotnet build --configuration Release
-      
+      run: dotnet build --configuration Release  # Build the project in Release mode
 
     - name: Run tests
-      run: dotnet test --configuration Release --no-build --verbosity normal
+      run: dotnet test LibraryManagementAPI.Tests/LibraryManagementAPI.Tests.csproj --configuration Release --no-build --verbosity normal  # Run the tests
 
     - name: Upload test results
       uses: actions/upload-artifact@v3
       with:
-        name: test-results
-        path: TestResults
-
-    - name: Publish test results
-      if: always()
-      run: |
-        mkdir -p $(Build.ArtifactStagingDirectory)/test-results
-        mv TestResults/* $(Build.ArtifactStagingDirectory)/test-results || true
-        echo "Test results are available in the $(Build.ArtifactStagingDirectory)/test-results directory"
+        name: test-results  # Artifact name
+        path: LibraryManagementAPI.Tests/TestResults/  # Path to where test results are saved (ensure this directory exists in your project)
