@@ -1,0 +1,37 @@
+name: Trigger Tests on Label
+
+on:
+  pull_request_target:
+    types:
+      - labeled  # Trigger when a label is added or removed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # The environment to run the job on
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checkout your repository
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0'  # Specify .NET 8.0
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release
+
+      - name: Run tests
+        if: contains(github.event.pull_request.labels.*.name, 'run tests')  # Only run tests if 'run tests' label is added
+        run: |
+          dotnet test LibraryManagementAPI.Tests/LibraryManagementAPI.Tests.csproj --configuration Release --no-build --verbosity normal
+
+      - name: Upload test results
+        if: contains(github.event.pull_request.labels.*.name, 'run tests')  # Only upload test results if tests ran
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: LibraryManagementAPI.Tests/TestResults/  # Path to where test results are saved

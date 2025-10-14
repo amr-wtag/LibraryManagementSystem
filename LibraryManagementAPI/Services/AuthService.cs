@@ -1,7 +1,7 @@
-namespace LibraryManagementAPI.Services;
+using LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Models;
 
-using interfaces;
-using Models;
+namespace LibraryManagementAPI.Services;
 
 public class AuthService
 {
@@ -17,8 +17,13 @@ public class AuthService
         return await _authRepository.RegisterAsync(user, password, role);
     }
 
-    public async Task<string?> LoginAsync(string username, string email, string password)
+    public async Task<string?> LoginAsync(string identifier, string password)
     {
-        return await _authRepository.LoginAsync(username, email, password);
+        return await _authRepository.LoginAsync(identifier, password);
+    }
+
+    public async Task Logout()
+    {
+        await _authRepository.Logout();
     }
 }

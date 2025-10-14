@@ -1,14 +1,18 @@
+using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Serialization;
 using DotNetEnv;
 using LibraryManagementAPI.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using LibraryManagementAPI.interfaces;
+using LibraryManagementAPI.Interfaces;
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Repositories;
 using LibraryManagementAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using AuthRepository = LibraryManagementAPI.Repositories.AuthRepository;
 
 Env.Load();
@@ -26,10 +30,46 @@ builder.Configuration["JwtSettings:Secret"] = jwtSecret;
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBookReservationRepository, BookReservationRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<BookService>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<AuthorService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<BookReservationService>();
+builder.Services.AddScoped<GenreService>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter the JWT token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -72,12 +112,19 @@ builder.Services.AddAuthentication(options =>
             IssuerSigningKey = new SymmetricSecurityKey(key),
             ValidateIssuer = false,
             ValidateAudience = false,
-            ValidateLifetime = true
+            ValidateLifetime = true,
+            RoleClaimType = ClaimTypes.Role
         };
     });
 
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    options.JsonSerializerOptions.MaxDepth = 64; // Increase if needed
+});
+
 
 var app = builder.Build();
 
@@ -91,5 +138,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors("AllowAll");
 
 app.Run();
