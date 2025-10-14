@@ -14,27 +14,32 @@ public class BookReservationRepository : IBookReservationRepository
         _context = context;
     }
 
-    public async Task<List<BookReservation>> GetBookReservationsAsync(Guid? id = null, Guid? userId = null,
-        Guid? bookId = null)
+    public async Task<List<BookReservation>> GetBookReservationsAsync(List<Guid>? ids = null, List<Guid>? userIds = null,
+        List<Guid>? bookIds = null, string status = "")
     {
         var query = _context.BookReservations
             .Include(r => r.Book)
             .Include(r => r.User)
             .AsQueryable();
 
-        if (id.HasValue)
+        if (ids != null && ids.Any())
         {
-            query = query.Where(r => r.Id == id.Value);
+            query = query.Where(r => ids.Contains(r.Id));
         }
 
-        if (userId.HasValue)
+        if (userIds != null && userIds.Any())
         {
-            query = query.Where(r => r.UserId == userId.Value);
+            query = query.Where(r => userIds.Contains(r.UserId));
         }
 
-        if (bookId.HasValue)
+        if (bookIds != null && bookIds.Any())
         {
-            query = query.Where(r => r.BookId == bookId.Value);
+            query = query.Where(r => bookIds.Contains(r.BookId));
+        }
+
+        if (status != "")
+        {
+            query = query.Where(r => r.Status == status);
         }
 
 
@@ -88,7 +93,7 @@ public class BookReservationRepository : IBookReservationRepository
     {
         var reservations = await _context.BookReservations
             .Include(r => r.Book)
-            .Where(r => reservationIds.Contains(r.Id) && r.Status == "Issued")
+            .Where(r => reservationIds.Contains(r.Id) && (r.Status == "Issued" || r.Status == "Returned"))
             .ToListAsync();
 
         if (reservations.Count != reservationIds.Count)

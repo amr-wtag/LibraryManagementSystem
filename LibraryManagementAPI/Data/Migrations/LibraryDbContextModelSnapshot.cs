@@ -28,8 +28,14 @@ namespace LibraryManagementAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
@@ -38,28 +44,38 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0f032fa8-75f9-4f1c-9ee9-b235eb5994fa"),
-                            Name = "Syble Shanahan"
+                            Id = new Guid("f9cea78d-02c9-476a-988a-33841d78de9d"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(7420),
+                            Name = "Hadley Stark",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(7420)
                         },
                         new
                         {
-                            Id = new Guid("fd7c127d-1c40-4761-b80d-b7dd3a96292c"),
-                            Name = "Chaz Sipes"
+                            Id = new Guid("cea1dda9-876b-4669-b0f4-4cfe4f9ee3fd"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8130),
+                            Name = "Billie Sanford",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8130)
                         },
                         new
                         {
-                            Id = new Guid("5f561b97-88fe-4c45-bdee-c29bba34de10"),
-                            Name = "Lucie Pacocha"
+                            Id = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8170),
+                            Name = "Tanya Cormier",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8170)
                         },
                         new
                         {
-                            Id = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa"),
-                            Name = "Kelly Sawayn"
+                            Id = new Guid("5198df9d-ed38-4fd1-8c86-43be62e4c990"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8190),
+                            Name = "Brianne Watsica",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8190)
                         },
                         new
                         {
-                            Id = new Guid("185ff85c-0df8-4f6b-92f3-2272032cfd8e"),
-                            Name = "Ryleigh Hegmann"
+                            Id = new Guid("e6a49a56-4f3d-47ee-b9a2-df275b9b1b99"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8210),
+                            Name = "Melany Bartell",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 392, DateTimeKind.Utc).AddTicks(8210)
                         });
                 });
 
@@ -88,83 +104,83 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c55a2f89-b009-405e-a058-2d4a72f6d957"),
-                            CopiesAvailable = 13,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Eius aut corrupti.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("9275ded7-8151-4b6f-84c9-5ef89a089108"),
+                            CopiesAvailable = 6,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(6840),
+                            Title = "Quaerat alias laboriosam.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(6840)
                         },
                         new
                         {
-                            Id = new Guid("446d7487-6cc2-47b1-88cb-b731b6b59eba"),
-                            CopiesAvailable = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Facilis et doloremque.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("89f9ea1c-839b-4e85-be7e-4e5f08e7a4dd"),
-                            CopiesAvailable = 8,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Unde iure ratione.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("4f0d47a0-9e10-4c75-a7b9-9e899b11d3ac"),
-                            CopiesAvailable = 4,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Non qui saepe.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("c2160331-d638-4201-8999-830b4608cbd3"),
-                            CopiesAvailable = 5,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Temporibus omnis quia.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = new Guid("58fa19cc-a939-458c-a1ed-5046fb300acc"),
+                            Id = new Guid("0935e473-e6d2-42af-882a-42930fa1bd48"),
                             CopiesAvailable = 9,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Libero facilis maiores.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7610),
+                            Title = "Et tenetur vel.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7610)
                         },
                         new
                         {
-                            Id = new Guid("23403e04-a6bf-4e7b-880c-84517092a8b0"),
+                            Id = new Guid("2ab6ee45-4e1a-4d6d-936b-2b8588c85624"),
+                            CopiesAvailable = 7,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7640),
+                            Title = "Ipsa sed accusantium.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7640)
+                        },
+                        new
+                        {
+                            Id = new Guid("9c81974a-17cf-4564-a0bf-3dcfeba9cc80"),
+                            CopiesAvailable = 6,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7660),
+                            Title = "Reiciendis a voluptates.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7660)
+                        },
+                        new
+                        {
+                            Id = new Guid("705647d5-90cb-40b0-924c-abf52362bdbf"),
                             CopiesAvailable = 19,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Voluptatibus quia numquam.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7670),
+                            Title = "Similique similique quae.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7670)
                         },
                         new
                         {
-                            Id = new Guid("2885d6ee-0336-4bde-a7f4-03cc7f3c5b66"),
-                            CopiesAvailable = 7,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Atque in maiores.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("6e9d0f46-56d6-462c-913c-5129aef3abb0"),
+                            CopiesAvailable = 14,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7690),
+                            Title = "Autem voluptas ut.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7690)
                         },
                         new
                         {
-                            Id = new Guid("879b8876-8aa8-43cc-a54c-4ffceeced272"),
-                            CopiesAvailable = 7,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Voluptatem odit nesciunt.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("5c2e5368-b1b0-405c-8c0e-ed411f224d01"),
+                            CopiesAvailable = 14,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7710),
+                            Title = "Voluptatem voluptatum adipisci.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7710)
                         },
                         new
                         {
-                            Id = new Guid("9b32fd11-6ee1-45b4-a305-d318e999c315"),
-                            CopiesAvailable = 11,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Officia dolores temporibus.",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("aa8e938b-bf9b-411d-b273-8ce77c290970"),
+                            CopiesAvailable = 9,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7720),
+                            Title = "Adipisci amet quia.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7720)
+                        },
+                        new
+                        {
+                            Id = new Guid("c48adad9-4f4a-4d5d-ba30-03c2114eaa5a"),
+                            CopiesAvailable = 19,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7740),
+                            Title = "Vel ut alias.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7740)
+                        },
+                        new
+                        {
+                            Id = new Guid("0d6e092e-464a-4063-b067-f609078e592d"),
+                            CopiesAvailable = 19,
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7760),
+                            Title = "Vero quidem autem.",
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(7760)
                         });
                 });
 
@@ -185,103 +201,103 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            BookId = new Guid("c55a2f89-b009-405e-a058-2d4a72f6d957"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("9275ded7-8151-4b6f-84c9-5ef89a089108"),
+                            AuthorId = new Guid("e6a49a56-4f3d-47ee-b9a2-df275b9b1b99")
                         },
                         new
                         {
-                            BookId = new Guid("c55a2f89-b009-405e-a058-2d4a72f6d957"),
-                            AuthorId = new Guid("5f561b97-88fe-4c45-bdee-c29bba34de10")
+                            BookId = new Guid("9275ded7-8151-4b6f-84c9-5ef89a089108"),
+                            AuthorId = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7")
                         },
                         new
                         {
-                            BookId = new Guid("446d7487-6cc2-47b1-88cb-b731b6b59eba"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("0935e473-e6d2-42af-882a-42930fa1bd48"),
+                            AuthorId = new Guid("cea1dda9-876b-4669-b0f4-4cfe4f9ee3fd")
                         },
                         new
                         {
-                            BookId = new Guid("446d7487-6cc2-47b1-88cb-b731b6b59eba"),
-                            AuthorId = new Guid("5f561b97-88fe-4c45-bdee-c29bba34de10")
+                            BookId = new Guid("0935e473-e6d2-42af-882a-42930fa1bd48"),
+                            AuthorId = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7")
                         },
                         new
                         {
-                            BookId = new Guid("89f9ea1c-839b-4e85-be7e-4e5f08e7a4dd"),
-                            AuthorId = new Guid("0f032fa8-75f9-4f1c-9ee9-b235eb5994fa")
+                            BookId = new Guid("2ab6ee45-4e1a-4d6d-936b-2b8588c85624"),
+                            AuthorId = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7")
                         },
                         new
                         {
-                            BookId = new Guid("89f9ea1c-839b-4e85-be7e-4e5f08e7a4dd"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("2ab6ee45-4e1a-4d6d-936b-2b8588c85624"),
+                            AuthorId = new Guid("e6a49a56-4f3d-47ee-b9a2-df275b9b1b99")
                         },
                         new
                         {
-                            BookId = new Guid("4f0d47a0-9e10-4c75-a7b9-9e899b11d3ac"),
-                            AuthorId = new Guid("0f032fa8-75f9-4f1c-9ee9-b235eb5994fa")
+                            BookId = new Guid("9c81974a-17cf-4564-a0bf-3dcfeba9cc80"),
+                            AuthorId = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7")
                         },
                         new
                         {
-                            BookId = new Guid("4f0d47a0-9e10-4c75-a7b9-9e899b11d3ac"),
-                            AuthorId = new Guid("5f561b97-88fe-4c45-bdee-c29bba34de10")
+                            BookId = new Guid("9c81974a-17cf-4564-a0bf-3dcfeba9cc80"),
+                            AuthorId = new Guid("e6a49a56-4f3d-47ee-b9a2-df275b9b1b99")
                         },
                         new
                         {
-                            BookId = new Guid("c2160331-d638-4201-8999-830b4608cbd3"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("705647d5-90cb-40b0-924c-abf52362bdbf"),
+                            AuthorId = new Guid("5198df9d-ed38-4fd1-8c86-43be62e4c990")
                         },
                         new
                         {
-                            BookId = new Guid("c2160331-d638-4201-8999-830b4608cbd3"),
-                            AuthorId = new Guid("185ff85c-0df8-4f6b-92f3-2272032cfd8e")
+                            BookId = new Guid("705647d5-90cb-40b0-924c-abf52362bdbf"),
+                            AuthorId = new Guid("f9cea78d-02c9-476a-988a-33841d78de9d")
                         },
                         new
                         {
-                            BookId = new Guid("58fa19cc-a939-458c-a1ed-5046fb300acc"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("6e9d0f46-56d6-462c-913c-5129aef3abb0"),
+                            AuthorId = new Guid("5198df9d-ed38-4fd1-8c86-43be62e4c990")
                         },
                         new
                         {
-                            BookId = new Guid("58fa19cc-a939-458c-a1ed-5046fb300acc"),
-                            AuthorId = new Guid("fd7c127d-1c40-4761-b80d-b7dd3a96292c")
+                            BookId = new Guid("6e9d0f46-56d6-462c-913c-5129aef3abb0"),
+                            AuthorId = new Guid("f9cea78d-02c9-476a-988a-33841d78de9d")
                         },
                         new
                         {
-                            BookId = new Guid("23403e04-a6bf-4e7b-880c-84517092a8b0"),
-                            AuthorId = new Guid("5f561b97-88fe-4c45-bdee-c29bba34de10")
+                            BookId = new Guid("5c2e5368-b1b0-405c-8c0e-ed411f224d01"),
+                            AuthorId = new Guid("cea1dda9-876b-4669-b0f4-4cfe4f9ee3fd")
                         },
                         new
                         {
-                            BookId = new Guid("23403e04-a6bf-4e7b-880c-84517092a8b0"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("5c2e5368-b1b0-405c-8c0e-ed411f224d01"),
+                            AuthorId = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7")
                         },
                         new
                         {
-                            BookId = new Guid("2885d6ee-0336-4bde-a7f4-03cc7f3c5b66"),
-                            AuthorId = new Guid("0f032fa8-75f9-4f1c-9ee9-b235eb5994fa")
+                            BookId = new Guid("aa8e938b-bf9b-411d-b273-8ce77c290970"),
+                            AuthorId = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7")
                         },
                         new
                         {
-                            BookId = new Guid("2885d6ee-0336-4bde-a7f4-03cc7f3c5b66"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("aa8e938b-bf9b-411d-b273-8ce77c290970"),
+                            AuthorId = new Guid("5198df9d-ed38-4fd1-8c86-43be62e4c990")
                         },
                         new
                         {
-                            BookId = new Guid("879b8876-8aa8-43cc-a54c-4ffceeced272"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("c48adad9-4f4a-4d5d-ba30-03c2114eaa5a"),
+                            AuthorId = new Guid("11b692db-4a50-4a9e-a0a6-ba0b774c33f7")
                         },
                         new
                         {
-                            BookId = new Guid("879b8876-8aa8-43cc-a54c-4ffceeced272"),
-                            AuthorId = new Guid("185ff85c-0df8-4f6b-92f3-2272032cfd8e")
+                            BookId = new Guid("c48adad9-4f4a-4d5d-ba30-03c2114eaa5a"),
+                            AuthorId = new Guid("f9cea78d-02c9-476a-988a-33841d78de9d")
                         },
                         new
                         {
-                            BookId = new Guid("9b32fd11-6ee1-45b4-a305-d318e999c315"),
-                            AuthorId = new Guid("185ff85c-0df8-4f6b-92f3-2272032cfd8e")
+                            BookId = new Guid("0d6e092e-464a-4063-b067-f609078e592d"),
+                            AuthorId = new Guid("5198df9d-ed38-4fd1-8c86-43be62e4c990")
                         },
                         new
                         {
-                            BookId = new Guid("9b32fd11-6ee1-45b4-a305-d318e999c315"),
-                            AuthorId = new Guid("6fe59e22-4f7b-4f8f-b944-82a15fd363aa")
+                            BookId = new Guid("0d6e092e-464a-4063-b067-f609078e592d"),
+                            AuthorId = new Guid("cea1dda9-876b-4669-b0f4-4cfe4f9ee3fd")
                         });
                 });
 
@@ -308,143 +324,143 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            BookId = new Guid("c55a2f89-b009-405e-a058-2d4a72f6d957"),
-                            GenreId = new Guid("904721d8-e2cd-4060-bd9f-def8a94a9bb6"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("9275ded7-8151-4b6f-84c9-5ef89a089108"),
+                            GenreId = new Guid("7d7896d9-8328-4a19-b51e-35487b4789b0"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8120),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8120)
                         },
                         new
                         {
-                            BookId = new Guid("c55a2f89-b009-405e-a058-2d4a72f6d957"),
-                            GenreId = new Guid("3646cbe1-1752-4778-b61a-9fe9aded449f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("9275ded7-8151-4b6f-84c9-5ef89a089108"),
+                            GenreId = new Guid("0a7fd9c3-f51f-4049-b5be-5d4959a01a01"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8120),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8120)
                         },
                         new
                         {
-                            BookId = new Guid("446d7487-6cc2-47b1-88cb-b731b6b59eba"),
-                            GenreId = new Guid("bcea001e-5ff7-4012-8a38-8e5ea4ea2ded"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("0935e473-e6d2-42af-882a-42930fa1bd48"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8140),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8140)
                         },
                         new
                         {
-                            BookId = new Guid("446d7487-6cc2-47b1-88cb-b731b6b59eba"),
-                            GenreId = new Guid("56114d5b-79d6-4989-8dfe-9fad2ba903e3"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("0935e473-e6d2-42af-882a-42930fa1bd48"),
+                            GenreId = new Guid("0a7fd9c3-f51f-4049-b5be-5d4959a01a01"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8140),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8140)
                         },
                         new
                         {
-                            BookId = new Guid("89f9ea1c-839b-4e85-be7e-4e5f08e7a4dd"),
-                            GenreId = new Guid("904721d8-e2cd-4060-bd9f-def8a94a9bb6"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("2ab6ee45-4e1a-4d6d-936b-2b8588c85624"),
+                            GenreId = new Guid("4c19b5e4-b8d8-4b19-bd28-43e8c24c9b2b"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8160),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8160)
                         },
                         new
                         {
-                            BookId = new Guid("89f9ea1c-839b-4e85-be7e-4e5f08e7a4dd"),
-                            GenreId = new Guid("bcea001e-5ff7-4012-8a38-8e5ea4ea2ded"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("2ab6ee45-4e1a-4d6d-936b-2b8588c85624"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8160),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8160)
                         },
                         new
                         {
-                            BookId = new Guid("4f0d47a0-9e10-4c75-a7b9-9e899b11d3ac"),
-                            GenreId = new Guid("56114d5b-79d6-4989-8dfe-9fad2ba903e3"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("9c81974a-17cf-4564-a0bf-3dcfeba9cc80"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8170),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8170)
                         },
                         new
                         {
-                            BookId = new Guid("4f0d47a0-9e10-4c75-a7b9-9e899b11d3ac"),
-                            GenreId = new Guid("3646cbe1-1752-4778-b61a-9fe9aded449f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("9c81974a-17cf-4564-a0bf-3dcfeba9cc80"),
+                            GenreId = new Guid("7d7896d9-8328-4a19-b51e-35487b4789b0"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8170),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8170)
                         },
                         new
                         {
-                            BookId = new Guid("c2160331-d638-4201-8999-830b4608cbd3"),
-                            GenreId = new Guid("bcea001e-5ff7-4012-8a38-8e5ea4ea2ded"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("705647d5-90cb-40b0-924c-abf52362bdbf"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8190),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8190)
                         },
                         new
                         {
-                            BookId = new Guid("c2160331-d638-4201-8999-830b4608cbd3"),
-                            GenreId = new Guid("3646cbe1-1752-4778-b61a-9fe9aded449f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("705647d5-90cb-40b0-924c-abf52362bdbf"),
+                            GenreId = new Guid("4c19b5e4-b8d8-4b19-bd28-43e8c24c9b2b"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8190),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8190)
                         },
                         new
                         {
-                            BookId = new Guid("58fa19cc-a939-458c-a1ed-5046fb300acc"),
-                            GenreId = new Guid("3646cbe1-1752-4778-b61a-9fe9aded449f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("6e9d0f46-56d6-462c-913c-5129aef3abb0"),
+                            GenreId = new Guid("7d7896d9-8328-4a19-b51e-35487b4789b0"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8210),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8210)
                         },
                         new
                         {
-                            BookId = new Guid("58fa19cc-a939-458c-a1ed-5046fb300acc"),
-                            GenreId = new Guid("56114d5b-79d6-4989-8dfe-9fad2ba903e3"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("6e9d0f46-56d6-462c-913c-5129aef3abb0"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8210),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8210)
                         },
                         new
                         {
-                            BookId = new Guid("23403e04-a6bf-4e7b-880c-84517092a8b0"),
-                            GenreId = new Guid("56114d5b-79d6-4989-8dfe-9fad2ba903e3"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("5c2e5368-b1b0-405c-8c0e-ed411f224d01"),
+                            GenreId = new Guid("0a7fd9c3-f51f-4049-b5be-5d4959a01a01"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8230),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8230)
                         },
                         new
                         {
-                            BookId = new Guid("23403e04-a6bf-4e7b-880c-84517092a8b0"),
-                            GenreId = new Guid("3646cbe1-1752-4778-b61a-9fe9aded449f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("5c2e5368-b1b0-405c-8c0e-ed411f224d01"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8230),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8230)
                         },
                         new
                         {
-                            BookId = new Guid("2885d6ee-0336-4bde-a7f4-03cc7f3c5b66"),
-                            GenreId = new Guid("3646cbe1-1752-4778-b61a-9fe9aded449f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("aa8e938b-bf9b-411d-b273-8ce77c290970"),
+                            GenreId = new Guid("4c19b5e4-b8d8-4b19-bd28-43e8c24c9b2b"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8240),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8240)
                         },
                         new
                         {
-                            BookId = new Guid("2885d6ee-0336-4bde-a7f4-03cc7f3c5b66"),
-                            GenreId = new Guid("904721d8-e2cd-4060-bd9f-def8a94a9bb6"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("aa8e938b-bf9b-411d-b273-8ce77c290970"),
+                            GenreId = new Guid("0a7fd9c3-f51f-4049-b5be-5d4959a01a01"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8240),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8240)
                         },
                         new
                         {
-                            BookId = new Guid("879b8876-8aa8-43cc-a54c-4ffceeced272"),
-                            GenreId = new Guid("56114d5b-79d6-4989-8dfe-9fad2ba903e3"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("c48adad9-4f4a-4d5d-ba30-03c2114eaa5a"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8250),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8250)
                         },
                         new
                         {
-                            BookId = new Guid("879b8876-8aa8-43cc-a54c-4ffceeced272"),
-                            GenreId = new Guid("bcea001e-5ff7-4012-8a38-8e5ea4ea2ded"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("c48adad9-4f4a-4d5d-ba30-03c2114eaa5a"),
+                            GenreId = new Guid("0a7fd9c3-f51f-4049-b5be-5d4959a01a01"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8250),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8250)
                         },
                         new
                         {
-                            BookId = new Guid("9b32fd11-6ee1-45b4-a305-d318e999c315"),
-                            GenreId = new Guid("3646cbe1-1752-4778-b61a-9fe9aded449f"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("0d6e092e-464a-4063-b067-f609078e592d"),
+                            GenreId = new Guid("4c19b5e4-b8d8-4b19-bd28-43e8c24c9b2b"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8270),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8270)
                         },
                         new
                         {
-                            BookId = new Guid("9b32fd11-6ee1-45b4-a305-d318e999c315"),
-                            GenreId = new Guid("904721d8-e2cd-4060-bd9f-def8a94a9bb6"),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            BookId = new Guid("0d6e092e-464a-4063-b067-f609078e592d"),
+                            GenreId = new Guid("8a934d79-3fa0-4933-a24e-e7fcd37f7610"),
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8270),
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 393, DateTimeKind.Utc).AddTicks(8270)
                         });
                 });
 
@@ -536,19 +552,19 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("376a9385-4f3f-46e1-baf0-ce7aa20e79d5"),
+                            Id = new Guid("c5c2e43d-9276-46b3-921f-f46aedd9376a"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("e7484a8a-a7c1-4e5e-a1d9-69601fedaf50"),
+                            Id = new Guid("66ebb3e7-bb30-4af8-b05e-7895da759e3b"),
                             Name = "Librarian",
                             NormalizedName = "LIBRARIAN"
                         },
                         new
                         {
-                            Id = new Guid("3ddf3a5b-4567-4830-9043-f64360eb0d63"),
+                            Id = new Guid("4299bba9-a2ae-4ce3-b076-3cc8f3191e3c"),
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -578,13 +594,19 @@ namespace LibraryManagementAPI.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("MembershipId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -618,6 +640,9 @@ namespace LibraryManagementAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MembershipId")
+                        .IsUnique();
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -630,93 +655,98 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e91fe1e5-dfd3-4f19-a7d9-e8b8ca211cde"),
+                            Id = new Guid("33c15f54-7dbb-4fe1-bfed-025d4b4278a0"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4da9f68c-675e-49d9-9572-0f25452f9975",
-                            CreatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(4330),
-                            Email = "Samantha.Schumm67@gmail.com",
+                            ConcurrencyStamp = "d917186b-1083-4e1d-b262-ea216b5206cc",
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(5350),
+                            Email = "Renee31@gmail.com",
                             EmailConfirmed = true,
-                            FullName = "Hettie Stark",
+                            FullName = "Sheridan Gerlach",
                             LockoutEnabled = false,
-                            NormalizedEmail = "SAMANTHA.SCHUMM67@GMAIL.COM",
-                            NormalizedUserName = "BRANDY75",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOBkTkAxRbAoBBz32adB6jwlv+rDsn44kJCePvyGhSRUjZBnOAvuTfjyZvBfItnv/w==",
+                            MembershipId = "MBR-20250607-EECC6A",
+                            NormalizedEmail = "RENEE31@GMAIL.COM",
+                            NormalizedUserName = "ALLIE96",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAY7e/3ezkdppGm4sMyU5NfNudeWRglmwx5VFCHXdJrh9mTC6Jh/EuUu5O/6l8/vPw==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UpdatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(4330),
-                            UserName = "Brandy75"
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(5350),
+                            UserName = "Allie96"
                         },
                         new
                         {
-                            Id = new Guid("86bc63b1-709e-447f-9ef6-d477b9dfba57"),
+                            Id = new Guid("13908bf1-ce13-4e3b-bcb9-6be7ed9d89b8"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "76210dc2-40df-419c-9c17-0e0ef54043af",
-                            CreatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5690),
-                            Email = "Linnie_Beer@yahoo.com",
+                            ConcurrencyStamp = "942bb48c-b7ff-45e7-b869-f3a3449fd5a7",
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(6750),
+                            Email = "Sincere.Heathcote62@gmail.com",
                             EmailConfirmed = true,
-                            FullName = "Demario Macejkovic",
+                            FullName = "Kellie Towne",
                             LockoutEnabled = false,
-                            NormalizedEmail = "LINNIE_BEER@YAHOO.COM",
-                            NormalizedUserName = "LOYAL_WALKER69",
-                            PasswordHash = "AQAAAAIAAYagAAAAELsh1QMXHe40n+OIKA+jlLyeR/sJaB2eXKOP+dmKDuSx5yJuQeoUGySWaqKX49Swtw==",
+                            MembershipId = "MBR-20250607-98920A",
+                            NormalizedEmail = "SINCERE.HEATHCOTE62@GMAIL.COM",
+                            NormalizedUserName = "MEREDITH_ANDERSON24",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL5r8biWW8cqXEM/P0fDWgYVceIZqUREGms22ZbkQ5TAQTOJU4ZMbfXjaWW6WC+I/w==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UpdatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5690),
-                            UserName = "Loyal_Walker69"
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(6750),
+                            UserName = "Meredith_Anderson24"
                         },
                         new
                         {
-                            Id = new Guid("a9ffb227-83ef-4abd-9969-1e07409c7015"),
+                            Id = new Guid("8fc9ea47-93a5-4291-b5c0-1ac4a7d25cfc"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9806d890-6b65-4c1f-b3a6-5833b02d2a61",
-                            CreatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5780),
-                            Email = "Harmon55@hotmail.com",
+                            ConcurrencyStamp = "ee0d92bb-93d8-47df-9d39-fe89def72a3c",
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(6890),
+                            Email = "Maeve_Parker68@hotmail.com",
                             EmailConfirmed = true,
-                            FullName = "Demetrius Rath",
+                            FullName = "Gianni Smitham",
                             LockoutEnabled = false,
-                            NormalizedEmail = "HARMON55@HOTMAIL.COM",
-                            NormalizedUserName = "ALEXIS59",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAK2Kmpkfi+px89YtNtExIyTJxjAzOtzlWbWdvGzCNt5xUwMKh67lXX4rPvcX/qJkA==",
+                            MembershipId = "MBR-20250607-6B913C",
+                            NormalizedEmail = "MAEVE_PARKER68@HOTMAIL.COM",
+                            NormalizedUserName = "KATTIE.HEANEY",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDTkVqarSyGrkVSRZmFQRRXl8CulfOk4755vuSBWSxDVzcVsyXQTuSBrf1pOQsFmTw==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UpdatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5780),
-                            UserName = "Alexis59"
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(6890),
+                            UserName = "Kattie.Heaney"
                         },
                         new
                         {
-                            Id = new Guid("af55ee9b-1ae6-4fdf-b2d6-2a8521d224b8"),
+                            Id = new Guid("81ecab9b-7f6a-4540-8749-c2cd4ff40f63"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c7cb4c80-b084-412a-b31a-81ea34edffbc",
-                            CreatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5850),
-                            Email = "Christop_Rippin30@yahoo.com",
+                            ConcurrencyStamp = "cb549f44-8138-40ee-86c3-8c44e39b651a",
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(7000),
+                            Email = "Delores.Lang90@yahoo.com",
                             EmailConfirmed = true,
-                            FullName = "Herbert Bartell",
+                            FullName = "Mortimer Zboncak",
                             LockoutEnabled = false,
-                            NormalizedEmail = "CHRISTOP_RIPPIN30@YAHOO.COM",
-                            NormalizedUserName = "KELLI_JACOBI31",
-                            PasswordHash = "AQAAAAIAAYagAAAAELOfOBvBnvilITksr3IoDRF7LWYK37CrN+d18MMe3doVDSRK1VucnHF294bC0E7R0g==",
+                            MembershipId = "MBR-20250607-209341",
+                            NormalizedEmail = "DELORES.LANG90@YAHOO.COM",
+                            NormalizedUserName = "EVANS.KOELPIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC/t6+Hbk4ung43EWYhCFNN/uk9OwjYe16oRnVKwBxVyp3lxwYPMf0ccvQE6VQ612Q==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UpdatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5850),
-                            UserName = "Kelli_Jacobi31"
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(7000),
+                            UserName = "Evans.Koelpin"
                         },
                         new
                         {
-                            Id = new Guid("31820b48-1db0-4cd1-bdaa-d7b81bdfc809"),
+                            Id = new Guid("0e02f68d-1441-40a0-8182-d5475e3b63e4"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cb7db01c-8de1-4ee3-a8e6-a012543705b2",
-                            CreatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5930),
-                            Email = "Antonietta27@hotmail.com",
+                            ConcurrencyStamp = "64a45c88-43af-421a-ae0e-20a8f13728b3",
+                            CreatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(7090),
+                            Email = "Robert.Stark64@yahoo.com",
                             EmailConfirmed = true,
-                            FullName = "Hermina Cruickshank",
+                            FullName = "Zack Volkman",
                             LockoutEnabled = false,
-                            NormalizedEmail = "ANTONIETTA27@HOTMAIL.COM",
-                            NormalizedUserName = "ERIN.BOEHM31",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP+NqOFA1PIsi0aBCt6rZilOOwMU/VoLctGl4gQC3ov4J+QUZQK0uD6A4uUGTZ6rBw==",
+                            MembershipId = "MBR-20250607-34F0D1",
+                            NormalizedEmail = "ROBERT.STARK64@YAHOO.COM",
+                            NormalizedUserName = "ADRIENNE.JENKINS",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE+vDjWWb0sGf8dTqizhVHa4hpNNw4qiX+VM0xyHR9cl9qqU8Q9NTJxvXagnn2NpTw==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
-                            UpdatedAt = new DateTime(2025, 4, 7, 19, 29, 47, 868, DateTimeKind.Utc).AddTicks(5930),
-                            UserName = "Erin.Boehm31"
+                            UpdatedAt = new DateTime(2025, 6, 7, 21, 30, 36, 219, DateTimeKind.Utc).AddTicks(7090),
+                            UserName = "Adrienne.Jenkins"
                         });
                 });
 
@@ -806,28 +836,28 @@ namespace LibraryManagementAPI.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("e91fe1e5-dfd3-4f19-a7d9-e8b8ca211cde"),
-                            RoleId = new Guid("376a9385-4f3f-46e1-baf0-ce7aa20e79d5")
+                            UserId = new Guid("33c15f54-7dbb-4fe1-bfed-025d4b4278a0"),
+                            RoleId = new Guid("c5c2e43d-9276-46b3-921f-f46aedd9376a")
                         },
                         new
                         {
-                            UserId = new Guid("86bc63b1-709e-447f-9ef6-d477b9dfba57"),
-                            RoleId = new Guid("e7484a8a-a7c1-4e5e-a1d9-69601fedaf50")
+                            UserId = new Guid("13908bf1-ce13-4e3b-bcb9-6be7ed9d89b8"),
+                            RoleId = new Guid("66ebb3e7-bb30-4af8-b05e-7895da759e3b")
                         },
                         new
                         {
-                            UserId = new Guid("a9ffb227-83ef-4abd-9969-1e07409c7015"),
-                            RoleId = new Guid("3ddf3a5b-4567-4830-9043-f64360eb0d63")
+                            UserId = new Guid("8fc9ea47-93a5-4291-b5c0-1ac4a7d25cfc"),
+                            RoleId = new Guid("4299bba9-a2ae-4ce3-b076-3cc8f3191e3c")
                         },
                         new
                         {
-                            UserId = new Guid("af55ee9b-1ae6-4fdf-b2d6-2a8521d224b8"),
-                            RoleId = new Guid("3ddf3a5b-4567-4830-9043-f64360eb0d63")
+                            UserId = new Guid("81ecab9b-7f6a-4540-8749-c2cd4ff40f63"),
+                            RoleId = new Guid("4299bba9-a2ae-4ce3-b076-3cc8f3191e3c")
                         },
                         new
                         {
-                            UserId = new Guid("31820b48-1db0-4cd1-bdaa-d7b81bdfc809"),
-                            RoleId = new Guid("3ddf3a5b-4567-4830-9043-f64360eb0d63")
+                            UserId = new Guid("0e02f68d-1441-40a0-8182-d5475e3b63e4"),
+                            RoleId = new Guid("4299bba9-a2ae-4ce3-b076-3cc8f3191e3c")
                         });
                 });
 

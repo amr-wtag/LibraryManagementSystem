@@ -19,10 +19,10 @@ public class BookReservationController : ControllerBase
 
     [HttpGet]
     [Authorize(Roles = "Admin, Librarian")]
-    public async Task<IActionResult> GetAllBookReservationsAsync(Guid? id = null, Guid? userId = null,
-        Guid? bookId = null)
+    public async Task<IActionResult> GetAllBookReservationsAsync([FromQuery] List<Guid>? ids, [FromQuery] List<Guid>? userIds,
+        [FromQuery] List<Guid>? bookIds, string status = "")
     {
-        var reservations = await _bookReservationService.GetBookReservationsAsync(id, userId, bookId);
+        var reservations = await _bookReservationService.GetBookReservationsAsync(ids, userIds, bookIds, status);
         return Ok(reservations);
     }
 

@@ -1,3 +1,4 @@
+using LibraryManagementAPI.DTOs;
 using LibraryManagementAPI.interfaces;
 using LibraryManagementAPI.Models;
 
@@ -12,8 +13,13 @@ public class UserService
         _userRepository = userRepository;
     }
 
-    public async Task<IEnumerable<User>> GetAllUsersAsync()
+    public async Task<IEnumerable<User>> GetAllUsersAsync(Guid userId)
     {
-        return await _userRepository.GetAllUsersAsync();
+        return await _userRepository.GetAllUsersAsync(userId);
+    }
+
+    public async Task<List<UserSummaryDto>> GetUserIdUserNameAsync()
+    {
+        return await _userRepository.GetUserIdUserNameAsync();
     }
 }
