@@ -28,53 +28,105 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            submitButton = new Button();
+            cancelButton = new Button();
             label1 = new Label();
             tableLayoutPanel2 = new TableLayoutPanel();
             userDropdownControl = new LibraryManagementSystem.Winforms.component.CustomDropdown();
             userLabel = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
-            bookLabel = new Label();
-            dueDateLabel = new Label();
-            addReservation = new Button();
-            bookReservationPanel = new FlowLayoutPanel();
-            submitButton = new Button();
+            bookReservation = new LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservationRow.BookReservationRowControl();
+            bookReservationDataGridView = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bookTitleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            issuedDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dueDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            returnDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            statusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            bookReservationDisplayModalBindingSource = new BindingSource(components);
             tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bookReservationDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bookReservationDisplayModalBindingSource).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             tableLayoutPanel1.BackColor = SystemColors.ControlDark;
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 4);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 2);
-            tableLayoutPanel1.Controls.Add(bookReservationPanel, 0, 3);
-            tableLayoutPanel1.Controls.Add(submitButton, 0, 4);
+            tableLayoutPanel1.Controls.Add(bookReservationDataGridView, 0, 3);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(2, 1, 2, 1);
+            tableLayoutPanel1.Margin = new Padding(4, 2, 4, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 5;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 23F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 31F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 49F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 66F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 128F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 325F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 47F));
-            tableLayoutPanel1.Size = new Size(765, 467);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new Size(1421, 996);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            tableLayoutPanel4.ColumnCount = 2;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.Controls.Add(submitButton, 0, 0);
+            tableLayoutPanel4.Controls.Add(cancelButton, 1, 0);
+            tableLayoutPanel4.Location = new Point(3, 919);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.Size = new Size(1415, 74);
+            tableLayoutPanel4.TabIndex = 9;
+            // 
+            // submitButton
+            // 
+            submitButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            submitButton.BackColor = SystemColors.Control;
+            submitButton.Location = new Point(459, 6);
+            submitButton.Margin = new Padding(6, 6, 60, 6);
+            submitButton.Name = "submitButton";
+            submitButton.Size = new Size(188, 62);
+            submitButton.TabIndex = 7;
+            submitButton.Text = "Submit";
+            submitButton.UseVisualStyleBackColor = false;
+            // 
+            // cancelButton
+            // 
+            cancelButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            cancelButton.BackColor = SystemColors.Control;
+            cancelButton.Location = new Point(767, 3);
+            cancelButton.Margin = new Padding(60, 3, 3, 3);
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(150, 68);
+            cancelButton.TabIndex = 8;
+            cancelButton.Text = "Cancel";
+            cancelButton.UseVisualStyleBackColor = false;
+            cancelButton.Click += cancelButton_Click;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
-            label1.Location = new Point(2, 0);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(4, 0);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(761, 23);
+            label1.Size = new Size(1413, 49);
             label1.TabIndex = 0;
             label1.Text = "Add Reservation Form";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -87,20 +139,21 @@
             tableLayoutPanel2.Controls.Add(userDropdownControl, 1, 0);
             tableLayoutPanel2.Controls.Add(userLabel, 0, 0);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 26);
+            tableLayoutPanel2.Location = new Point(6, 55);
+            tableLayoutPanel2.Margin = new Padding(6);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(759, 25);
+            tableLayoutPanel2.Size = new Size(1409, 54);
             tableLayoutPanel2.TabIndex = 2;
             // 
             // userDropdownControl
             // 
             userDropdownControl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            userDropdownControl.Location = new Point(334, 1);
-            userDropdownControl.Margin = new Padding(2, 1, 2, 1);
+            userDropdownControl.Location = new Point(620, 2);
+            userDropdownControl.Margin = new Padding(4, 2, 4, 2);
             userDropdownControl.Name = "userDropdownControl";
-            userDropdownControl.Size = new Size(140, 23);
+            userDropdownControl.Size = new Size(260, 50);
             userDropdownControl.TabIndex = 1;
             // 
             // userLabel
@@ -108,100 +161,125 @@
             userLabel.Anchor = AnchorStyles.Right;
             userLabel.AutoSize = true;
             userLabel.BackColor = SystemColors.Control;
-            userLabel.Location = new Point(299, 5);
+            userLabel.Location = new Point(550, 11);
             userLabel.Margin = new Padding(0);
             userLabel.Name = "userLabel";
-            userLabel.Size = new Size(33, 15);
+            userLabel.Size = new Size(66, 32);
             userLabel.TabIndex = 2;
             userLabel.Text = "User:";
             // 
             // tableLayoutPanel3
             // 
-            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnCount = 1;
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 44.768856F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55.231144F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 347F));
-            tableLayoutPanel3.Controls.Add(bookLabel, 0, 0);
-            tableLayoutPanel3.Controls.Add(dueDateLabel, 1, 0);
-            tableLayoutPanel3.Controls.Add(addReservation, 2, 0);
+            tableLayoutPanel3.Controls.Add(bookReservation, 0, 0);
             tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(3, 57);
+            tableLayoutPanel3.Location = new Point(6, 121);
+            tableLayoutPanel3.Margin = new Padding(6);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel3.Size = new Size(759, 35);
+            tableLayoutPanel3.Size = new Size(1409, 116);
             tableLayoutPanel3.TabIndex = 4;
             // 
-            // bookLabel
+            // bookReservation
             // 
-            bookLabel.AutoSize = true;
-            bookLabel.Dock = DockStyle.Fill;
-            bookLabel.Location = new Point(3, 0);
-            bookLabel.Name = "bookLabel";
-            bookLabel.Size = new Size(178, 35);
-            bookLabel.TabIndex = 0;
-            bookLabel.Text = "Book";
-            bookLabel.TextAlign = ContentAlignment.MiddleCenter;
+            bookReservation.AutoSize = true;
+            bookReservation.Dock = DockStyle.Fill;
+            bookReservation.Location = new Point(4, 2);
+            bookReservation.Margin = new Padding(4, 2, 4, 2);
+            bookReservation.Name = "bookReservation";
+            bookReservation.Size = new Size(1401, 112);
+            bookReservation.TabIndex = 0;
             // 
-            // dueDateLabel
+            // bookReservationDataGridView
             // 
-            dueDateLabel.AutoSize = true;
-            dueDateLabel.Dock = DockStyle.Fill;
-            dueDateLabel.Location = new Point(187, 0);
-            dueDateLabel.Name = "dueDateLabel";
-            dueDateLabel.Size = new Size(221, 35);
-            dueDateLabel.TabIndex = 1;
-            dueDateLabel.Text = "Due Date";
-            dueDateLabel.TextAlign = ContentAlignment.MiddleCenter;
+            bookReservationDataGridView.AllowUserToAddRows = false;
+            bookReservationDataGridView.AllowUserToDeleteRows = false;
+            bookReservationDataGridView.AutoGenerateColumns = false;
+            bookReservationDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            bookReservationDataGridView.ColumnHeadersHeight = 46;
+            bookReservationDataGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, bookTitleDataGridViewTextBoxColumn, issuedDateDataGridViewTextBoxColumn, dueDateDataGridViewTextBoxColumn, returnDateDataGridViewTextBoxColumn, statusDataGridViewTextBoxColumn });
+            bookReservationDataGridView.DataSource = bookReservationDisplayModalBindingSource;
+            bookReservationDataGridView.Dock = DockStyle.Fill;
+            bookReservationDataGridView.Location = new Point(3, 246);
+            bookReservationDataGridView.Name = "bookReservationDataGridView";
+            bookReservationDataGridView.ReadOnly = true;
+            bookReservationDataGridView.RowHeadersVisible = false;
+            bookReservationDataGridView.RowHeadersWidth = 82;
+            bookReservationDataGridView.Size = new Size(1415, 667);
+            bookReservationDataGridView.TabIndex = 7;
             // 
-            // addReservation
+            // idDataGridViewTextBoxColumn
             // 
-            addReservation.Location = new Point(414, 3);
-            addReservation.Name = "addReservation";
-            addReservation.Size = new Size(113, 29);
-            addReservation.TabIndex = 2;
-            addReservation.Text = "AddReservation";
-            addReservation.UseVisualStyleBackColor = true;
-            addReservation.Click += addReservation_Click;
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.MinimumWidth = 10;
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // bookReservationPanel
+            // bookTitleDataGridViewTextBoxColumn
             // 
-            bookReservationPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            bookReservationPanel.AutoScroll = true;
-            bookReservationPanel.AutoSize = true;
-            bookReservationPanel.FlowDirection = FlowDirection.TopDown;
-            bookReservationPanel.Location = new Point(3, 98);
-            bookReservationPanel.Name = "bookReservationPanel";
-            bookReservationPanel.Size = new Size(759, 0);
-            bookReservationPanel.TabIndex = 5;
-            bookReservationPanel.WrapContents = false;
+            bookTitleDataGridViewTextBoxColumn.DataPropertyName = "BookTitle";
+            bookTitleDataGridViewTextBoxColumn.HeaderText = "BookTitle";
+            bookTitleDataGridViewTextBoxColumn.MinimumWidth = 10;
+            bookTitleDataGridViewTextBoxColumn.Name = "bookTitleDataGridViewTextBoxColumn";
+            bookTitleDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // submitButton
+            // issuedDateDataGridViewTextBoxColumn
             // 
-            submitButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            submitButton.Location = new Point(329, 423);
-            submitButton.Name = "submitButton";
-            submitButton.Size = new Size(107, 41);
-            submitButton.TabIndex = 6;
-            submitButton.Text = "Submit Button";
-            submitButton.UseVisualStyleBackColor = true;
-            submitButton.Click += submitButton_Click;
+            issuedDateDataGridViewTextBoxColumn.DataPropertyName = "IssuedDate";
+            issuedDateDataGridViewTextBoxColumn.HeaderText = "IssuedDate";
+            issuedDateDataGridViewTextBoxColumn.MinimumWidth = 10;
+            issuedDateDataGridViewTextBoxColumn.Name = "issuedDateDataGridViewTextBoxColumn";
+            issuedDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dueDateDataGridViewTextBoxColumn
+            // 
+            dueDateDataGridViewTextBoxColumn.DataPropertyName = "DueDate";
+            dueDateDataGridViewTextBoxColumn.HeaderText = "DueDate";
+            dueDateDataGridViewTextBoxColumn.MinimumWidth = 10;
+            dueDateDataGridViewTextBoxColumn.Name = "dueDateDataGridViewTextBoxColumn";
+            dueDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // returnDateDataGridViewTextBoxColumn
+            // 
+            returnDateDataGridViewTextBoxColumn.DataPropertyName = "ReturnDate";
+            returnDateDataGridViewTextBoxColumn.HeaderText = "ReturnDate";
+            returnDateDataGridViewTextBoxColumn.MinimumWidth = 10;
+            returnDateDataGridViewTextBoxColumn.Name = "returnDateDataGridViewTextBoxColumn";
+            returnDateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
+            statusDataGridViewTextBoxColumn.HeaderText = "Status";
+            statusDataGridViewTextBoxColumn.MinimumWidth = 10;
+            statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            statusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bookReservationDisplayModalBindingSource
+            // 
+            bookReservationDisplayModalBindingSource.DataSource = typeof(Models.BookReservations.BookReservationDisplayModal);
             // 
             // AddReservationForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(765, 467);
+            ClientSize = new Size(1421, 996);
             Controls.Add(tableLayoutPanel1);
-            Margin = new Padding(2, 1, 2, 1);
+            Margin = new Padding(4, 2, 4, 2);
             Name = "AddReservationForm";
             Text = "AddReservationForm";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bookReservationDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bookReservationDisplayModalBindingSource).EndInit();
             ResumeLayout(false);
         }
 
@@ -213,10 +291,17 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Label userLabel;
         private TableLayoutPanel tableLayoutPanel3;
-        private Label bookLabel;
-        private Label dueDateLabel;
-        private Button addReservation;
-        private FlowLayoutPanel bookReservationPanel;
+        private BookReservationRow.BookReservationRowControl bookReservation;
+        private DataGridView bookReservationDataGridView;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn bookTitleDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn issuedDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dueDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn returnDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+        private BindingSource bookReservationDisplayModalBindingSource;
+        private TableLayoutPanel tableLayoutPanel4;
         private Button submitButton;
+        private Button cancelButton;
     }
 }

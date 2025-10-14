@@ -23,7 +23,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             // Hook up event handlers
             bookSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
             authorSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
-            multiSelectComboBox3.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
+            genreSelectComboBox.SelectedValuesChanged += MultiSelectComboBoxes_SelectedValuesChanged;
             dataGridViewBooks.CellMouseClick += DataGridViewBooks_CellMouseClick;
         }
 
@@ -52,6 +52,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             {
                 await LoadBookFilterOptionsAsync();
                 await LoadAuthorFilterOptionsAsync();
+                await LoadGenreFilterOptionAsync();
                 await ShowBooksAsync(); // Show all books initially
             }
             else
@@ -73,7 +74,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
                 .Select(opt => opt.Value.ToString())
                 .ToList();
 
-            var selectedGenreIds = multiSelectComboBox3
+            var selectedGenreIds = genreSelectComboBox
                 .GetSelectedItems()
                 .Select(opt => opt.Value.ToString())
                 .ToList();
@@ -83,11 +84,7 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
 
         private async Task ShowBooksAsync(List<string>? bookIds = null, List<string>? authorIds = null, List<string>? genreIds = null)
         {
-            var token = Properties.Settings.Default.JwtToken;
             using var client = ApiClientHelper.CreateClient();
-
-            client.DefaultRequestHeaders.Authorization =
-                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
             try
             {
@@ -213,6 +210,46 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             }
         }
 
+        private async Task LoadGenreFilterOptionAsync()
+        {
+            using var client = ApiClientHelper.CreateClient();
+
+            try
+            {
+                var response = await client.GetAsync("genre/id-names");
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseObject = JsonSerializer.Deserialize<AuthorSummaryResponse>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    var genres = responseObject?.Values;
+
+                    if (genres != null && genres.Any())
+                    {
+                        var options = genres.Select(genre => new DropDownOption
+                        {
+                            Label = genre.Name ?? "(Unnamed)",
+                            Value = genre.Id
+                        }).ToList();
+
+                        genreSelectComboBox.SetItems(options);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to fetch genres.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading genres: " + ex.Message);
+            }
+        }
+
         private void DataGridViewBooks_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
@@ -246,9 +283,10 @@ namespace LibraryManagementSystem.Winforms.Forms.Books
             if (selectedBook != null)
             {
                 var bookUpdateFrom = new BookUpdateFrom(selectedBook);
-                this.Hide();
 
                 bookUpdateFrom.Show();
+                this.Hide();
+
                 //MessageBox.Show(
                 //    $"(EDIT MODE)\nTitle: {selectedBook.Title}\n" +
                 //    $"Available: {selectedBook.CopiesAvailable}\n" +

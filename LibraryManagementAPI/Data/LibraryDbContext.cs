@@ -22,6 +22,10 @@ public class LibraryDbContext : IdentityDbContext<User, Role, Guid>
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.MembershipId)
+            .IsUnique();
+
         // Update relationships to use BookReservation
         modelBuilder.Entity<BookReservation>()
             .HasOne(br => br.Book)

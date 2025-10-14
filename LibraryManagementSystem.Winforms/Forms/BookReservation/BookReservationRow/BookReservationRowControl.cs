@@ -9,7 +9,6 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservation
         public BookReservationRowControl()
         {
             InitializeComponent();
-            removeButton.Click += RemoveButton_Click;
 
             // Subscribe to the Load event
             this.Load += BookReservationRowControl_Load;

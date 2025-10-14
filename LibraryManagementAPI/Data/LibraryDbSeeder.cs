@@ -22,6 +22,7 @@ public static class LibraryDbSeeder
         // Generate Users
         var userFaker = new Faker<User>()
             .RuleFor(u => u.Id, f => Guid.NewGuid())
+            .RuleFor(u => u.MembershipId, f => $"MBR-{DateTime.UtcNow:yyyyMMdd}-{Guid.NewGuid().ToString()[..6].ToUpper()}")
             .RuleFor(u => u.UserName, f => f.Internet.UserName())
             .RuleFor(u => u.FullName, f => f.Name.FullName())
             .RuleFor(u => u.Email, f => f.Internet.Email())

@@ -30,60 +30,72 @@
         {
             bookDropdown = new LibraryManagementSystem.Winforms.component.CustomDropdown();
             issueDateTimePicker = new DateTimePicker();
-            removeButton = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
+            dueDateLabel = new Label();
+            bookLabel = new Label();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // bookDropdown
             // 
             bookDropdown.Dock = DockStyle.Fill;
-            bookDropdown.Location = new Point(11, 21);
+            bookDropdown.Location = new Point(11, 53);
             bookDropdown.Margin = new Padding(11, 21, 11, 13);
             bookDropdown.Name = "bookDropdown";
-            bookDropdown.Size = new Size(314, 56);
+            bookDropdown.Size = new Size(314, 54);
             bookDropdown.TabIndex = 0;
             // 
             // issueDateTimePicker
             // 
             issueDateTimePicker.Dock = DockStyle.Fill;
-            issueDateTimePicker.Location = new Point(347, 21);
+            issueDateTimePicker.Location = new Point(347, 53);
             issueDateTimePicker.Margin = new Padding(11, 21, 11, 13);
             issueDateTimePicker.Name = "issueDateTimePicker";
-            issueDateTimePicker.Size = new Size(400, 39);
+            issueDateTimePicker.Size = new Size(593, 39);
             issueDateTimePicker.TabIndex = 1;
             issueDateTimePicker.ValueChanged += dateTimePicker1_ValueChanged;
             // 
-            // removeButton
-            // 
-            removeButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            removeButton.AutoSize = true;
-            removeButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            removeButton.Location = new Point(769, 13);
-            removeButton.Margin = new Padding(11, 13, 11, 13);
-            removeButton.Name = "removeButton";
-            removeButton.Size = new Size(171, 64);
-            removeButton.TabIndex = 2;
-            removeButton.Text = "X Remove";
-            removeButton.UseVisualStyleBackColor = true;
-            // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 189F));
-            tableLayoutPanel1.Controls.Add(bookDropdown, 0, 0);
-            tableLayoutPanel1.Controls.Add(removeButton, 2, 0);
-            tableLayoutPanel1.Controls.Add(issueDateTimePicker, 1, 0);
+            tableLayoutPanel1.Controls.Add(dueDateLabel, 1, 0);
+            tableLayoutPanel1.Controls.Add(bookDropdown, 0, 1);
+            tableLayoutPanel1.Controls.Add(issueDateTimePicker, 1, 1);
+            tableLayoutPanel1.Controls.Add(bookLabel, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(4, 2, 4, 2);
+            tableLayoutPanel1.MinimumSize = new Size(0, 120);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(951, 90);
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
+            tableLayoutPanel1.Size = new Size(951, 120);
             tableLayoutPanel1.TabIndex = 3;
+            // 
+            // dueDateLabel
+            // 
+            dueDateLabel.AutoSize = true;
+            dueDateLabel.Dock = DockStyle.Fill;
+            dueDateLabel.Location = new Point(339, 0);
+            dueDateLabel.Name = "dueDateLabel";
+            dueDateLabel.Size = new Size(609, 32);
+            dueDateLabel.TabIndex = 3;
+            dueDateLabel.Text = "DueDateLabel";
+            // 
+            // bookLabel
+            // 
+            bookLabel.AutoSize = true;
+            bookLabel.Dock = DockStyle.Fill;
+            bookLabel.Location = new Point(3, 0);
+            bookLabel.Name = "bookLabel";
+            bookLabel.Size = new Size(330, 32);
+            bookLabel.TabIndex = 2;
+            bookLabel.Text = "BookLabel";
             // 
             // BookReservationRowControl
             // 
@@ -93,17 +105,19 @@
             Controls.Add(tableLayoutPanel1);
             Margin = new Padding(4, 2, 4, 2);
             Name = "BookReservationRowControl";
-            Size = new Size(951, 90);
+            Size = new Size(951, 120);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private component.CustomDropdown bookDropdown;
         private DateTimePicker issueDateTimePicker;
-        private Button removeButton;
         private TableLayoutPanel tableLayoutPanel1;
+        private Label dueDateLabel;
+        private Label bookLabel;
     }
 }

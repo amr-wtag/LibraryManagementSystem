@@ -1,31 +1,47 @@
-﻿using System.Net.Http.Json;
-using System.Text.Json;
-using LibraryManagementSystem.Winforms.Forms.BookReservation.BookReservationRow;
-using LibraryManagementSystem.Winforms.helpers;
+﻿using LibraryManagementSystem.Winforms.helpers;
 using LibraryManagementSystem.Winforms.Models.BookReservations;
 using LibraryManagementSystem.Winforms.Models.Users;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace LibraryManagementSystem.Winforms.Forms.BookReservation
 {
     public partial class AddReservationForm : Form
     {
-        private List<BookReservationRowControl> bookRows = new List<BookReservationRowControl>();
+
+        private bool isInitializing = true;
 
         public AddReservationForm()
         {
             InitializeComponent();
-            this.Load += AddReservationForm_Load; // Hook into form load event
+            this.Load += AddReservationForm_Load;
+
+            userDropdownControl.SelectedIndexChanged += async (s, e) =>
+            {
+                if (isInitializing) return;
+
+                if (userDropdownControl.SelectedOption != null &&
+                    Guid.TryParse(userDropdownControl.SelectedOption.Value?.ToString(), out _))
+                {
+                    await ShowBookReservationsAsync();
+                }
+            };
         }
 
         private async void AddReservationForm_Load(object sender, EventArgs e)
         {
+            isInitializing = true;
             await LoadUserOptionAsync();
+            await bookReservation.SetBookOptions(); // Populate book dropdown on load
+
+            isInitializing = false;
 
         }
 
         private async Task LoadUserOptionAsync()
         {
             using var client = ApiClientHelper.CreateClient();
+
             try
             {
                 var response = await client.GetAsync("user/id-username");
@@ -44,11 +60,7 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                     Value = user.Id
                 }).ToList();
 
-
-
                 userDropdownControl.SetOptions(userOptions);
-                userDropdownControl.Refresh();
-
             }
             catch (Exception ex)
             {
@@ -56,40 +68,51 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             }
         }
 
-        private void addReservation_Click(object sender, EventArgs e)
+        private async Task ShowBookReservationsAsync()
         {
-            var row = new BookReservationRowControl();
-            row.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            row.Width = bookReservationPanel.ClientSize.Width - 20;
+            using var client = ApiClientHelper.CreateClient();
+            var response = await client.GetAsync($"bookreservation?userId={userDropdownControl.SelectedOption.Value}&status=Issued");
 
-            // Create a container to hold the row
-            var container = new Panel
+            var result = await response.Content.ReadAsStringAsync();
+
+            if (response.IsSuccessStatusCode)
             {
-                AutoSize = false,
-                Width = bookReservationPanel.Width,
-                Padding = new Padding(2),
-                AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                MinimumSize = new Size(bookReservationPanel.Width, 0)
-            };
+                var bookReservationsWrapper = JsonSerializer.Deserialize<BookReservationListResponse>(result, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
 
-            row.Dock = DockStyle.Fill;
+                var bookReservations = bookReservationsWrapper?.BookReservations;
 
-            container.Controls.Add(row);
-            bookReservationPanel.Controls.Add(container);
-            bookRows.Add(row);
+                if (bookReservations != null)
+                {
+                    var tasks = bookReservations.Select(async bookReservation =>
+                    {
 
-            // Hook up the row's internal [ - ] button event
-            row.RemoveClicked += (s, args) =>
-            {
-                bookRows.Remove(row);
-                bookReservationPanel.Controls.Remove(container);
-                container.Dispose();
-            };
+
+                        return new BookReservationDisplayModal
+                        {
+                            Id = bookReservation.Id,
+                            IssuedDate = bookReservation.IssuedDate,
+                            DueDate = bookReservation.DueDate,
+                            ReturnDate = bookReservation.ReturnDate,
+                            Status = bookReservation.Status,
+                            BookTitle = bookReservation?.Book?.Title,
+                        };
+                    });
+
+                    var displayBookReservations = await Task.WhenAll(tasks);
+
+                    bookReservationDataGridView.DataSource = displayBookReservations.ToList();
+
+                }
+
+            }
         }
 
         private async void submitButton_Click(object sender, EventArgs e)
         {
-
+            // Validate user
             if (userDropdownControl.SelectedOption == null ||
                 !Guid.TryParse(userDropdownControl.SelectedOption.Value?.ToString(), out Guid userId))
             {
@@ -97,44 +120,38 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
                 return;
             }
 
-            var reservations = new List<ReservationItem>();
-
-            foreach (var row in bookRows)
+            // Validate book
+            var bookIdStr = bookReservation.SelectedBookId;
+            if (string.IsNullOrWhiteSpace(bookIdStr) || !Guid.TryParse(bookIdStr, out Guid bookId))
             {
-                if (!Guid.TryParse(row.SelectedBookId, out Guid bookId))
-                {
-                    MessageBox.Show("Please select a valid book in all rows.");
-                    return;
-                }
-
-                reservations.Add(new ReservationItem
-                {
-                    BookId = bookId,
-                    DueDate = DateTime.SpecifyKind(row.DueDate, DateTimeKind.Utc)
-                });
+                MessageBox.Show("Please select a valid book.");
+                return;
             }
 
+            // Prepare request
             var payload = new ReservationRequest
             {
                 UserId = userId,
-                Reservations = reservations
+                Reservations = new List<ReservationItem>
+                {
+                    new ReservationItem
+                    {
+                        BookId = bookId,
+                        DueDate = DateTime.SpecifyKind(bookReservation.DueDate, DateTimeKind.Utc)
+                    }
+                }
             };
-
-            var json = JsonSerializer.Serialize(payload, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
-            });
 
             using var client = ApiClientHelper.CreateClient();
 
             try
             {
-                var response = await client.PostAsJsonAsync("BookReservation", payload); // Adjust endpoint as needed
+                var response = await client.PostAsJsonAsync("BookReservation", payload);
 
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Reservation submitted successfully!");
+                    await ShowBookReservationsAsync();
                 }
                 else
                 {
@@ -148,6 +165,9 @@ namespace LibraryManagementSystem.Winforms.Forms.BookReservation
             }
         }
 
-
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
