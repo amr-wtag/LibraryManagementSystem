@@ -1,0 +1,28 @@
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "semi": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "endOfLine": "lf",
+  "plugins": [
+    "prettier-plugin-sort-json"
+  ],
+  "overrides": [
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": true
+      }
+    }
+  ],
+  "removeUnusedImports": false,
+  "importOrder": [
+    "^react",
+    "^@?\\w"
+  ]
+}
