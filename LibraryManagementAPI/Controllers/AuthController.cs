@@ -1,3 +1,5 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using LibraryManagementAPI.Models;
 using LibraryManagementAPI.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -40,7 +42,21 @@ public class AuthController : ControllerBase
             return Unauthorized("invalid credentials");
         }
 
-        return Ok(new { token });
+
+
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true, // local dev
+            SameSite = SameSiteMode.None, // allow cross-origin
+            Expires = DateTimeOffset.Now.AddDays(7),
+            Path = "/"
+        };
+
+
+        Response.Cookies.Append("token", token, cookieOptions);
+
+        return Ok(new { token, message = "Login successful" });
     }
 
     [Authorize]
@@ -49,4 +65,31 @@ public class AuthController : ControllerBase
     {
         return Ok(new { message = "Logged out successfully" });
     }
+
+    [HttpGet("me")]
+    public IActionResult Me()
+    {
+        // 1. Try Authorization header first
+        var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+        // 2. Fallback to cookie
+        if (string.IsNullOrEmpty(token))
+        {
+            token = Request.Cookies["token"];
+        }
+
+        if (string.IsNullOrEmpty(token))
+            return Unauthorized("Token missing");
+
+        try
+        {
+            var user = _authService.ValidateToken(token);
+            return Ok(user);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return Unauthorized(new { message = ex.Message });
+        }
+    }
+
 }
