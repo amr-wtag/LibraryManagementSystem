@@ -1,3 +1,162 @@
+// using System.Security.Claims;
+// using System.Text;
+// using System.Text.Json.Serialization;
+// using DotNetEnv;
+// using LibraryManagementAPI.Data;
+// using LibraryManagementAPI.interfaces;
+// using LibraryManagementAPI.Interfaces;
+// using LibraryManagementAPI.Models;
+// using LibraryManagementAPI.Repositories;
+// using LibraryManagementAPI.Services;
+// using Microsoft.AspNetCore.Authentication.JwtBearer;
+// using Microsoft.AspNetCore.Identity;
+// using Microsoft.EntityFrameworkCore;
+// using Microsoft.IdentityModel.Tokens;
+// using Microsoft.OpenApi.Models;
+// using AuthRepository = LibraryManagementAPI.Repositories.AuthRepository;
+
+// Env.Load();
+
+// var builder = WebApplication.CreateBuilder(args);
+
+// var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+
+// if (string.IsNullOrEmpty(jwtSecret))
+// {
+//     throw new InvalidOperationException("JWT_SECRET is missing from environment variables.");
+// }
+
+// builder.Configuration["JwtSettings:Secret"] = jwtSecret;
+
+// builder.Services.AddScoped<IBookRepository, BookRepository>();
+// builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+// builder.Services.AddScoped<IUserRepository, UserRepository>();
+// builder.Services.AddScoped<IBookReservationRepository, BookReservationRepository>();
+// builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+// builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+// builder.Services.AddScoped<BookService>();
+// builder.Services.AddScoped<AuthService>();
+// builder.Services.AddScoped<AuthorService>();
+// builder.Services.AddScoped<UserService>();
+// builder.Services.AddScoped<BookReservationService>();
+// builder.Services.AddScoped<GenreService>();
+
+// builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen(c =>
+// {
+//     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+//     {
+//         In = ParameterLocation.Header,
+//         Description = "Please enter the JWT token",
+//         Name = "Authorization",
+//         Type = SecuritySchemeType.ApiKey,
+//         BearerFormat = "JWT",
+//         Scheme = "Bearer"
+//     });
+
+//     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+//     {
+//         {
+//             new OpenApiSecurityScheme
+//             {
+//                 Reference = new OpenApiReference
+//                 {
+//                     Type = ReferenceType.SecurityScheme,
+//                     Id = "Bearer"
+//                 }
+//             },
+//             new string[] { }
+//         }
+//     });
+// });
+
+// /*builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowAll", policy =>
+//     {
+//         policy.AllowAnyOrigin()
+//             .AllowAnyMethod()
+//             .AllowAnyHeader();
+//     });
+// });*/
+
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("BrowserCors", policy =>
+//     {
+//         policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
+//             .AllowAnyHeader()
+//             .AllowAnyMethod()
+//             .AllowCredentials();
+//     });
+
+// });
+
+
+// builder.Services.AddDbContext<LibraryDbContext>(options =>
+//     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// builder.Services.AddIdentity<User, Role>()
+//     .AddEntityFrameworkStores<LibraryDbContext>()
+//     .AddDefaultTokenProviders();
+
+// var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+// var secretKey = jwtSettings.GetValue<string>("Secret");
+
+// if (string.IsNullOrEmpty(secretKey))
+// {
+//     throw new InvalidOperationException("JWT Secret is missing in appsettings.json");
+// }
+
+// var key = Encoding.UTF8.GetBytes(secretKey);
+
+// builder.Services.AddAuthentication(options =>
+//     {
+//         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//     })
+//     .AddJwtBearer(options =>
+//     {
+//         options.RequireHttpsMetadata = false;
+//         options.SaveToken = true;
+//         options.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             ValidateIssuerSigningKey = true,
+//             IssuerSigningKey = new SymmetricSecurityKey(key),
+//             ValidateIssuer = false,
+//             ValidateAudience = false,
+//             ValidateLifetime = true,
+//             RoleClaimType = ClaimTypes.Role
+//         };
+//     });
+
+// builder.Services.AddAuthorization();
+// builder.Services.AddControllers()
+//     .AddJsonOptions(options =>
+//     {
+//         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+//         options.JsonSerializerOptions.MaxDepth = 64; // Increase if needed
+//     });
+
+
+// var app = builder.Build();
+
+// if (app.Environment.IsDevelopment())
+// {
+//     app.UseSwagger();
+//     app.UseSwaggerUI();
+// }
+
+// app.UseHttpsRedirection();
+// app.UseCors("BrowserCors");
+// app.UseAuthentication();
+// app.UseAuthorization();
+// app.MapControllers();
+// // app.UseCors("AllowAll");
+
+// app.Run();
+
+
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -84,11 +243,12 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("BrowserCors", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // frontend origin
+        policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
     });
+
 });
 
 
@@ -139,6 +299,34 @@ builder.Services.AddControllers()
 
 
 var app = builder.Build();
+
+// --- 👇 START OF NEW MIGRATION CODE ---
+// This block will automatically apply database migrations on startup
+try
+{
+    // Create a new service scope to get services
+    using (var scope = app.Services.CreateScope())
+    {
+        // Get the DbContext and a logger
+        var dbContext = scope.ServiceProvider.GetRequiredService<LibraryDbContext>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+        logger.LogInformation("Applying database migrations...");
+
+        // This command applies any pending migrations
+        dbContext.Database.Migrate();
+
+        logger.LogInformation("Database migrations applied successfully.");
+    }
+}
+catch (Exception ex)
+{
+    // Log an error if migrations fail
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred while applying database migrations.");
+}
+// --- 👆 END OF NEW MIGRATION CODE ---
+
 
 if (app.Environment.IsDevelopment())
 {

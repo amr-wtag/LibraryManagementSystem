@@ -5,7 +5,7 @@ import useAuth from '@/hooks/use-auth';
 const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
-  if (!isAuthenticated) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 

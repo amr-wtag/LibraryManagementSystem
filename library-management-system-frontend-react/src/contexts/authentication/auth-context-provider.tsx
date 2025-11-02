@@ -11,7 +11,7 @@ const AuthContentProvider: FC<AuthContentProviderProps> = ({ children }) => {
   const { data: user, isLoading, isError } = useGetMe();
 
   const value = useMemo(
-    () => ({ user, isAuthenticated: !!user, isLoading, isError }),
+    () => ({ user, isAuthenticated: !!user?.id, isLoading, isError }),
     [user, isLoading, isError]
   );
 

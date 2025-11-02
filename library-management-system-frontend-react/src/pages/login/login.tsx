@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import useAuth from '@/hooks/use-auth';
 import { type LoginPayload, useLogin } from '@/hooks/useLogin/useLogin.ts';
 
 type LoginFormValues = {
@@ -21,13 +22,18 @@ type LoginFormValues = {
 
 const Login = () => {
   const { register, handleSubmit } = useForm<LoginFormValues>();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  if (isAuthenticated) {
+    navigate('/dashboard');
+  }
 
   const loginMutation = useLogin();
 
   const onSubmit = (values: LoginPayload) => {
     loginMutation.mutate(values, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         navigate('/dashboard');
       },
       onError: (error) => {

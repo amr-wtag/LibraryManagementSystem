@@ -61,11 +61,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  place-items: center;
-  min-width: 320px;
+  min-width: 100dvw;
   min-height: 100vh;
 }
 
@@ -81,7 +77,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }

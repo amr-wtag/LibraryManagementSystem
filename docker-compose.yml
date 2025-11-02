@@ -1,0 +1,46 @@
+version: '3.8'
+services:
+  backend:
+    build: ./LibraryManagementAPI
+    container_name: backend
+    ports:
+      - "5049:5049"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5049
+      - JWT_SECRET=${JWT_SECRET}
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Username=postgres;Password=1234;Database=Library_management_system
+
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: postgres # Or whatever your database service is named
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=Library_management_system
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./library-management-system-frontend-react
+      args:
+        # This value is now correctly passed at build-time
+        # It will also be read from the .env file
+        VITE_APP_DOMAIN: ${VITE_APP_DOMAIN}
+    container_name: library-management-system-frontend-react
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
