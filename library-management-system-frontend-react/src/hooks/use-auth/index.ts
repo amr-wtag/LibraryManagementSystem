@@ -5,7 +5,7 @@ import AuthContext from '@/contexts/authentication/auth-context';
 const useAuth = () => {
   const context = useContext(AuthContext);
 
-  if (context === null) {
+  if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
 

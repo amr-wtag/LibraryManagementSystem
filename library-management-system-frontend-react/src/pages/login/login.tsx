@@ -32,14 +32,7 @@ const Login = () => {
   const loginMutation = useLogin();
 
   const onSubmit = (values: LoginPayload) => {
-    loginMutation.mutate(values, {
-      onSuccess: () => {
-        navigate('/dashboard');
-      },
-      onError: (error) => {
-        console.error('Login failed:', error);
-      },
-    });
+    loginMutation.mutate(values);
   };
 
   return (

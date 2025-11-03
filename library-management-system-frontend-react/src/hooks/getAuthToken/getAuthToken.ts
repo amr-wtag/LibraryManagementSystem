@@ -1,8 +1,6 @@
 const getAuthToken = (cookieName = 'token') => {
   const allCookies = document.cookie.split(';');
 
-  console.log({ allCookies });
-
   const targetCookie = allCookies.find((cookie) => {
     return cookie.trim().startsWith(`${cookieName}=`);
   });
