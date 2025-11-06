@@ -63,7 +63,7 @@ export const useLogin = () => {
       return response.data;
     },
 
-    onSuccess: async (data) => {
+    onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: ['me'] });
     },
 

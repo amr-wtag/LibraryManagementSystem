@@ -3,4 +3,5 @@
 /.idea
 /Folder.DotSettings.user
 .env
-.DS_Store
+.vs
+.user
